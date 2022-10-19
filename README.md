@@ -172,7 +172,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+ECE444 Group 16 - All Stars - ece444group16@gmail.com
 
 Project Link: [https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars](https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars)
 
