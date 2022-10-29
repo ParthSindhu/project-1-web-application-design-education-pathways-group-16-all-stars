@@ -6,6 +6,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Switch, Link, useLocation } from "react-router-dom";
 // import LogIn from "./LogIn.jsx";
 import CourseDescriptionPage from "./CourseDescription";
+import CourseComments from "./CourseComments";
 // import Wishlist from './Wishlist';
 // import SignUp from './SignUp'
 import SearchResultDisplay from './ResultDisplay'
@@ -72,6 +73,10 @@ export default class NavbarComp extends Component {
           <Switch>
             <Route path="/search">
               <SearchResultDisplay />
+            </Route>
+            <Route exact
+              path="/courseComments/:code"
+              render={props =>(<CourseComments {...props} />)}>
             </Route>
             <Route exact
               path="/courseDetails/:code"
