@@ -117,20 +117,20 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
+   cd Education_Pathways/frontend
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+3. Run
+   ```bash
+   npm start
    ```
-
+   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
