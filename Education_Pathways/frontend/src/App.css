@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&display=swap');
+
 .App {
   text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  color: white;
 }
 
 .App-logo {
