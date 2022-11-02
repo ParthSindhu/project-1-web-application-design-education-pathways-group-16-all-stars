@@ -102,10 +102,6 @@ export default class NavbarComp extends Component {
               <SearchResultDisplay />
             </Route>
             <Route exact
-              path="/courseComments/:code"
-              render={props =>(<CourseComments {...props} />)}>
-            </Route>
-            <Route exact
               path="/courseDetails/:code"
               render={props =>(<CourseDescriptionPage {...props} />)}>
             </Route>
