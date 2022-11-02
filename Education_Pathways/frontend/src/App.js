@@ -8,13 +8,10 @@ function App() {
 
   return (
     <div>
-    <div className="App">
-      <NavbarComp />
-    </div>
-
-    <div className="App">
-    <ReactComp />
-    </div>
+      <div className="App">
+        <NavbarComp />
+        <ReactComp />
+      </div>
     </div>
   );
 
