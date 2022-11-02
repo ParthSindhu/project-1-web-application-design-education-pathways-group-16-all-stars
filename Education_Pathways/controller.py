@@ -376,13 +376,15 @@ class UserComment(Resource):
         course = request.args.get('course')
         try:
             course = Course.get(course)
+            print(course)
             comments = course.get_comments()
+            comments = [c for c in comments if isinstance(c, Comment)]
             resp = jsonify(
                 {'comments': comments})
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -414,7 +416,7 @@ class UserComment(Resource):
                 upvotes=0,
                 downvotes=0)
             in_course.comments.append(comment)
-            # comment.save()
+            comment.save()
             in_course.save()
             # add comment to course
             resp = jsonify({"comment_id": comment_id})
