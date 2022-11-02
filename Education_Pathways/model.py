@@ -19,32 +19,17 @@ class Comment(db.Document):
     upvotes = db.IntField(required=True)
     downvotes = db.IntField(required=True)
 
-    def upvote(self):
-        self.update(inc__upvotes=1)
-
-    def downvote(self):
-        self.update(inc__downvotes=1)
-
-    @classmethod
-    def get_for_course(cls, course_):
-        return cls.objects(course=course_).get()
-
     @classmethod
     def get(cls, comment_id_):
-        # Does this even work
         return cls.objects(comment_id=comment_id_).get()
 
     @classmethod
     def get_all(cls):
         return cls.objects.all()
 
-    @classmethod
-    def delete(cls, comment_id_):
-        usr = cls.objects(comment_id=comment_id_).get()
-        if usr:
-            usr.delete()
-            return True
-        return False
+    def updateComment(self, upvotes, downvotes):
+        self.update(upvotes = upvotes)
+        self.update(downvotes = downvotes)
 
     def expand(self):
         ret = {

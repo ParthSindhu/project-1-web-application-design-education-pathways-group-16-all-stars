@@ -374,9 +374,9 @@ class UserWishlistMinorCheck(Resource):
 class UserComment(Resource):
     def get(self):
         course = request.args.get('course')
+
         try:
             course = Course.get(course)
-            print(course)
             comments = course.get_comments()
             comments = [c for c in comments if isinstance(c, Comment)]
             resp = jsonify(
@@ -397,16 +397,11 @@ class UserComment(Resource):
         username = data['username']
         course = data['course']
         text = data['text']
-        print("new comment username: ", username)
         try:
             in_course = Course.get(course)
-            print(in_course)
-            # comment_id = Comment.create(
-            # course_=course, text_=text, username_=username)
             comment_id = str(
                 hash(datetime.datetime.utcnow().timestamp()) +
                 hash(username + course + text))
-            print("comment id: ", comment_id)
             comment = Comment(
                 comment_id=comment_id,
                 username=username,
@@ -418,8 +413,7 @@ class UserComment(Resource):
             in_course.comments.append(comment)
             comment.save()
             in_course.save()
-            # add comment to course
-            resp = jsonify({"comment_id": comment_id})
+            resp = jsonify({"comment": comment})
             resp.status_code = 200
             return resp
         except Exception as e:
@@ -428,26 +422,25 @@ class UserComment(Resource):
             resp.status_code = 400
             return resp
 
-    def delete(self):
+    def put(self):
         comment_id = request.args.get('comment_id')
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('upvotes', required=True)
+        parser.add_argument('downvotes', required=True)
+        data = parser.parse_args()
+        upvotes = data['upvotes']
+        downvotes = data['downvotes']
+
         try:
-            resp = jsonify({'Deleted': Comment.delete(comment_id_=comment_id)})
+            comment = Comment.get(comment_id)
+            comment.updateComment(upvotes, downvotes)
+            updatedComment = Comment.get(comment_id)
+            resp = jsonify(
+                {'comment': updatedComment})
             resp.status_code = 200
             return resp
         except Exception as e:
             resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
-
-    # TODO
-    def upvote(self):
-        comment_id = request.args.get('comment_id')
-        comment: Comment = Comment.get(comment_id_=comment_id)
-        comment.upvote()
-        pass
-
-    def downvote(self):
-        comment_id = request.args.get('comment_id')
-        comment: Comment = Comment.get(comment_id_=comment_id)
-        comment.downvote()
-        pass
