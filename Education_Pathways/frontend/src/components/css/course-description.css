@@ -57,11 +57,11 @@ p {
   color: #5C779C;
 }
 
-.course-template .course-description, .course-requisite {
+.course-template .course-description, .course-requisite, course-recommendations {
   margin-left: 0;
 }
 
-.requisites-display {
+.requisites-display, recommendations-display {
   height: 120px;
   margin-top: 2%;
   background-color: #EFF3FB;

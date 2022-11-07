@@ -13,7 +13,7 @@ let star = empty_star;
 
 class CourseDescriptionPage extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -21,12 +21,14 @@ class CourseDescriptionPage extends Component {
       course_name: "",
       division: "Faculty of Applied Science and Engineering",
       department: "Department of Edward S. Rogers Sr. Dept. of Electrical & Computer Engineering",
-      graph : "",
+      graph: "",
       course_description: "",
       syllabus: "",
       prerequisites: "",
       corequisites: "",
       exclusions: "",
+      tags: "",
+      recommendations: {},
       starred: false,
       graphics: [],
       username: localStorage.getItem('username')
@@ -38,15 +40,15 @@ class CourseDescriptionPage extends Component {
   componentDidMount() {
     console.log("pass in course code: ", this.props.match.params.code)
 
+    // Get info about course
     axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
       code: this.props.course_code
     })
       .then(res => {
-        console.log(res.data)
-        this.setState({course_code: res.data.course.code})
-        this.setState({course_name: res.data.course.name})
-        this.setState({course_description : res.data.course.description})
-        this.setState({graph: res.data.course.graph})
+        this.setState({ course_code: res.data.course.code })
+        this.setState({ course_name: res.data.course.name })
+        this.setState({ course_description: res.data.course.description })
+        this.setState({ graph: res.data.course.graph })
         let prereq_len = res.data.course.prereq.length
         if (prereq_len > 1) {
           let prereq_str = ""
@@ -56,9 +58,9 @@ class CourseDescriptionPage extends Component {
               prereq_str += ", "
             }
           }
-          this.setState({prerequisites : prereq_str})
+          this.setState({ prerequisites: prereq_str })
         } else {
-          this.setState({prerequisites : res.data.course.prereq})
+          this.setState({ prerequisites: res.data.course.prereq })
         }
         let coreq_len = res.data.course.coreq.length
         if (coreq_len > 1) {
@@ -69,9 +71,9 @@ class CourseDescriptionPage extends Component {
               coreq_str += ", "
             }
           }
-          this.setState({corequisites : coreq_str})
+          this.setState({ corequisites: coreq_str })
         } else {
-          this.setState({corequisites : res.data.course.coreq})
+          this.setState({ corequisites: res.data.course.coreq })
         }
         let exclusion_len = res.data.course.exclusion.length
         if (exclusion_len > 1) {
@@ -82,22 +84,38 @@ class CourseDescriptionPage extends Component {
               exclusion_str += ", "
             }
           }
-          this.setState({exclusions : exclusion_str})
+          this.setState({ exclusions: exclusion_str })
         } else {
-          this.setState({exclusions : res.data.course.exclusion})
+          this.setState({ exclusions: res.data.course.exclusion })
+        }
+        let rec_len = res.data.course.tags.length
+        if (rec_len > 1) {
+          let rec_str = ""
+          for (let i = 0; i < rec_len; i++) {
+            rec_str += res.data.course.tags[i]
+            if (i !== rec_len - 1) {
+              rec_str += ", "
+            }
+          }
+          this.setState({ tags: rec_str })
+        } else {
+          this.setState({ tags: res.data.course.tags })
         }
         let syllabus_link = "http://courses.skule.ca/course/" + this.props.code
-        this.setState({syllabus : syllabus_link})
+        this.setState({ syllabus: syllabus_link })
 
         let temp_graph = []
         //temp_graph.push(<ShowGraph graph_src={this.state.graph}></ShowGraph>)
-        this.setState({graphics: temp_graph})
+        this.setState({ graphics: temp_graph })
+      })
 
-
-    })
-
-
-    console.log("new state: ", this.state)
+    // Get course recommendations based on tags
+    // axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.state.tags}`, {
+    //   code: this.props.course_code
+    // })
+    //   .then(res => {
+    //     // Implement this
+    //   })
   }
 
 
@@ -108,8 +126,8 @@ class CourseDescriptionPage extends Component {
     }
   }
 
-	render() {
-		return(
+  render() {
+    return (
 
       <div className="page-content">
         <Container className="course-template">
@@ -159,16 +177,49 @@ class CourseDescriptionPage extends Component {
             </Row>
             <Row>
               <div className={"req-graph"}>
-                <img style={{width: "70%", marginBottom: "3%"}} alt="" src={requisite_label}></img>
+                <img style={{ width: "70%", marginBottom: "3%" }} alt="" src={requisite_label}></img>
                 <img src={`data:image/jpeg;base64,${this.state.graph}`} alt="" ></img>
               </div>
+            </Row>
+          </Row>
+          <Row className="col-item course-recommendations">
+            <Row>
+              <h3>Course Recommendations</h3>
+            </Row>
+            <Row>
+              <Col className="recommendations-display">
+                <h4>Recommended Course 1</h4>
+                <p>{this.state.exclusions}</p>
+              </Col>
+              <Col className="recommendations-display">
+                <h4>Recommended Course 2</h4>
+                <p>{this.state.exclusions}</p>
+              </Col>
+              <Col className="recommendations-display">
+                <h4>Recommended Course 3</h4>
+                <p>{this.state.exclusions}</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="recommendations-display">
+                <h4>Recommended Course 4</h4>
+                <p>{this.state.exclusions}</p>
+              </Col>
+              <Col className="recommendations-display">
+                <h4>Recommended Course 5</h4>
+                <p>{this.state.exclusions}</p>
+              </Col>
+              <Col className="recommendations-display">
+                <h4>Recommended Course 6</h4>
+                <p>{this.state.exclusions}</p>
+              </Col>
             </Row>
           </Row>
         </Container>
       </div>
 
-		)
-	}
+    )
+  }
 }
 
 export default CourseDescriptionPage
