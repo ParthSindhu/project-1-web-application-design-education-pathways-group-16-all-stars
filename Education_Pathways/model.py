@@ -12,6 +12,7 @@ class Course(db.Document):
     exclusion = db.ListField()
     keyword = db.StringField(required=True)
     graph = db.StringField(required=True)
+    tags = db.ListField()
 
     meta = {'indexes': [
         '$keyword'

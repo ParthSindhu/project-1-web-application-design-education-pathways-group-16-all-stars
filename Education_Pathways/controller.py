@@ -174,6 +174,19 @@ class ShowCourse(Resource):
             resp.status_code = 400
             return resp
 
+class ShowRecommendations(Resource):
+    def get(self):
+        tag = request.args.get('tag')
+
+        try:
+            recommended_courses = list(Course.objects(tag__iexact=tag))
+            resp = jsonify(recommended_courses)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': 'something went wrong'})
+            resp.status_code = 400
+            return resp
 
 class ShowCourseGraph(Resource):
     def get(self):
