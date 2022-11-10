@@ -95,3 +95,10 @@ p {
   justify-content: center;
   margin-bottom: 2%;
 }
+
+.ratings-lbl {
+  display: inline-block;
+  width: 25%;
+  margin-right: .5em;
+  padding-top: 1.5em;
+}

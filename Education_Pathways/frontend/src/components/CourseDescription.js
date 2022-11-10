@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './css/course-description.css'
+import './css/css-circular-prog-bar.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col'
@@ -109,6 +110,7 @@ class CourseDescriptionPage extends Component {
   }
 
 	render() {
+
 		return(
 
       <div className="page-content">
@@ -135,9 +137,49 @@ class CourseDescriptionPage extends Component {
               <button className={"syllabus-link"} onClick={this.openLink}>View</button>
             </Col>
           </Row>
-          <Row className="col-item course-description">
-            <h3>Course Description</h3>
-            <p>{this.state.course_description}</p>
+          <Row>
+            <Col className="col-item">
+              <h3>Course Description</h3>
+              <p>{this.state.course_description}</p>
+            </Col>
+
+            <Col className="col-item">
+              <h3>Instructor Ratings</h3>
+
+              <label class="ratings-lbl">
+                <div className="progress-circle p10">
+                <span>10%</span>
+                <div className="left-half-clipper">
+                  <div className="first10-bar"/>
+                  <div className="value-bar"/>
+                </div>
+              </div>
+                Overall
+              </label>
+
+              <label className="ratings-lbl">
+                <div className="progress-circle p50">
+                  <span>50%</span>
+                  <div className="left-half-clipper">
+                    <div className="first10-bar"/>
+                    <div className="value-bar"/>
+                  </div>
+                </div>
+                Difficulty
+              </label>
+
+              <label className="ratings-lbl">
+                <div className="progress-circle p80 over50">
+                  <span>80%</span>
+                  <div className="left-half-clipper">
+                    <div className="first50-bar"/>
+                    <div className="value-bar"/>
+                  </div>
+                </div>
+                Recommend
+              </label>
+
+            </Col>
           </Row>
           <Row className="col-item course-requisite">
             <Row>
