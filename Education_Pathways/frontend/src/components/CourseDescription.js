@@ -111,13 +111,17 @@ class CourseDescriptionPage extends Component {
   }
 
   submitRating = () => {
-    // const express = require('express')
-    // const mongoose = require('mongoose')
-    // var app = express()
-    // mongoose.connect('mongodb://localhost:"yourPortHere"/"mongoDBhere"')
-    // app.use(bodyParser.urlencoded({extended: false})) //Post Body Parser
-    // pass
-
+    console.log("sending post request for rating")
+    const resp = fetch('http://localhost:5000/course/ratings', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          course_id: 1,
+          rating: 5
+      })
+    })
   }
 
 	render() {
