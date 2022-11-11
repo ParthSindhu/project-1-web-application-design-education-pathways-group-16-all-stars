@@ -33,6 +33,8 @@ api.add_resource(controller.UserWishlistAdd, '/user/wishlist/addCourse')
 api.add_resource(controller.UserWishlistRemove, '/user/wishlist/removeCourse')
 api.add_resource(controller.UserWishlistMinorCheck, '/user/wishlist/minorCheck')
 
+api.add_resource(controller.UserRatings, '/course/ratings')
+
 @app.route("/", defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):

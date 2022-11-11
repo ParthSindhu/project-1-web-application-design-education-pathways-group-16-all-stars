@@ -30,6 +30,8 @@ class SearchResultDisplay extends Component{
   getData = (input) => {
     axios.get(`https://assignment-1-starter-template.herokuapp.com/searchc?input=${input}`)
       .then(res => {
+          console.log("course data")
+          console.log(res.data)
         console.log(`it is ${res.status}`)
         if (res.status === 200) {
           this.setState({results: []})

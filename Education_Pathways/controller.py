@@ -10,6 +10,42 @@ import re
 
 
 # -------------------- User related --------------------
+class UserRatings(Resource):
+    def get(self):
+        course = request.args.get('course')
+        try:
+            course = Course.get(course)
+            ratings = course.get_ratings()
+            resp = jsonify(
+                {'rating': ratings})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('course', required=True)
+        parser.add_argument('rating', required=True)
+        data = parser.parse_args()
+        course = data['course']
+        rating = data['rating']
+        try:
+            in_course = Course.get(course)
+            in_course.rating.append(rating)
+            in_course.save()
+            resp = jsonify({"rating": rating})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            print(e)
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+
 class UserRegistration(Resource):
     def post(self):
         parser = reqparse.RequestParser()

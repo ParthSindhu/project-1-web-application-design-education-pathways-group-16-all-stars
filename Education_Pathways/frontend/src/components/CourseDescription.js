@@ -43,6 +43,8 @@ class CourseDescriptionPage extends Component {
     })
       .then(res => {
         console.log(res.data)
+        console.log("rating: ", res.data.course.rating)
+        this.setState({rating: res.data.course.rating})
         this.setState({course_code: res.data.course.code})
         this.setState({course_name: res.data.course.name})
         this.setState({course_description : res.data.course.description})
@@ -108,6 +110,16 @@ class CourseDescriptionPage extends Component {
     }
   }
 
+  submitRating = () => {
+    // const express = require('express')
+    // const mongoose = require('mongoose')
+    // var app = express()
+    // mongoose.connect('mongodb://localhost:"yourPortHere"/"mongoDBhere"')
+    // app.use(bodyParser.urlencoded({extended: false})) //Post Body Parser
+    // pass
+
+  }
+
 	render() {
 		return(
 
@@ -135,9 +147,16 @@ class CourseDescriptionPage extends Component {
               <button className={"syllabus-link"} onClick={this.openLink}>View</button>
             </Col>
           </Row>
-          <Row className="col-item course-description">
-            <h3>Course Description</h3>
-            <p>{this.state.course_description}</p>
+          <Row>
+            <Col className="col-item">
+              <h3>Course Description</h3>
+              <p>{this.state.course_description}</p>
+            </Col>
+            <Col className="col-item">
+              <p>
+                <button className={"syllabus-link"} onClick={this.submitRating}>Submit Rating</button>
+              </p>
+            </Col>
           </Row>
           <Row className="col-item course-requisite">
             <Row>
