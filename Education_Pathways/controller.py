@@ -30,7 +30,7 @@ class UserRatings(Resource):
         parser.add_argument('course', required=True)
         parser.add_argument('rating', required=True)
         data = parser.parse_args()
-        course = data['course']
+        course = data['course_id']
         rating = data['rating']
         try:
             in_course = Course.get(course)

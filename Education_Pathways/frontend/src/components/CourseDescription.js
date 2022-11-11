@@ -112,7 +112,7 @@ class CourseDescriptionPage extends Component {
 
   submitRating = () => {
     console.log("sending post request for rating")
-    const resp = fetch('http://localhost:5000/course/ratings', {
+    const resp = fetch('http://127.0.0.1:5000/course/ratings', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
