@@ -37,8 +37,9 @@ class CourseDescriptionPage extends Component {
 
   componentDidMount() {
     console.log("pass in course code: ", this.props.match.params.code)
-
-    axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
+    let url = "http://localhost:5000" 
+    
+    axios.get(`${url}/course/details?code=${this.props.match.params.code}`, {
       code: this.props.course_code
     })
       .then(res => {

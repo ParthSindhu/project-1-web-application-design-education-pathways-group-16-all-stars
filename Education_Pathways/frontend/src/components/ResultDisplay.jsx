@@ -28,7 +28,9 @@ class SearchResultDisplay extends Component{
   }
 
   getData = (input) => {
-    axios.get(`https://assignment-1-starter-template.herokuapp.com/searchc?input=${input}`)
+    // let url = "https://assignment-1-starter-template.herokuapp.com" 
+    let url = "http://localhost:5000" 
+    axios.get(`${url}/searchc?input=${input}`)
       .then(res => {
         console.log(`it is ${res.status}`)
         if (res.status === 200) {
