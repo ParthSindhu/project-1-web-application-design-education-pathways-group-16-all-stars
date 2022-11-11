@@ -9,6 +9,7 @@ import CourseDescriptionPage from "./CourseDescription";
 // import Wishlist from './Wishlist';
 // import SignUp from './SignUp'
 import SearchResultDisplay from './ResultDisplay'
+import CourseComments from "./CourseComments";
 
 function CourseDescription (props) {
   let query = useQuery();
@@ -96,6 +97,10 @@ We are looking for feedback to improve Education Pathways and make it more usefu
             </Route>
             <Route path="/search">
               <SearchResultDisplay />
+            </Route>
+            <Route exact
+              path="/courseComments/:code"
+              render={props =>(<CourseComments {...props} />)}>
             </Route>
             <Route exact
               path="/courseDetails/:code"
