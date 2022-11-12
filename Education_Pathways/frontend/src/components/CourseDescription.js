@@ -30,7 +30,10 @@ class CourseDescriptionPage extends Component {
       exclusions: "",
       starred: false,
       graphics: [],
-      username: localStorage.getItem('username')
+      username: localStorage.getItem('username'),
+      ratings_difficulty: [],
+      ratings_course_load: [],
+      ratings_engagement: []
     }
   }
 
@@ -44,6 +47,9 @@ class CourseDescriptionPage extends Component {
     })
       .then(res => {
         console.log(res.data)
+        this.setState({ratings_difficulty: this.getRatingPercentage([1,1,1])})
+        this.setState({ratings_course_load: this.getRatingPercentage([1,2,5])})
+        this.setState({ratings_engagement: this.getRatingPercentage([5,4,5])})
         this.setState({course_code: res.data.course.code})
         this.setState({course_name: res.data.course.name})
         this.setState({course_description : res.data.course.description})
@@ -101,6 +107,22 @@ class CourseDescriptionPage extends Component {
     console.log("new state: ", this.state)
   }
 
+  getRatingPercentage(ratings) {
+    const total = ratings.reduce((acc, c) => acc + c, 0);
+    let percentage = Math.round(((total / ratings.length) / 5)*100)
+    if (percentage == null){
+      percentage="?"
+    }
+    return percentage;
+  }
+
+  getRatingOver50(percentage){
+    let over50=null
+    if (percentage > 50){
+      over50 = "over50"
+    }
+    return over50
+  }
 
   openLink = () => {
     const newWindow = window.open(this.state.syllabus, '_blacnk', 'noopener,noreferrer');
@@ -144,24 +166,24 @@ class CourseDescriptionPage extends Component {
             </Col>
 
             <Col className="col-item">
-              <h3>Instructor Ratings</h3>
+              <h3>Course Ratings</h3>
 
               <label class="ratings-lbl">
-                <div className="progress-circle p10">
-                <span>10%</span>
+                <div className={`progress-circle p${this.state.ratings_difficulty} ${this.getRatingOver50(this.state.ratings_difficulty)}`}>
+                <span>{this.state.ratings_difficulty}%</span>
                 <div className="left-half-clipper">
-                  <div className="first10-bar"/>
+                  <div class="first50-bar"></div>
                   <div className="value-bar"/>
                 </div>
               </div>
-                Overall
+                Courseload
               </label>
 
               <label className="ratings-lbl">
-                <div className="progress-circle p50">
-                  <span>50%</span>
+                <div className={`progress-circle p${this.state.ratings_course_load} ${this.getRatingOver50(this.state.ratings_course_load)}`}>
+                  <span>{this.state.ratings_course_load}%</span>
                   <div className="left-half-clipper">
-                    <div className="first10-bar"/>
+                    <div class="first50-bar"></div>
                     <div className="value-bar"/>
                   </div>
                 </div>
@@ -169,15 +191,17 @@ class CourseDescriptionPage extends Component {
               </label>
 
               <label className="ratings-lbl">
-                <div className="progress-circle p80 over50">
-                  <span>80%</span>
+                <div className={`progress-circle p${this.state.ratings_engagement} ${this.getRatingOver50(this.state.ratings_engagement)}`}>
+                  <span>{this.state.ratings_engagement}%</span>
                   <div className="left-half-clipper">
-                    <div className="first50-bar"/>
+                    <div class="first50-bar"></div>
                     <div className="value-bar"/>
                   </div>
                 </div>
-                Recommend
+                Engagement
               </label>
+         
+              
 
             </Col>
           </Row>
