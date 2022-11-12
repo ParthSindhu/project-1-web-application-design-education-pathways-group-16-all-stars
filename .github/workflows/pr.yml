@@ -57,7 +57,7 @@ jobs:
 
       - name: Create Heroku app
         # if: github.event.action == 'opened'
-        run: heroku apps:create ${{ env.HEROKU_APP_NAME }} # --team=my-team
+        run: heroku apps:create ${{ env.HEROKU_APP_NAME }} || true
 
       # - name: Add Heroku app to pipeline
         # if: github.event.action == 'opened'
