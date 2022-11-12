@@ -18,6 +18,16 @@
   line-height: 1.4em;
 }
 
+.like {
+  height: 30px;
+  width: auto;
+}
+
+.dislike {
+  height: 30px;
+  width: auto;
+}
+
 .comments {
   margin-top: 20px;
 }
@@ -76,6 +86,14 @@
 
 .comment-image-container img {
   border-radius: 50px;
+}
+.comment-votes-container img {
+  display: flex;
+  flex-direction: column;
+}
+.comment-votes-box {
+  display: flex;
+  flex-direction: row;
 }
 
 .comment-right-part {

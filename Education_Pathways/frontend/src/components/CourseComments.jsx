@@ -14,6 +14,14 @@ class CourseComments extends CourseDescriptionPage{
     
     componentDidMount() {
         console.log("pass in course code: ", this.props.match.params.code)
+        // fetch comments from backend
+        fetch("http://localhost:5000/course/comments?course=" + this.props.match.params.code).then(
+            response => response.json()
+        ).then(comments => {
+            this.setState({comments: comments.comments});
+        }).catch(
+            error => console.log(error)
+        )
     }
     submitComment = (event) => {
         event.preventDefault();
@@ -24,12 +32,12 @@ class CourseComments extends CourseDescriptionPage{
         let text = data.get("comment");
         let username = data.get("comment_author");
         let email = data.get("email");
-        console.log(text, username, email);
         let course = this.props.match.params.code;
         axios.post(`${url}/course/comments`, {
             text,
             username,
-            course
+            course,
+            email
         })
         .then(res => {
             console.log(res.data)
@@ -42,14 +50,7 @@ class CourseComments extends CourseDescriptionPage{
 
 
     componentDidUpdate() {
-        // fetch comments from backend
-        fetch("http://localhost:5000/course/comments?course=" + this.props.match.params.code).then(
-            response => response.json()
-        ).then(comments => {
-            this.setState({comments: comments.comments});
-        }).catch(
-            error => console.log(error)
-        )
+        
     }
     
 
@@ -60,13 +61,17 @@ class CourseComments extends CourseDescriptionPage{
                 <div className="container">
                             <h3 className="comments-title">Comments</h3>
                 <ul className="comments-list">
+                    {/* {console.log(this.state.comments)} */}
                     { 
                      this.state.comments?.map((comment, index) =>  
                     <Comment 
                     comment={{
+                        id: comment._id,
                         username : comment.username,
                         body : comment.text,
                         createdAt : comment.timestamp.$date,
+                        upvotes: comment.upvotes,
+                        downvotes: comment.downvotes
                     }}    
                     />
                      )

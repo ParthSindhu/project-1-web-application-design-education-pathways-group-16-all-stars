@@ -393,10 +393,17 @@ class UserComment(Resource):
         parser.add_argument('username', required=True)
         parser.add_argument('course', required=True)
         parser.add_argument('text', required=True)
+        parser.add_argument('email', required=True)
         data = parser.parse_args()
+        email = data['email']
         username = data['username']
         course = data['course']
         text = data['text']
+        # check if email ends with @mail.utoronto.ca
+        if not email.endswith('@mail.utoronto.ca'):
+            resp = jsonify({'error': 'invalid email'})
+            resp.status_code = 400
+            return resp
         try:
             in_course = Course.get(course)
             comment_id = str(
@@ -426,15 +433,26 @@ class UserComment(Resource):
         comment_id = request.args.get('comment_id')
 
         parser = reqparse.RequestParser()
-        parser.add_argument('upvotes', required=True)
-        parser.add_argument('downvotes', required=True)
+        parser.add_argument('increment', required=True)
         data = parser.parse_args()
-        upvotes = data['upvotes']
-        downvotes = data['downvotes']
+        change = data['increment']
 
         try:
             comment = Comment.get(comment_id)
-            comment.updateComment(upvotes, downvotes)
+            print(comment)
+            print(comment.upvotes)
+            print(comment.downvotes)
+            print(change)
+            upvp = comment.upvotes
+            downvp = comment.downvotes
+            if change > 0:
+                print("yes")
+                upvp += change
+            else:
+                print("no")
+                downvp += change
+
+            comment.updateComment(upvp, downvp)
             updatedComment = Comment.get(comment_id)
             resp = jsonify(
                 {'comment': updatedComment})
