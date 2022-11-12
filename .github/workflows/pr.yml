@@ -56,18 +56,7 @@ jobs:
           justlogin: true
 
       - name: Create Heroku app
-        # if: github.event.action == 'opened'
         run: heroku apps:create ${{ env.HEROKU_APP_NAME }} || true
-
-      # - name: Add Heroku app to pipeline
-        # if: github.event.action == 'opened'
-        # run: heroku pipelines:add my-pipeline --app=${{ env.HEROKU_APP_NAME }} --stage=development
-
-      # - name: Copy environment variables to Heroku app
-        # if: github.event.action == 'opened'
-        # run: |
-          # heroku config --shell --app=my-development-app > .env
-          # cat .env | tr '\n' ' ' | xargs heroku config:set --app=${{ env.HEROKU_APP_NAME }}
 
       - name: Add Heroku remote
         run: heroku git:remote --app=${{ env.HEROKU_APP_NAME }}
