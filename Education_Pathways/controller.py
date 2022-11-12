@@ -102,7 +102,10 @@ class SearchCourse(Resource):
                     return resp
         input = ' '.join([nysiis(w) for w in input.split()])
         try:
-            search = Course.objects.search_text(input).order_by('$text_score')
+            searchCourseCode = list(Course.objects(code__icontains=input))
+            searchCourseName = list(Course.objects(name__icontains=input))
+            searchCourseDescription = list(Course.objects(description__icontains=input))
+            search = list(dict.fromkeys(searchCourseCode + searchCourseName + searchCourseDescription))
             resp = jsonify(search)
             resp.status_code = 200
             return resp
