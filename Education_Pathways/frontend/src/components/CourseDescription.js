@@ -42,14 +42,15 @@ class CourseDescriptionPage extends Component {
   componentDidMount() {
     console.log("pass in course code: ", this.props.match.params.code)
 
-    axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
+    this.setState({ratings_difficulty: this.getRatingPercentage([1,1,1])})
+    this.setState({ratings_course_load: this.getRatingPercentage([1,2,5])})
+    this.setState({ratings_engagement: this.getRatingPercentage([5,4,5])})
+
+    axios.get(`http://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
       code: this.props.course_code
     })
       .then(res => {
         console.log(res.data)
-        this.setState({ratings_difficulty: this.getRatingPercentage([1,1,1])})
-        this.setState({ratings_course_load: this.getRatingPercentage([1,2,5])})
-        this.setState({ratings_engagement: this.getRatingPercentage([5,4,5])})
         this.setState({course_code: res.data.course.code})
         this.setState({course_name: res.data.course.name})
         this.setState({course_description : res.data.course.description})
@@ -131,6 +132,24 @@ class CourseDescriptionPage extends Component {
     }
   }
 
+  showForm() {
+    document.getElementById('formElement').style.display = 'block';
+  }
+  closeForm() {
+    document.getElementById("formElement").style.display = "none";
+  }
+  submitRating(){
+    var email = document.getElementById("email");
+    var rating_courseload = document.getElementById("rating_courseload");
+    var rating_difficulty = document.getElementById("rating_difficulty");
+    var rating_engagement = document.getElementById("rating_engagement");
+    if (!email.value || !rating_courseload.value || !rating_difficulty.value || !rating_engagement.value) {
+      return;
+    }
+    console.log("Rating Submitted!")
+    console.log(rating_courseload.value, rating_difficulty.value, rating_engagement.value)
+  }
+
 	render() {
 
 		return(
@@ -200,9 +219,31 @@ class CourseDescriptionPage extends Component {
                 </div>
                 Engagement
               </label>
-         
-              
 
+              <button className={"open-button"} onClick={this.showForm}>Submit a Rating</button>
+              
+              <div className={"form-popup"} id="formElement">
+                <form className={"form-container"} > 
+                  <h3>Rate Your Experience!</h3>
+                  
+                  <div className={"dropdown"}>
+                    <label for="hour">Courseload:</label>
+                    <input type="number" id="rating_courseload" min="1" max="5" required/><br></br><br></br>
+
+                    <label for="hour">Difficulty    :</label>
+                    <input type="number" id="rating_difficulty" min="1" max="5" required/><br></br><br></br>
+
+                    <label for="hour">Engagement:</label>
+                    <input type="number" id="rating_engagement" min="1" max="5" required/>
+                  </div>
+
+                  <input type="email" placeholder="Enter Email" id="email" required/>
+                  
+                  <button type="submit" class={"btn"} onClick={this.submitRating}>Submit</button>
+                  <button className={"btn cancel"} onClick={this.closeForm}>Cancel</button>
+                </form>
+              </div>
+              
             </Col>
           </Row>
           <Row className="col-item course-requisite">
