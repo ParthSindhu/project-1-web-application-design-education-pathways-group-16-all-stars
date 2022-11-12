@@ -15,9 +15,14 @@ class UserRatings(Resource):
         course = request.args.get('course')
         try:
             course = Course.get(course)
-            ratings = course.get_ratings()
-            resp = jsonify(
-                {'rating': ratings})
+            ratings_difficulty = course.ratings_difficulty
+            ratings_courseload = course.ratings_courseload
+            ratings_engagement = course.ratings_engagement
+            resp = jsonify({
+                "ratings_difficulty": ratings_difficulty,
+                "ratings_courseload": ratings_courseload,
+                "ratings_engagement": ratings_engagement
+            })
             resp.status_code = 200
             return resp
         except Exception as e:
@@ -28,15 +33,25 @@ class UserRatings(Resource):
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('course', required=True)
-        parser.add_argument('rating', required=True)
+        parser.add_argument('rating_difficulty', required=True)
+        parser.add_argument('rating_courseload', required=True)
+        parser.add_argument('rating_engagement', required=True)
         data = parser.parse_args()
-        course = data['course_id']
-        rating = data['rating']
+        course = data['course']
+        rating_difficulty = data['rating_difficulty']
+        rating_courseload = data['rating_courseload']
+        rating_engagement = data['rating_engagement']
         try:
             in_course = Course.get(course)
-            in_course.rating.append(rating)
+            in_course.ratings_difficulty.append(rating_difficulty)
+            in_course.ratings_courseload.append(rating_courseload)
+            in_course.ratings_engagement.append(rating_engagement)
             in_course.save()
-            resp = jsonify({"rating": rating})
+            resp = jsonify({
+                "rating_difficulty": rating_difficulty,
+                "rating_courseload": rating_courseload,
+                "rating_engagement": rating_engagement
+            })
             resp.status_code = 200
             return resp
         except Exception as e:

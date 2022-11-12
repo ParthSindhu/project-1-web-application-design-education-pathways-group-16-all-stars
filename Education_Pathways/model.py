@@ -13,7 +13,9 @@ class Course(db.Document):
     exclusion = db.ListField()
     keyword = db.StringField(required=True)
     graph = db.StringField(required=True)
-    rating = db.ListField()
+    ratings_difficulty = db.ListField()
+    ratings_engagement = db.ListField()
+    ratings_courseload = db.ListField()
 
     meta = {'indexes': [
         '$keyword'
@@ -27,10 +29,6 @@ class Course(db.Document):
     def get_requisite_graph(cls, code_):
         return cls.objects(code=code_).get().graph
 
-    @classmethod
-    def get_ratings(cls, code_):
-        return cls.objects(code=code_).get().rating
-        #return self.rating
 
 
 class Wishlist(db.Document):

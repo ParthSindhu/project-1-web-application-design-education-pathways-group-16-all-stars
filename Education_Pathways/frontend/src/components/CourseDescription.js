@@ -29,7 +29,10 @@ class CourseDescriptionPage extends Component {
       exclusions: "",
       starred: false,
       graphics: [],
-      username: localStorage.getItem('username')
+      username: localStorage.getItem('username'),
+      ratings_difficulty: [],
+      ratings_courseload: [],
+      ratings_engagement: []
     }
   }
 
@@ -38,12 +41,19 @@ class CourseDescriptionPage extends Component {
   componentDidMount() {
     console.log("pass in course code: ", this.props.match.params.code)
 
+    axios.get(`http://127.0.0.1:5000/course/ratings?course=${this.props.match.params.code}`, {})
+      .then(res => {
+        console.log(res.data)
+        this.setState({ratings_difficulty: res.data.ratings_difficulty})
+        this.setState({ratings_courseload: res.data.ratings_courseload})
+        this.setState({ratings_engagement: res.data.ratings_engagement})
+    })
+
     axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
       code: this.props.course_code
     })
       .then(res => {
         console.log(res.data)
-        console.log("rating: ", res.data.course.rating)
         this.setState({rating: res.data.course.rating})
         this.setState({course_code: res.data.course.code})
         this.setState({course_name: res.data.course.name})
@@ -110,20 +120,6 @@ class CourseDescriptionPage extends Component {
     }
   }
 
-  submitRating = () => {
-    console.log("sending post request for rating")
-    const resp = fetch('http://127.0.0.1:5000/course/ratings', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          course_id: 1,
-          rating: 5
-      })
-    })
-  }
-
 	render() {
 		return(
 
@@ -155,11 +151,6 @@ class CourseDescriptionPage extends Component {
             <Col className="col-item">
               <h3>Course Description</h3>
               <p>{this.state.course_description}</p>
-            </Col>
-            <Col className="col-item">
-              <p>
-                <button className={"syllabus-link"} onClick={this.submitRating}>Submit Rating</button>
-              </p>
             </Col>
           </Row>
           <Row className="col-item course-requisite">
