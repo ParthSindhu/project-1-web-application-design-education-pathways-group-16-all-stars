@@ -76,7 +76,7 @@ jobs:
         run: git push heroku ${{ github.head_ref }}:master --force
 
       - name: Add comment to PR
-        if: github.event.action == 'opened'
+        # if: github.event.action == 'opened'
         run: |
           gh pr comment ${{ github.event.number }} --body '[Heroku app](https://dashboard.heroku.com/apps/${{ env.HEROKU_APP_NAME }}): https://${{ env.HEROKU_APP_NAME }}.herokuapp.com'
         env:
