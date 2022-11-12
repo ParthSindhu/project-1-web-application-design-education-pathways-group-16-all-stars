@@ -1,10 +1,10 @@
 # Create pr workflow to build and deploy to heroku
-name: Test App
+name: CICD
 on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -35,10 +35,10 @@ jobs:
         run: |
           npm test
         working-directory: ./Education_Pathways/frontend
-  heroku-pull-request:
+  heroku-pull-request-deploy:
     runs-on: ubuntu-latest
     env:
-      HEROKU_APP_NAME: education-pathways--allstars-pr-${{ github.event.number }}
+      HEROKU_APP_NAME: ep-allstars-pr-${{ github.event.number }}
 
     steps:
       - name: Checkout repository
