@@ -250,7 +250,11 @@ class CourseDescriptionPage extends Component {
               <button className={"open-button"} onClick={this.showForm}>Submit a Rating</button>
               
               <div className={"form-popup"} id="formElement">
-                <form className={"form-container"} > 
+                <form className={"form-container"} onSubmit={(event) => {
+                    event.preventDefault();
+                    this.submitRating()
+                    this.closeForm()
+                  } }> 
                   <h3>Rate Your Experience!</h3>
                   
                   <div className={"dropdown"}>
@@ -266,7 +270,7 @@ class CourseDescriptionPage extends Component {
 
                   <input type="email" placeholder="Enter Email" id="email" required/>
                   
-                  <button type="submit" class={"btn"} onClick={this.submitRating}>Submit</button>
+                  <button type="submit" class={"btn"} >Submit</button>
                   <button type="button" className={"btn cancel"} onClick={this.closeForm}>Close</button>
                 </form>
               </div>
