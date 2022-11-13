@@ -233,6 +233,27 @@ class ShowCourse(Resource):
             return resp
 
 
+class ShowAllCourse(Resource):
+    def get(self):
+
+        limit = request.args.get('limit', type=int)
+        try:
+            courses = Course.get_all(limit)
+            courses = [course.to_json() for course in courses]
+            # remove keyword, graph , comments
+            for course in courses:
+                del course['keyword']
+                del course['graph']
+                del course['comments']
+            resp = jsonify({'courses': courses})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+
 class ShowRecommendations(Resource):
     def get(self):
         tag = request.args.get('tag')
