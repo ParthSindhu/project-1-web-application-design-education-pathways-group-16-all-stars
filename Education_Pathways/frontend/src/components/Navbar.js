@@ -3,23 +3,23 @@ import './css/navbar.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import logo from './img/logo.png'
 import { Navbar, Nav } from "react-bootstrap";
-import { BrowserRouter as Router, Route, Switch, Link, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 // import LogIn from "./LogIn.jsx";
 import CourseDescriptionPage from "./CourseDescription";
 // import Wishlist from './Wishlist';
 // import SignUp from './SignUp'
 import SearchResultDisplay from './ResultDisplay'
 
-function CourseDescription (props) {
-  let query = useQuery();
-  return <CourseDescriptionPage code={query.get("code")} />;
-}
+// function CourseDescription (props) {
+//   let query = useQuery();
+//   return <CourseDescriptionPage code={query.get("code")} />;
+// }
 
-function useQuery() {
-  const { search } = useLocation();
+// function useQuery() {
+//   const { search } = useLocation();
 
-  return React.useMemo(() => new URLSearchParams(search), [search]);
-}
+//   return React.useMemo(() => new URLSearchParams(search), [search]);
+// }
 
 
 export default class NavbarComp extends Component {

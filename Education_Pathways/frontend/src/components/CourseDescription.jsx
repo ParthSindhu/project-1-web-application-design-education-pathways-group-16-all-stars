@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import './css/course-description.css'
+import './css/css-circular-prog-bar.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import requisite_label from './img/requisite-label.png'
-import empty_star from './img/star.png'
-import starred from './img/starred.png'
+// import empty_star from './img/star.png'
+// import starred from './img/starred.png'
 import axios from "axios"
 
-let star = empty_star;
+// let star = empty_star;
 
 class CourseDescriptionPage extends Component {
 
@@ -40,16 +41,15 @@ class CourseDescriptionPage extends Component {
 
   componentDidMount() {
     console.log("pass in course code: ", this.props.match.params.code)
-
-    axios.get(`http://127.0.0.1:5000/course/ratings?course=${this.props.match.params.code}`, {})
+    axios.get(`${process.env.REACT_APP_API_URL}/course/ratings?course=${this.props.match.params.code}`, {})
       .then(res => {
         console.log(res.data)
-        this.setState({ratings_difficulty: res.data.ratings_difficulty})
-        this.setState({ratings_courseload: res.data.ratings_courseload})
-        this.setState({ratings_engagement: res.data.ratings_engagement})
+        this.setState({ratings_difficulty: this.getRatingPercentage(res.data.ratings_difficulty)})
+        this.setState({ratings_courseload: this.getRatingPercentage(res.data.ratings_courseload)})
+        this.setState({ratings_engagement: this.getRatingPercentage(res.data.ratings_engagement)})
     })
 
-    axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
+    axios.get(`${process.env.REACT_APP_API_URL}/course/details?code=${this.props.match.params.code}`, {
       code: this.props.course_code
     })
       .then(res => {
@@ -111,6 +111,25 @@ class CourseDescriptionPage extends Component {
     console.log("new state: ", this.state)
   }
 
+  getRatingPercentage(ratings) {
+    let total=0
+    for (const value of ratings) {
+      total += parseInt(value);
+    }
+    let percentage = Math.round(((total / ratings.length) / 5)*100)
+    if (percentage == null){
+      percentage="?"
+    }
+    return percentage;
+  }
+
+  getRatingOver50(percentage){
+    let over50=null
+    if (percentage > 50){
+      over50 = "over50"
+    }
+    return over50
+  }
 
   openLink = () => {
     const newWindow = window.open(this.state.syllabus, '_blacnk', 'noopener,noreferrer');
@@ -119,11 +138,43 @@ class CourseDescriptionPage extends Component {
     }
   }
 
+  showForm() {
+    document.getElementById('formElement').style.display = 'block';
+  }
+  closeForm() {
+    document.getElementById("formElement").style.display = "none";
+  }
+  submitRating = () =>{
+    var email = document.getElementById("email");
+    var rating_courseload = document.getElementById("rating_courseload");
+    var rating_difficulty = document.getElementById("rating_difficulty");
+    var rating_engagement = document.getElementById("rating_engagement");
+    if (!email.value || !rating_courseload.value || !rating_difficulty.value || !rating_engagement.value) {
+      return;
+    }
+    console.log(rating_courseload.value, rating_difficulty.value, rating_engagement.value)
+    console.log("sending post request for rating")
+    fetch(`${process.env.REACT_APP_API_URL}/course/ratings`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          course: this.props.match.params.code,
+          rating_difficulty: rating_courseload.value,
+          rating_courseload: rating_difficulty.value,
+          rating_engagement: rating_engagement.value,
+      })
+    })
+    console.log("Rating Submitted!")
+  }
+
   redirectCourseComments = () => {
     this.props.history.push(`/courseComments/${this.state.course_code}`, {course_code: this.state.course_code})
   }
 
 	render() {
+
 		return(
 
       <div className="page-content">
@@ -159,6 +210,73 @@ class CourseDescriptionPage extends Component {
               <h3>Course Description</h3>
               <p>{this.state.course_description}</p>
             </Col>
+
+            <Col className="col-item">
+              <h3>Course Ratings</h3>
+
+              <label class="ratings-lbl">
+                <div className={`progress-circle p${this.state.ratings_difficulty} ${this.getRatingOver50(this.state.ratings_difficulty)}`}>
+                <span>{this.state.ratings_difficulty}%</span>
+                <div className="left-half-clipper">
+                  <div class="first50-bar"></div>
+                  <div className="value-bar"/>
+                </div>
+              </div>
+                Difficulty
+              </label>
+
+              <label className="ratings-lbl">
+                <div className={`progress-circle p${this.state.ratings_courseload} ${this.getRatingOver50(this.state.ratings_courseload)}`}>
+                  <span>{this.state.ratings_courseload}%</span>
+                  <div className="left-half-clipper">
+                    <div class="first50-bar"></div>
+                    <div className="value-bar"/>
+                  </div>
+                </div>
+                Courseload
+              </label>
+
+              <label className="ratings-lbl">
+                <div className={`progress-circle p${this.state.ratings_engagement} ${this.getRatingOver50(this.state.ratings_engagement)}`}>
+                  <span>{this.state.ratings_engagement}%</span>
+                  <div className="left-half-clipper">
+                    <div class="first50-bar"></div>
+                    <div className="value-bar"/>
+                  </div>
+                </div>
+                Engagement
+              </label>
+
+              <button className={"open-button"} onClick={this.showForm}>Submit a Rating</button>
+              
+              <div className={"form-popup"} id="formElement">
+                <form className={"form-container"} onSubmit={(event) => {
+                    event.preventDefault();
+                    this.submitRating()
+                    this.closeForm()
+                  } }> 
+                  <h3>Rate Your Experience!</h3>
+                  
+                  <div className={"dropdown"}>
+                    <label for="hour">Courseload:</label>
+                    <input type="number" id="rating_courseload" min="1" max="5" required/><br></br><br></br>
+
+                    <label for="hour">Difficulty:</label>
+                    <input type="number" id="rating_difficulty" min="1" max="5" required/><br></br><br></br>
+
+                    <label for="hour">Engagement:</label>
+                    <input type="number" id="rating_engagement" min="1" max="5" required/>
+                  </div>
+
+                  <input type="email" placeholder="Enter Email" id="email" required/>
+                  
+                  <button type="submit" class={"btn"} >Submit</button>
+                  <button type="button" className={"btn cancel"} onClick={this.closeForm}>Close</button>
+                </form>
+              </div>
+              
+            </Col>
+            
           </Row>
           <Row className="col-item course-requisite">
             <Row>
