@@ -9,7 +9,6 @@ import CourseDescriptionPage from "./CourseDescription";
 // import Wishlist from './Wishlist';
 // import SignUp from './SignUp'
 import SearchResultDisplay from './ResultDisplay'
-import CourseComments from "./CourseComments";
 
 function CourseDescription (props) {
   let query = useQuery();
