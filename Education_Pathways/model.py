@@ -112,15 +112,19 @@ class Package(db.Document):
             return None
         else:
             # Create package_id
-            package_id = name_.lower().replace(" ", "_")
+            package_id_ = name_.lower().replace(" ", "_")
+            # Get courses
+            courses = []
+            for course in courses_:
+                courses.append(Course.get(course))
             package = cls(name=name_, description=description_,
-                          courses=courses_, package_id=package_id)
+                          courses=courses, package_id=package_id_)
             package.save()
             return package
 
     meta = {'indexes': [
-        '$name',
-        '$description'
+        'name',
+        'description'
     ]}
 
     @classmethod
@@ -143,7 +147,9 @@ class Package(db.Document):
     def expand(self):
         ret = {
             'name': self.name,
-            'course': self.courses
+            'courses': self.courses,
+            'description': self.description,
+            'package_id': self.package_id
         }
         return ret
 

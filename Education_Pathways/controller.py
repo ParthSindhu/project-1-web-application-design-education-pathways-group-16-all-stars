@@ -547,15 +547,19 @@ class CoursePackages(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('name', required=True)
         parser.add_argument('description', required=True)
-        parser.add_argument('courses', required=True)
+        parser.add_argument('courses', required=True,
+                            type=str, action='append')
         data = parser.parse_args()
         name = data['name']
         description = data['description']
         courses = data['courses']
         try:
             package = Package.create(
-                name=name, description=description, courses=courses)
-            package.save()
+                name, description, courses)
+            if package is None:
+                resp = jsonify({'error': 'package already exists'})
+                resp.status_code = 400
+                return resp
             resp = jsonify({'package': package.expand()})
             resp.status_code = 200
             return resp
@@ -568,14 +572,17 @@ class CoursePackages(Resource):
 class SearchPackages(Resource):
     def get(self):
         input = request.args.get('input')
-        input = ' '.join([nysiis(w) for w in input.split()])
+        # input = ' '.join([nysiis(w) for w in input.split()])
         try:
             searchPackageName = list(Package.objects(name__icontains=input))
             searchPackageDescription = list(
                 Package.objects(description__icontains=input))
-            search = list(dict.fromkeys(
-                searchPackageName + searchPackageDescription))
-            resp = jsonify(search)
+            search = searchPackageName + searchPackageDescription
+            packages = []
+            # Get packages
+            for package in search:
+                packages.append(package.expand())
+            resp = jsonify(packages)
             resp.status_code = 200
             return resp
         except Exception as e:
