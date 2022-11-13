@@ -29,6 +29,7 @@ api.add_resource(controller.UserLogin, '/user/login')
 api.add_resource(controller.SearchCourse, '/searchc')
 api.add_resource(controller.ShowCourse, '/course/details')
 api.add_resource(controller.ShowCourseGraph, '/course/graph')
+api.add_resource(controller.ShowRecommendations, '/course/recommendations')
 
 api.add_resource(controller.UserWishlist, '/user/wishlist')
 api.add_resource(controller.UserWishlistAdd, '/user/wishlist/addCourse')

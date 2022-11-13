@@ -58,6 +58,7 @@ class Course(db.Document):
     ratings_difficulty = db.ListField()
     ratings_engagement = db.ListField()
     ratings_courseload = db.ListField()
+    tags = db.ListField()
     comments = db.ListField(db.ReferenceField(
         Comment),  reverse_delete_rule=db.CASCADE)
     meta = {
@@ -78,7 +79,8 @@ class Course(db.Document):
             "exclusion": self.exclusion,
             "keyword": self.keyword,
             "graph": self.graph,
-            "comments": self.comments
+            "comments": self.comments,
+            "tags": self.tags
         }
 
     meta = {'indexes': [
