@@ -1,13 +1,13 @@
-import React, { Component, useImperativeHandle } from "react";
+import React, { Component } from "react";
 import axios from 'axios'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import './css/Result.css'
-import unstarred from './img/star.png'
-import starred from './img/starred.png'
+// import unstarred from './img/star.png'
+// import starred from './img/starred.png'
 
-let star;
+// let star;
 
 class Result extends Component{
 
@@ -21,7 +21,7 @@ class Result extends Component{
       starred: false,
       username: localStorage.getItem('username')
     };
-    star = unstarred
+    // star = unstarred
   }
 
   redirectCourse = () => {
@@ -29,16 +29,20 @@ class Result extends Component{
   }
   
   componentDidMount() {
-    axios.get(`https://assignment-1-starter-template.herokuapp.com/user/wishlist?username=${this.state.username}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/user/wishlist?username=${this.state.username}`)
     .then(res => {
       let len = res.data.wishlist.course.length
       for (let i = 0; i < len; i++) {
         if (res.data.wishlist.course[i].code === this.state.course_code) {
-          star = starred
+          // star = starred
           this.setState({starred: true})
         }
       }
-    })
+    }).catch(
+      err => {
+        console.log(err)
+      }
+    )
   }
 
 

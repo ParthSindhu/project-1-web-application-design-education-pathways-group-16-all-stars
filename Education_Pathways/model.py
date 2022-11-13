@@ -1,6 +1,49 @@
 # This is the model
 
 from config import app, db
+import datetime
+
+
+if db is None:
+    print("DB is None")
+    exit()
+
+
+class Comment(db.Document):
+    # Unique identifier
+    comment_id = db.StringField(required=True, primary_key=True)
+    username = db.StringField(required=True)
+    course = db.StringField(required=True)
+    text = db.StringField(required=True)
+    timestamp = db.DateTimeField(required=True)
+    upvotes = db.IntField(required=True)
+    downvotes = db.IntField(required=True)
+
+    @classmethod
+    def get(cls, comment_id_):
+        return cls.objects(comment_id=comment_id_).get()
+
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
+
+    def updateComment(self, upvotes, downvotes):
+        self.update(upvotes = upvotes)
+        self.update(downvotes = downvotes)
+
+    def expand(self):
+        ret = {
+            'comment_id': self.comment_id,
+            'username': self.username,
+            'course': self.course,
+            'text': self.text,
+            'timestamp': self.timestamp,
+            'upvotes': self.upvotes,
+            'downvotes': self.downvotes
+        }
+        return ret
+
+
 
 class Course(db.Document):
     code = db.StringField(required=True, unique=True)
@@ -12,6 +55,33 @@ class Course(db.Document):
     exclusion = db.ListField()
     keyword = db.StringField(required=True)
     graph = db.StringField(required=True)
+    ratings_difficulty = db.ListField()
+    ratings_engagement = db.ListField()
+    ratings_courseload = db.ListField()
+    tags = db.ListField()
+    comments = db.ListField(db.ReferenceField(
+        Comment),  reverse_delete_rule=db.CASCADE)
+    meta = {
+        'collection': 'courses'
+    }
+
+    def __str__(self):
+        return self.code
+
+    def to_json(self):
+        return {
+            "code": self.code,
+            "name": self.name,
+            "description": self.description,
+            "syllabus": self.syllabus,
+            "prereq": self.prereq,
+            "coreq": self.coreq,
+            "exclusion": self.exclusion,
+            "keyword": self.keyword,
+            "graph": self.graph,
+            "comments": self.comments,
+            "tags": self.tags
+        }
 
     meta = {'indexes': [
         '$keyword'
@@ -20,11 +90,13 @@ class Course(db.Document):
     @classmethod
     def get(cls, code_):
         return cls.objects(code=code_).get()
-    
+
     @classmethod
     def get_requisite_graph(cls, code_):
         return cls.objects(code=code_).get().graph
 
+    def get_comments(self):
+        return self.comments
 
 
 class Wishlist(db.Document):
@@ -33,16 +105,16 @@ class Wishlist(db.Document):
     comments = db.DictField()
 
     @classmethod
-    def create(cls,username_):
+    def create(cls, username_):
         usr = cls.objects(username=username_)
         usr.update_one(set__course=[],
                        upsert=True)
         return True
-    
+
     def add_course(self, course_):
         if course_ not in self.course:
             self.update(add_to_set__course=course_)
-    
+
     def remove_course(self, course_):
         if course_ in self.course:
             self.course.remove(course_)
@@ -65,7 +137,7 @@ class User(db.Document):
     def create(cls, username_, password_):
         usr = cls.objects(username=username_)
         Wishlist.create(username_)
-        usr.update_one(set__username=username_, 
+        usr.update_one(set__username=username_,
                        set__password=password_,
                        upsert=True)
         return True
@@ -85,9 +157,9 @@ class User(db.Document):
     def verify_password(cls, username_, password_):
         usr = cls.objects(username=username_).get()
         if usr and usr.password == password_:
-                return True
+            return True
         return False
-    
+
     @classmethod
     def get_wishlist(cls, username_):
         return Wishlist.objects(username=username_).get()
@@ -105,13 +177,13 @@ class User(db.Document):
 class Minor(db.Document):
     name = db.StringField(required=True, unique=True)
     description = db.StringField()
-    requisites = db.ListField(db.ListField(db.ListField())) 
-            #[ (['code', 'code'], 2), (['code', 'code'], 1), ] 
+    requisites = db.ListField(db.ListField(db.ListField()))
+    #[ (['code', 'code'], 2), (['code', 'code'], 1), ]
 
     @classmethod
     def get(cls, name_):
         return cls.objects(name=name_).get()
-    
+
     @classmethod
     def check(cls, codes_):
         ret = []
