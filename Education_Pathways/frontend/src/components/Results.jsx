@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from 'axios'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -28,22 +27,22 @@ class Result extends Component{
     this.props.history.push(`/course/details/${this.props.course_code}`, {course_code: this.props.course_code})
   }
   
-  componentDidMount() {
-    axios.get(`${process.env.REACT_APP_API_URL}/user/wishlist?username=${this.state.username}`)
-    .then(res => {
-      let len = res.data.wishlist.course.length
-      for (let i = 0; i < len; i++) {
-        if (res.data.wishlist.course[i].code === this.state.course_code) {
-          // star = starred
-          this.setState({starred: true})
-        }
-      }
-    }).catch(
-      err => {
-        console.log(err)
-      }
-    )
-  }
+  // componentDidMount() {
+  //   axios.get(`${process.env.REACT_APP_API_URL}/user/wishlist?username=${this.state.username}`)
+  //   .then(res => {
+  //     let len = res.data.wishlist.course.length
+  //     for (let i = 0; i < len; i++) {
+  //       if (res.data.wishlist.course[i].code === this.state.course_code) {
+  //         // star = starred
+  //         this.setState({starred: true})
+  //       }
+  //     }
+  //   }).catch(
+  //     err => {
+  //       console.log(err)
+  //     }
+  //   )
+  // }
 
 
 
