@@ -54,7 +54,6 @@ class CourseDescriptionPage extends Component {
     })
       .then(res => {
         console.log(res.data)
-        this.setState({rating: res.data.course.rating})
         this.setState({course_code: res.data.course.code})
         this.setState({course_name: res.data.course.name})
         this.setState({course_description : res.data.course.description})
