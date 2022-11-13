@@ -60,7 +60,11 @@ class SearchResultDisplay extends Component {
         } else if (res.status === 400) {
           alert("System Error. Please refresh")
         }
-      })
+      }).catch(
+        err => {
+          console.log(err)
+        }
+      )
   }
 
   render() {
