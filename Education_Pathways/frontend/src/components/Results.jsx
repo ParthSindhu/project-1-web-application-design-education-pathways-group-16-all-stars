@@ -21,7 +21,7 @@ class Result extends Component{
       starred: false,
       username: localStorage.getItem('username')
     };
-    star = unstarred
+    // star = unstarred
   }
 
   redirectCourse = () => {
@@ -34,7 +34,7 @@ class Result extends Component{
       let len = res.data.wishlist.course.length
       for (let i = 0; i < len; i++) {
         if (res.data.wishlist.course[i].code === this.state.course_code) {
-          star = starred
+          // star = starred
           this.setState({starred: true})
         }
       }
