@@ -32,7 +32,7 @@ class UserRegistration(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -51,7 +51,7 @@ class UserUpdatePwd(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -73,7 +73,7 @@ class UserLogin(Resource):
                 resp.status_code = 401
                 return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 # ------------------------------------------------------------
@@ -97,20 +97,22 @@ class SearchCourse(Resource):
                     resp.status_code = 200
                     return resp
                 except Exception as e:
-                    resp = jsonify({'error': 'something went wrong'})
+                    resp = jsonify({'error': str(e)})
                     resp.status_code = 400
                     return resp
         input = ' '.join([nysiis(w) for w in input.split()])
         try:
             searchCourseCode = list(Course.objects(code__icontains=input))
             searchCourseName = list(Course.objects(name__icontains=input))
-            searchCourseDescription = list(Course.objects(description__icontains=input))
-            search = list(dict.fromkeys(searchCourseCode + searchCourseName + searchCourseDescription))
+            searchCourseDescription = list(
+                Course.objects(description__icontains=input))
+            search = list(dict.fromkeys(searchCourseCode +
+                          searchCourseName + searchCourseDescription))
             resp = jsonify(search)
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -132,7 +134,7 @@ class SearchCourse(Resource):
                     resp.status_code = 200
                     return resp
                 except Exception as e:
-                    resp = jsonify({'error': 'something went wrong'})
+                    resp = jsonify({'error': str(e)})
                     resp.status_code = 400
                     return resp
         input = ' '.join([nysiis(w) for w in input.split()])
@@ -142,7 +144,7 @@ class SearchCourse(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -159,7 +161,7 @@ class ShowCourse(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -177,7 +179,22 @@ class ShowCourse(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+
+class ShowRecommendations(Resource):
+    def get(self):
+        tag = request.args.get('tag')
+
+        try:
+            recommended_courses = list(Course.objects(tag__iexact=tag))
+            resp = jsonify(recommended_courses)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -194,7 +211,7 @@ class ShowCourseGraph(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -212,7 +229,7 @@ class ShowCourseGraph(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -230,7 +247,7 @@ class UserWishlist(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -245,7 +262,7 @@ class UserWishlist(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -273,7 +290,7 @@ class UserWishlistAdd(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -292,7 +309,7 @@ class UserWishlistAdd(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -309,7 +326,7 @@ class UserWishlistRemove(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -328,7 +345,7 @@ class UserWishlistRemove(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -346,7 +363,7 @@ class UserWishlistMinorCheck(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -365,7 +382,7 @@ class UserWishlistMinorCheck(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 

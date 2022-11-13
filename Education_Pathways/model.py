@@ -54,6 +54,7 @@ class Course(db.Document):
     exclusion = db.ListField()
     keyword = db.StringField(required=True)
     graph = db.StringField(required=True)
+    tags = db.ListField()
     comments = db.ListField(db.ReferenceField(
         Comment),  reverse_delete_rule=db.CASCADE)
     meta = {
@@ -74,7 +75,8 @@ class Course(db.Document):
             "exclusion": self.exclusion,
             "keyword": self.keyword,
             "graph": self.graph,
-            "comments": self.comments
+            "comments": self.comments,
+            "tags": self.tags
         }
 
     meta = {'indexes': [
