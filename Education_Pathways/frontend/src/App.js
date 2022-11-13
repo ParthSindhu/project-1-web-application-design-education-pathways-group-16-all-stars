@@ -7,7 +7,7 @@ import './App.css';
 function App() {
 
   return (
-    <div>
+    <div id='MAIN'>
       <div className="App">
         <NavbarComp />
         <ReactComp />
