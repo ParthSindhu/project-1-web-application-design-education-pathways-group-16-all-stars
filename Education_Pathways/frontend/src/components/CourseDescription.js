@@ -50,7 +50,7 @@ class CourseDescriptionPage extends Component {
         this.setState({ratings_engagement: this.getRatingPercentage(res.data.ratings_engagement)})
     })
 
-    axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
+    axios.get(`https://education-pathways-allstars.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
       code: this.props.course_code
     })
       .then(res => {
@@ -113,17 +113,14 @@ class CourseDescriptionPage extends Component {
   }
 
   getRatingPercentage(ratings) {
-    const total = ratings.reduce((a, b) => {
-      return parseInt(a) + parseInt(b);
-    });
-    console.log(total)
+    let total=0
+    for (const value of ratings) {
+      total += parseInt(value);
+    }
     let percentage = Math.round(((total / ratings.length) / 5)*100)
     if (percentage == null){
       percentage="?"
     }
-    console.log("ratings"+ratings)
-    console.log("percentage"+percentage)
-
     return percentage;
   }
 
@@ -156,8 +153,21 @@ class CourseDescriptionPage extends Component {
     if (!email.value || !rating_courseload.value || !rating_difficulty.value || !rating_engagement.value) {
       return;
     }
-    console.log("Rating Submitted!")
     console.log(rating_courseload.value, rating_difficulty.value, rating_engagement.value)
+    console.log("sending post request for rating")
+    const resp = fetch('http://127.0.0.1:5000/course/ratings', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          course: "ECE318H1",
+          rating_difficulty: rating_courseload.value,
+          rating_courseload: rating_difficulty.value,
+          rating_engagement: rating_engagement.value,
+      })
+    })
+    console.log("Rating Submitted!")
   }
 
   redirectCourseComments = () => {
