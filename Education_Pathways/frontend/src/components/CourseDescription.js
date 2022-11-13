@@ -145,7 +145,7 @@ class CourseDescriptionPage extends Component {
   closeForm() {
     document.getElementById("formElement").style.display = "none";
   }
-  submitRating(){
+  submitRating = () =>{
     var email = document.getElementById("email");
     var rating_courseload = document.getElementById("rating_courseload");
     var rating_difficulty = document.getElementById("rating_difficulty");
@@ -161,7 +161,7 @@ class CourseDescriptionPage extends Component {
           'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-          course: "ECE318H1",
+          course: this.props.match.params.code,
           rating_difficulty: rating_courseload.value,
           rating_courseload: rating_difficulty.value,
           rating_engagement: rating_engagement.value,
