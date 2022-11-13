@@ -152,6 +152,7 @@ class CourseDescriptionPage extends Component {
     }
     console.log("Rating Submitted!")
     console.log(rating_courseload.value, rating_difficulty.value, rating_engagement.value)
+  }
 
   redirectCourseComments = () => {
     this.props.history.push(`/courseComments/${this.state.course_code}`, {course_code: this.state.course_code})
