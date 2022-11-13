@@ -5,7 +5,6 @@ import './css/Result.css'
 import Label from './Label'
 import "./css/styles.css";
 
-
 class SearchResultDisplay extends Component {
 
   constructor() {
@@ -32,9 +31,7 @@ class SearchResultDisplay extends Component {
   }
 
   getData = (input) => {
-    // let url = "https://assignment-1-starter-template.herokuapp.com" 
-    let url = "http://localhost:5000" 
-    axios.get(`${url}/searchc?input=${input}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/searchc?input=${input}`)
       .then(res => {
         if (res.status === 200) {
           this.setState({ results: [] })

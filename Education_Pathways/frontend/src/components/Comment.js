@@ -6,9 +6,7 @@ import './css/Comments.css'
 
 function vote(increment, comment_id) {
     console.log("vote", increment, comment_id);
-    let url = "http://localhost:5000" 
-    
-    axios.put(`${url}/course/comments?comment_id=${comment_id}`, {increment: increment})
+    axios.put(`${process.env.REACT_APP_API_URL}/course/comments?comment_id=${comment_id}`, {increment: increment})
     .catch((err) => {
         console.log(err);
     })

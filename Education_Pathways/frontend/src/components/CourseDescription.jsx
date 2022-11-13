@@ -37,9 +37,8 @@ class CourseDescriptionPage extends Component {
 
   componentDidMount() {
     console.log("pass in course code: ", this.props.match.params.code)
-    let url = "http://localhost:5000" 
     
-    axios.get(`${url}/course/details?code=${this.props.match.params.code}`, {
+    axios.get(`${process.env.REACT_APP_API_URL}/course/details?code=${this.props.match.params.code}`, {
       code: this.props.course_code
     })
       .then(res => {

@@ -15,7 +15,7 @@ class CourseComments extends CourseDescriptionPage{
     componentDidMount() {
         console.log("pass in course code: ", this.props.match.params.code)
         // fetch comments from backend
-        fetch("http://localhost:5000/course/comments?course=" + this.props.match.params.code).then(
+        fetch(`${process.env.REACT_APP_API_URL}/course/comments?course=` + this.props.match.params.code).then(
             response => response.json()
         ).then(comments => {
             this.setState({comments: comments.comments});
@@ -25,7 +25,6 @@ class CourseComments extends CourseDescriptionPage{
     }
     submitComment = (event) => {
         event.preventDefault();
-        let url = "http://localhost:5000"
         console.log(event)
         const data = new FormData(event.currentTarget);
 
@@ -33,7 +32,7 @@ class CourseComments extends CourseDescriptionPage{
         let username = data.get("comment_author");
         let email = data.get("email");
         let course = this.props.match.params.code;
-        axios.post(`${url}/course/comments`, {
+        axios.post(`${process.env.REACT_APP_API_URL}/course/comments`, {
             text,
             username,
             course,
