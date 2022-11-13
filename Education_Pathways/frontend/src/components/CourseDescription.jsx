@@ -5,11 +5,11 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import requisite_label from './img/requisite-label.png'
-import empty_star from './img/star.png'
-import starred from './img/starred.png'
+// import empty_star from './img/star.png'
+// import starred from './img/starred.png'
 import axios from "axios"
 
-let star = empty_star;
+// let star = empty_star;
 
 class CourseDescriptionPage extends Component {
 
@@ -29,7 +29,10 @@ class CourseDescriptionPage extends Component {
       exclusions: "",
       starred: false,
       graphics: [],
-      username: localStorage.getItem('username')
+      username: localStorage.getItem('username'),
+      ratings_difficulty: [],
+      ratings_courseload: [],
+      ratings_engagement: []
     }
   }
 
@@ -37,8 +40,16 @@ class CourseDescriptionPage extends Component {
 
   componentDidMount() {
     console.log("pass in course code: ", this.props.match.params.code)
+    
+    axios.get(`${process.env.REACT_APP_API_URL}/course/ratings?course=${this.props.match.params.code}`, {})
+      .then(res => {
+        console.log(res.data)
+        this.setState({ratings_difficulty: res.data.ratings_difficulty})
+        this.setState({ratings_courseload: res.data.ratings_courseload})
+        this.setState({ratings_engagement: res.data.ratings_engagement})
+    })
 
-    axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
+    axios.get(`${process.env.REACT_APP_API_URL}/course/details?code=${this.props.match.params.code}`, {
       code: this.props.course_code
     })
       .then(res => {
@@ -143,9 +154,11 @@ class CourseDescriptionPage extends Component {
               <button className={"syllabus-link"} onClick={this.redirectCourseComments}>View</button>
             </Col>
           </Row>
-          <Row className="col-item course-description">
-            <h3>Course Description</h3>
-            <p>{this.state.course_description}</p>
+          <Row>
+            <Col className="col-item">
+              <h3>Course Description</h3>
+              <p>{this.state.course_description}</p>
+            </Col>
           </Row>
           <Row className="col-item course-requisite">
             <Row>

@@ -10,6 +10,55 @@ import re
 
 
 # -------------------- User related --------------------
+class UserRatings(Resource):
+    def get(self):
+        course = request.args.get('course')
+        try:
+            course = Course.get(course)
+            ratings_difficulty = course.ratings_difficulty
+            ratings_courseload = course.ratings_courseload
+            ratings_engagement = course.ratings_engagement
+            resp = jsonify({
+                "ratings_difficulty": ratings_difficulty,
+                "ratings_courseload": ratings_courseload,
+                "ratings_engagement": ratings_engagement
+            })
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('course', required=True)
+        parser.add_argument('rating_difficulty', required=True)
+        parser.add_argument('rating_courseload', required=True)
+        parser.add_argument('rating_engagement', required=True)
+        data = parser.parse_args()
+        course = data['course']
+        rating_difficulty = data['rating_difficulty']
+        rating_courseload = data['rating_courseload']
+        rating_engagement = data['rating_engagement']
+        try:
+            in_course = Course.get(course)
+            in_course.ratings_difficulty.append(rating_difficulty)
+            in_course.ratings_courseload.append(rating_courseload)
+            in_course.ratings_engagement.append(rating_engagement)
+            in_course.save()
+            resp = jsonify({
+                "rating_difficulty": rating_difficulty,
+                "rating_courseload": rating_courseload,
+                "rating_engagement": rating_engagement
+            })
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            print(e)
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
 
 
 class UserRegistration(Resource):
@@ -32,7 +81,7 @@ class UserRegistration(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -51,7 +100,7 @@ class UserUpdatePwd(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -73,7 +122,7 @@ class UserLogin(Resource):
                 resp.status_code = 401
                 return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 # ------------------------------------------------------------
@@ -97,17 +146,22 @@ class SearchCourse(Resource):
                     resp.status_code = 200
                     return resp
                 except Exception as e:
-                    resp = jsonify({'error': 'something went wrong'})
+                    resp = jsonify({'error': str(e)})
                     resp.status_code = 400
                     return resp
         input = ' '.join([nysiis(w) for w in input.split()])
         try:
-            search = Course.objects.search_text(input).order_by('$text_score')
+            searchCourseCode = list(Course.objects(code__icontains=input))
+            searchCourseName = list(Course.objects(name__icontains=input))
+            searchCourseDescription = list(
+                Course.objects(description__icontains=input))
+            search = list(dict.fromkeys(searchCourseCode +
+                          searchCourseName + searchCourseDescription))
             resp = jsonify(search)
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -129,7 +183,7 @@ class SearchCourse(Resource):
                     resp.status_code = 200
                     return resp
                 except Exception as e:
-                    resp = jsonify({'error': 'something went wrong'})
+                    resp = jsonify({'error': str(e)})
                     resp.status_code = 400
                     return resp
         input = ' '.join([nysiis(w) for w in input.split()])
@@ -139,7 +193,7 @@ class SearchCourse(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -156,7 +210,7 @@ class ShowCourse(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -174,7 +228,22 @@ class ShowCourse(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+
+class ShowRecommendations(Resource):
+    def get(self):
+        tag = request.args.get('tag')
+
+        try:
+            recommended_courses = list(Course.objects(tag__iexact=tag))
+            resp = jsonify(recommended_courses)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -191,7 +260,7 @@ class ShowCourseGraph(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -209,7 +278,7 @@ class ShowCourseGraph(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -227,7 +296,7 @@ class UserWishlist(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -242,7 +311,7 @@ class UserWishlist(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -270,7 +339,7 @@ class UserWishlistAdd(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -289,7 +358,7 @@ class UserWishlistAdd(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -306,7 +375,7 @@ class UserWishlistRemove(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -325,7 +394,7 @@ class UserWishlistRemove(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -343,7 +412,7 @@ class UserWishlistMinorCheck(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -362,7 +431,7 @@ class UserWishlistMinorCheck(Resource):
             resp.status_code = 200
             return resp
         except Exception as e:
-            resp = jsonify({'error': 'something went wrong'})
+            resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
 
@@ -393,10 +462,17 @@ class UserComment(Resource):
         parser.add_argument('username', required=True)
         parser.add_argument('course', required=True)
         parser.add_argument('text', required=True)
+        parser.add_argument('email', required=True)
         data = parser.parse_args()
+        email = data['email']
         username = data['username']
         course = data['course']
         text = data['text']
+        # check if email ends with @mail.utoronto.ca
+        if not email.endswith('@mail.utoronto.ca'):
+            resp = jsonify({'error': 'invalid email'})
+            resp.status_code = 400
+            return resp
         try:
             in_course = Course.get(course)
             comment_id = str(
@@ -426,15 +502,20 @@ class UserComment(Resource):
         comment_id = request.args.get('comment_id')
 
         parser = reqparse.RequestParser()
-        parser.add_argument('upvotes', required=True)
-        parser.add_argument('downvotes', required=True)
+        parser.add_argument('increment', required=True)
         data = parser.parse_args()
-        upvotes = data['upvotes']
-        downvotes = data['downvotes']
+        change = data['increment']
 
         try:
             comment = Comment.get(comment_id)
-            comment.updateComment(upvotes, downvotes)
+            upvp = comment.upvotes
+            downvp = comment.downvotes
+            if change > 0:
+                upvp += change
+            else:
+                downvp += change
+
+            comment.updateComment(upvp, downvp)
             updatedComment = Comment.get(comment_id)
             resp = jsonify(
                 {'comment': updatedComment})
