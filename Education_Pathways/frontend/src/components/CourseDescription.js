@@ -50,7 +50,7 @@ class CourseDescriptionPage extends Component {
         this.setState({ratings_engagement: this.getRatingPercentage(res.data.ratings_engagement)})
     })
 
-    axios.get(`https://education-pathways-allstars.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
+    axios.get(`${process.env.REACT_APP_API_URL}/course/details?code=${this.props.match.params.code}`, {
       code: this.props.course_code
     })
       .then(res => {
