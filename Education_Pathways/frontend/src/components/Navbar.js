@@ -11,16 +11,16 @@ import CourseDescriptionPage from "./CourseDescription";
 import SearchResultDisplay from './ResultDisplay'
 import CourseComments from "./CourseComments";
 
-function CourseDescription (props) {
-  let query = useQuery();
-  return <CourseDescriptionPage code={query.get("code")} />;
-}
+// function CourseDescription (props) {
+//   let query = useQuery();
+//   return <CourseDescriptionPage code={query.get("code")} />;
+// }
 
-function useQuery() {
-  const { search } = useLocation();
+// function useQuery() {
+//   const { search } = useLocation();
 
-  return React.useMemo(() => new URLSearchParams(search), [search]);
-}
+//   return React.useMemo(() => new URLSearchParams(search), [search]);
+// }
 
 
 export default class NavbarComp extends Component {
