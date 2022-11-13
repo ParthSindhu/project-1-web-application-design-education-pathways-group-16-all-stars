@@ -42,7 +42,7 @@ class CourseDescriptionPage extends Component {
   componentDidMount() {
     console.log("pass in course code: ", this.props.match.params.code)
 
-    axios.get(`http://127.0.0.1:5000/course/ratings?course=${this.props.match.params.code}`, {})
+    axios.get(`${process.env.REACT_APP_API_URL}/course/ratings?course=${this.props.match.params.code}`, {})
       .then(res => {
         console.log(res.data)
         this.setState({ratings_difficulty: this.getRatingPercentage(res.data.ratings_difficulty)})
