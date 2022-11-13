@@ -28,8 +28,8 @@ class Comment(db.Document):
         return cls.objects.all()
 
     def updateComment(self, upvotes, downvotes):
-        self.update(upvotes = upvotes)
-        self.update(downvotes = downvotes)
+        self.update(upvotes=upvotes)
+        self.update(downvotes=downvotes)
 
     def expand(self):
         ret = {
@@ -42,7 +42,6 @@ class Comment(db.Document):
             'downvotes': self.downvotes
         }
         return ret
-
 
 
 class Course(db.Document):
@@ -97,6 +96,56 @@ class Course(db.Document):
 
     def get_comments(self):
         return self.comments
+
+
+# Course Packages Frontend
+class Package(db.Document):
+    package_id = db.StringField(required=True, primary_key=True)
+    name = db.StringField(required=True)
+    description = db.StringField(required=True)
+    courses = db.ListField(db.ReferenceField(Course))
+
+    @classmethod
+    def create(cls, name_, description_, courses_):
+        usr = cls.objects(name=name_)
+        if usr:
+            return None
+        else:
+            # Create package_id
+            package_id = name_.lower().replace(" ", "_")
+            package = cls(name=name_, description=description_,
+                          courses=courses_, package_id=package_id)
+            package.save()
+            return package
+
+    meta = {'indexes': [
+        '$name',
+        '$description'
+    ]}
+
+    @classmethod
+    def get(cls, package_id_):
+        return cls.objects(package_id=package_id_).get()
+
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
+
+    def add_course(self, course_):
+        if course_ not in self.courses:
+            self.update(add_to_set__course=course_)
+
+    def remove_course(self, course_):
+        if course_ in self.courses:
+            self.courses.remove(course_)
+            self.save()
+
+    def expand(self):
+        ret = {
+            'name': self.name,
+            'course': self.courses
+        }
+        return ret
 
 
 class Wishlist(db.Document):

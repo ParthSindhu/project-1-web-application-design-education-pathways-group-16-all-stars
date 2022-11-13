@@ -525,3 +525,39 @@ class UserComment(Resource):
             resp = jsonify({'error': str(e)})
             resp.status_code = 400
             return resp
+
+
+# ------------------------------------------------------------
+# Course Packages
+
+class CoursePackages(Resource):
+    def get(self):
+        package_id = request.args.get('package_id')
+        try:
+            package = Package.get(package_id)
+            resp = jsonify({'package': package.expand()})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+
+class SearchPackages(Resource):
+    def get(self):
+        input = request.args.get('input')
+        input = ' '.join([nysiis(w) for w in input.split()])
+        try:
+            searchPackageName = list(Package.objects(name__icontains=input))
+            searchPackageDescription = list(
+                Package.objects(description__icontains=input))
+            search = list(dict.fromkeys(
+                searchPackageName + searchPackageDescription))
+            resp = jsonify(search)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
