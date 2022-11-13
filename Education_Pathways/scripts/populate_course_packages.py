@@ -4,7 +4,7 @@ import requests
 
 
 def create_course_package(courses, name, description):
-    url = "http://localhost:5000/packages"
+    url = "https://education-pathways-allstars.herokuapp.com/packages"
     payload = {
         "courses": courses,
         "name": name,
