@@ -258,7 +258,7 @@ class CourseDescriptionPage extends Component {
                     <label for="hour">Courseload:</label>
                     <input type="number" id="rating_courseload" min="1" max="5" required/><br></br><br></br>
 
-                    <label for="hour">Difficulty    :</label>
+                    <label for="hour">Difficulty:</label>
                     <input type="number" id="rating_difficulty" min="1" max="5" required/><br></br><br></br>
 
                     <label for="hour">Engagement:</label>
@@ -268,7 +268,7 @@ class CourseDescriptionPage extends Component {
                   <input type="email" placeholder="Enter Email" id="email" required/>
                   
                   <button type="submit" class={"btn"} onClick={this.submitRating}>Submit</button>
-                  <button className={"btn cancel"} onClick={this.closeForm}>Cancel</button>
+                  <button type="button" className={"btn cancel"} onClick={this.closeForm}>Close</button>
                 </form>
               </div>
               
