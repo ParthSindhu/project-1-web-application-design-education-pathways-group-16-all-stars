@@ -10,6 +10,8 @@ import re
 
 
 # -------------------- User related --------------------
+
+
 class UserRegistration(Resource):
     def post(self):
         parser = reqparse.RequestParser()
@@ -18,12 +20,12 @@ class UserRegistration(Resource):
         data = parser.parse_args()
         username = data['username']
         password = data['password']
-        
+
         if User.objects(username=username):
             resp = jsonify({'message': 'Username already exists'})
             resp.status_code = 409
             return resp
-        
+
         try:
             User.create(username, password)
             resp = jsonify({})
@@ -77,6 +79,8 @@ class UserLogin(Resource):
 # ------------------------------------------------------------
 
 # -------------------- Course related --------------------
+
+
 class SearchCourse(Resource):
     def get(self):
         input = request.args.get('input')
@@ -98,7 +102,10 @@ class SearchCourse(Resource):
                     return resp
         input = ' '.join([nysiis(w) for w in input.split()])
         try:
-            search = Course.objects.search_text(input).order_by('$text_score')
+            searchCourseCode = list(Course.objects(code__icontains=input))
+            searchCourseName = list(Course.objects(name__icontains=input))
+            searchCourseDescription = list(Course.objects(description__icontains=input))
+            search = list(dict.fromkeys(searchCourseCode + searchCourseName + searchCourseDescription))
             resp = jsonify(search)
             resp.status_code = 200
             return resp
@@ -155,7 +162,7 @@ class ShowCourse(Resource):
             resp = jsonify({'error': 'something went wrong'})
             resp.status_code = 400
             return resp
-    
+
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('code', required=True)
@@ -225,14 +232,17 @@ class ShowCourseGraph(Resource):
 # ------------------------------------------------------------
 
 # -------------------- Wishlist related --------------------
+
+
 class UserWishlist(Resource):
     def get(self):
         username = request.args.get('username')
         try:
-            resp = jsonify({'wishlist': User.get_wishlist(username_=username).expand()})
+            resp = jsonify(
+                {'wishlist': User.get_wishlist(username_=username).expand()})
             resp.status_code = 200
             return resp
-        except Exception as e: 
+        except Exception as e:
             resp = jsonify({'error': 'something went wrong'})
             resp.status_code = 400
             return resp
@@ -243,10 +253,11 @@ class UserWishlist(Resource):
         data = parser.parse_args()
         username = data['username']
         try:
-            resp = jsonify({'wishlist': User.get_wishlist(username_=username).expand()})
+            resp = jsonify(
+                {'wishlist': User.get_wishlist(username_=username).expand()})
             resp.status_code = 200
             return resp
-        except Exception as e: 
+        except Exception as e:
             resp = jsonify({'error': 'something went wrong'})
             resp.status_code = 400
             return resp
@@ -259,8 +270,9 @@ class UserWishlist(Resource):
         if not Course.objects(code=code):
             resp = jsonify({'message': f"Course {code} doesn't exist"})
             resp.status_code = 404
-            return resp        
+            return resp
 # ------------------------------------------------------------
+
 
 class UserWishlistAdd(Resource):
     def get(self):
@@ -273,7 +285,7 @@ class UserWishlistAdd(Resource):
             resp = jsonify({'wishlist': wl.expand()})
             resp.status_code = 200
             return resp
-        except Exception as e: 
+        except Exception as e:
             resp = jsonify({'error': 'something went wrong'})
             resp.status_code = 400
             return resp
@@ -292,7 +304,7 @@ class UserWishlistAdd(Resource):
             resp = jsonify({'wishlist': wl.expand()})
             resp.status_code = 200
             return resp
-        except Exception as e: 
+        except Exception as e:
             resp = jsonify({'error': 'something went wrong'})
             resp.status_code = 400
             return resp
@@ -309,7 +321,7 @@ class UserWishlistRemove(Resource):
             resp = jsonify({'wishlist': wl.expand()})
             resp.status_code = 200
             return resp
-        except Exception as e: 
+        except Exception as e:
             resp = jsonify({'error': 'something went wrong'})
             resp.status_code = 400
             return resp
@@ -328,7 +340,7 @@ class UserWishlistRemove(Resource):
             resp = jsonify({'wishlist': wl.expand()})
             resp.status_code = 200
             return resp
-        except Exception as e: 
+        except Exception as e:
             resp = jsonify({'error': 'something went wrong'})
             resp.status_code = 400
             return resp
@@ -346,11 +358,11 @@ class UserWishlistMinorCheck(Resource):
             resp = jsonify({'minorCheck': check})
             resp.status_code = 200
             return resp
-        except Exception as e: 
+        except Exception as e:
             resp = jsonify({'error': 'something went wrong'})
             resp.status_code = 400
             return resp
-    
+
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('username', required=True)
@@ -365,8 +377,86 @@ class UserWishlistMinorCheck(Resource):
             resp = jsonify({'minorCheck': check})
             resp.status_code = 200
             return resp
-        except Exception as e: 
+        except Exception as e:
             resp = jsonify({'error': 'something went wrong'})
             resp.status_code = 400
             return resp
-            
+
+
+# ------------------------------------------------------------
+# Comments
+
+
+class UserComment(Resource):
+    def get(self):
+        course = request.args.get('course')
+
+        try:
+            course = Course.get(course)
+            comments = course.get_comments()
+            comments = [c for c in comments if isinstance(c, Comment)]
+            resp = jsonify(
+                {'comments': comments})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('username', required=True)
+        parser.add_argument('course', required=True)
+        parser.add_argument('text', required=True)
+        data = parser.parse_args()
+        username = data['username']
+        course = data['course']
+        text = data['text']
+        try:
+            in_course = Course.get(course)
+            comment_id = str(
+                hash(datetime.datetime.utcnow().timestamp()) +
+                hash(username + course + text))
+            comment = Comment(
+                comment_id=comment_id,
+                username=username,
+                course=course,
+                text=text,
+                timestamp=datetime.datetime.now(),
+                upvotes=0,
+                downvotes=0)
+            in_course.comments.append(comment)
+            comment.save()
+            in_course.save()
+            resp = jsonify({"comment": comment})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            print(e)
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+    def put(self):
+        comment_id = request.args.get('comment_id')
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('upvotes', required=True)
+        parser.add_argument('downvotes', required=True)
+        data = parser.parse_args()
+        upvotes = data['upvotes']
+        downvotes = data['downvotes']
+
+        try:
+            comment = Comment.get(comment_id)
+            comment.updateComment(upvotes, downvotes)
+            updatedComment = Comment.get(comment_id)
+            resp = jsonify(
+                {'comment': updatedComment})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
