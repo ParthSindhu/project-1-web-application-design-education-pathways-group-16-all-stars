@@ -83,6 +83,8 @@ jobs:
 
       - name: Commit frontend to heroku
         run: |
+          git config --global user.email "sindhu.parth@gmail.com"
+          git config --global user.name "Parth Sindhu"
           git add ./frontend/build
           git commit -m "Add frontend build"
         working-directory: ./Education_Pathways
