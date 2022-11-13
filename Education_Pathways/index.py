@@ -28,6 +28,7 @@ api.add_resource(controller.UserRegistration, '/user/register')
 api.add_resource(controller.UserLogin, '/user/login')
 
 api.add_resource(controller.SearchCourse, '/searchc')
+api.add_resource(controller.ShowAllCourse, '/course_list')
 api.add_resource(controller.ShowCourse, '/course/details')
 api.add_resource(controller.ShowCourseGraph, '/course/graph')
 api.add_resource(controller.ShowRecommendations, '/course/recommendations')

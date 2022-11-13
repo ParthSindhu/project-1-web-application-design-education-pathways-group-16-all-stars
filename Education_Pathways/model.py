@@ -91,6 +91,12 @@ class Course(db.Document):
         return cls.objects(code=code_).get()
 
     @classmethod
+    def get_all(cls, limit=0):
+        if limit == 0:
+            return []
+        return cls.objects.all()[:limit]
+
+    @classmethod
     def get_requisite_graph(cls, code_):
         return cls.objects(code=code_).get().graph
 
