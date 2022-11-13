@@ -155,7 +155,7 @@ class CourseDescriptionPage extends Component {
     }
     console.log(rating_courseload.value, rating_difficulty.value, rating_engagement.value)
     console.log("sending post request for rating")
-    const resp = fetch('http://127.0.0.1:5000/course/ratings', {
+    const resp = fetch('${process.env.REACT_APP_API_URL}/course/ratings', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
