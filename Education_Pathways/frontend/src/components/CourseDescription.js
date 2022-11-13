@@ -120,6 +120,10 @@ class CourseDescriptionPage extends Component {
     }
   }
 
+  redirectCourseComments = () => {
+    this.props.history.push(`/courseComments/${this.state.course_code}`, {course_code: this.state.course_code})
+  }
+
 	render() {
 		return(
 
@@ -145,6 +149,10 @@ class CourseDescriptionPage extends Component {
             <Col className="col-item">
               <h3>Past Tests and Syllabi</h3>
               <button className={"syllabus-link"} onClick={this.openLink}>View</button>
+            </Col>
+            <Col className="col-item">
+              <h3>Past Student Comments</h3>
+              <button className={"syllabus-link"} onClick={this.redirectCourseComments}>View</button>
             </Col>
           </Row>
           <Row>
