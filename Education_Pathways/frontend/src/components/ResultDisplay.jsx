@@ -5,7 +5,6 @@ import './css/Result.css'
 import Label from './Label'
 import "./css/styles.css";
 
-
 class SearchResultDisplay extends Component {
 
   constructor() {
@@ -32,7 +31,7 @@ class SearchResultDisplay extends Component {
   }
 
   getData = (input) => {
-    axios.get(`https://assignment-1-starter-template.herokuapp.com/searchc?input=${input}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/searchc?input=${input}`)
       .then(res => {
         console.log("course data")
         console.log(res.data)
@@ -61,7 +60,11 @@ class SearchResultDisplay extends Component {
         } else if (res.status === 400) {
           alert("System Error. Please refresh")
         }
-      })
+      }).catch(
+        err => {
+          console.log(err)
+        }
+      )
   }
 
   render() {

@@ -6,11 +6,11 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import requisite_label from './img/requisite-label.png'
-import empty_star from './img/star.png'
-import starred from './img/starred.png'
+// import empty_star from './img/star.png'
+// import starred from './img/starred.png'
 import axios from "axios"
 
-let star = empty_star;
+// let star = empty_star;
 
 class CourseDescriptionPage extends Component {
 
@@ -41,7 +41,6 @@ class CourseDescriptionPage extends Component {
 
   componentDidMount() {
     console.log("pass in course code: ", this.props.match.params.code)
-
     axios.get(`${process.env.REACT_APP_API_URL}/course/ratings?course=${this.props.match.params.code}`, {})
       .then(res => {
         console.log(res.data)
