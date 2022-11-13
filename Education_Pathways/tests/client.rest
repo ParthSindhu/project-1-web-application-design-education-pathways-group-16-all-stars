@@ -1,0 +1,5 @@
+### GET /courses
+
+GET http://localhost:5000/course_list
+
+Content-Type: application/application/json

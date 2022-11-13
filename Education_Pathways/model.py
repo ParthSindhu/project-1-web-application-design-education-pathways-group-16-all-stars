@@ -28,8 +28,8 @@ class Comment(db.Document):
         return cls.objects.all()
 
     def updateComment(self, upvotes, downvotes):
-        self.update(upvotes = upvotes)
-        self.update(downvotes = downvotes)
+        self.update(upvotes=upvotes)
+        self.update(downvotes=downvotes)
 
     def expand(self):
         ret = {
@@ -42,7 +42,6 @@ class Comment(db.Document):
             'downvotes': self.downvotes
         }
         return ret
-
 
 
 class Course(db.Document):
@@ -90,6 +89,12 @@ class Course(db.Document):
     @classmethod
     def get(cls, code_):
         return cls.objects(code=code_).get()
+
+    @classmethod
+    def get_all(cls, limit=0):
+        if limit == 0:
+            return []
+        return cls.objects.all()[:limit]
 
     @classmethod
     def get_requisite_graph(cls, code_):
