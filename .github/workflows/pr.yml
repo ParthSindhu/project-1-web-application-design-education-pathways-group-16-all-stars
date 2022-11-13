@@ -1,4 +1,4 @@
-# Create pr workflow to build and deploy to heroku
+# pr workflow to Test and Deploy to heroku
 name: CICD
 on:
   pull_request:

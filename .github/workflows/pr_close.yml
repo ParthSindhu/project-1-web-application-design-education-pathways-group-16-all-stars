@@ -1,5 +1,4 @@
-# Create pr workflow to build and deploy to heroku
-name: CICD
+name: PR close worflow to remove PR deployment
 on:
   pull_request:
     types: [closed]
