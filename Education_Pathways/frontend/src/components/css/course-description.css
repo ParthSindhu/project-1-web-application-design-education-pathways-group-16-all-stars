@@ -110,18 +110,38 @@ p {
   display: none;
 }
 
-/* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {
-  margin-top: 7%;
-  border-radius: 15px;
-  background-color: #2e583b;
+
+.rating-button-wrapper{
+  margin-top: 5%;
+  display: inline-block;
   color: white;
-  width: 15em;
+  border-radius: 1vh;
+  background-image: linear-gradient(to bottom,#2e583b 0%,#2e583b 100%);
+}
+/* Button used to open the contact form - fixed at the bottom of the page */
+.rating-button {
   height: 3em;
-  border: none;
-  font-size: 1.2em;
-  text-align: center;
-  opacity: 1;
+  width: 15em;
+
+  font-size: 1.7vh;
+  --_g1: conic-gradient(from 90deg at 50% 75%,#2e583b  90deg, black 0) no-repeat;
+  --_g2: conic-gradient(from 90deg at 50% 75%,#2e583b 90deg, rgb(99, 151, 116) 0) no-repeat;
+  background: 
+    var(--_g1) 0    calc(134% - var(--_p,0%)),
+    var(--_g2) 0    calc(134% - var(--_p,0%)),
+    var(--_g1) 100% calc(200% - var(--_p,0%)),
+    var(--_g2) 100% calc(200% - var(--_p,0%)),
+    #000;
+  color:white;
+  background-size: 50.2% 400%;
+  border-radius: 1vh;
+  -webkit-background-clip: text, padding-box;
+          background-clip: text, padding-box;
+  transition: 0.2s
+}
+.rating-button:hover {
+  --_p: 134%;
+  color: white;
 }
 
 /* The popup form - hidden by default */

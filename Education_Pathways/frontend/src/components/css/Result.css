@@ -20,6 +20,10 @@
   margin-bottom: 3%;
   
 }
+.result-display:hover {
+  transition: transform 50ms ease-in-out;
+  transform: scale(1.04); 
+}
 
 .search-result-message {
   margin-top: 3%;
@@ -37,6 +41,7 @@
 }
 
 .submit-button-wrapper{
+  margin-top: 5%;
   display: inline-block;
   color: white;
   border-radius: 1vh;

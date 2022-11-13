@@ -198,11 +198,16 @@ class CourseDescriptionPage extends Component {
             </Col>
             <Col className="col-item">
               <h3>Past Tests and Syllabi</h3>
-              <button className={"syllabus-link"} onClick={this.openLink}>View</button>
+              <div className="submit-button-wrapper">
+                <button className={"submit-button"} onClick={this.openLink}>View</button>
+              </div>
+              
             </Col>
             <Col className="col-item">
               <h3>Past Student Comments</h3>
-              <button className={"syllabus-link"} onClick={this.redirectCourseComments}>View</button>
+              <div className="submit-button-wrapper">
+                <button className={"submit-button"} onClick={this.redirectCourseComments}>View</button>
+              </div>
             </Col>
           </Row>
           <Row>
@@ -247,7 +252,10 @@ class CourseDescriptionPage extends Component {
                 Engagement
               </label>
 
-              <button className={"open-button"} onClick={this.showForm}>Submit a Rating</button>
+              <br></br>
+              <div className="rating-button-wrapper">
+                <button className={"rating-button"} onClick={this.showForm}>Submit a Rating</button>
+              </div>
               
               <div className={"form-popup"} id="formElement">
                 <form className={"form-container"} onSubmit={(event) => {
