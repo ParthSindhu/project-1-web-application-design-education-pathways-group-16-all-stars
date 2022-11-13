@@ -32,7 +32,7 @@ class CourseDescriptionPage extends Component {
       graphics: [],
       username: localStorage.getItem('username'),
       ratings_difficulty: [],
-      ratings_course_load: [],
+      ratings_courseload: [],
       ratings_engagement: []
     }
   }
@@ -42,11 +42,15 @@ class CourseDescriptionPage extends Component {
   componentDidMount() {
     console.log("pass in course code: ", this.props.match.params.code)
 
-    this.setState({ratings_difficulty: this.getRatingPercentage([1,1,1])})
-    this.setState({ratings_course_load: this.getRatingPercentage([1,2,5])})
-    this.setState({ratings_engagement: this.getRatingPercentage([5,4,5])})
+    axios.get(`http://127.0.0.1:5000/course/ratings?course=${this.props.match.params.code}`, {})
+      .then(res => {
+        console.log(res.data)
+        this.setState({ratings_difficulty: res.data.ratings_difficulty})
+        this.setState({ratings_courseload: res.data.ratings_courseload})
+        this.setState({ratings_engagement: res.data.ratings_engagement})
+    })
 
-    axios.get(`http://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
+    axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
       code: this.props.course_code
     })
       .then(res => {
@@ -148,6 +152,9 @@ class CourseDescriptionPage extends Component {
     }
     console.log("Rating Submitted!")
     console.log(rating_courseload.value, rating_difficulty.value, rating_engagement.value)
+
+  redirectCourseComments = () => {
+    this.props.history.push(`/courseComments/${this.state.course_code}`, {course_code: this.state.course_code})
   }
 
 	render() {
@@ -176,6 +183,10 @@ class CourseDescriptionPage extends Component {
             <Col className="col-item">
               <h3>Past Tests and Syllabi</h3>
               <button className={"syllabus-link"} onClick={this.openLink}>View</button>
+            </Col>
+            <Col className="col-item">
+              <h3>Past Student Comments</h3>
+              <button className={"syllabus-link"} onClick={this.redirectCourseComments}>View</button>
             </Col>
           </Row>
           <Row>
@@ -245,6 +256,7 @@ class CourseDescriptionPage extends Component {
               </div>
               
             </Col>
+            
           </Row>
           <Row className="col-item course-requisite">
             <Row>
