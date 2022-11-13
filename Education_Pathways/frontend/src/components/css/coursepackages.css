@@ -1,0 +1,66 @@
+.package-container {
+  position: absolute;
+  left: 53.54%;
+  right: 2.92%;
+  top: 36.91%;
+  bottom: 6.15%;
+}
+
+.course-packages {
+  background-color: #ebe7fb;
+  height: 100vh;
+}
+
+.package-bg {
+  position: absolute;
+  z-index: -1;
+  background-image: url(./package_bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  opacity: 30%;
+  border-radius: inherit;
+}
+
+.package-content {
+  z-index: 1;
+  text-align: center;
+  padding-top: 100px;
+  height: 100%;
+  width: 100%;
+  opacity: 80%;
+  border-radius: inherit;
+}
+.package-content:hover {
+  opacity: 100%;
+}
+
+.grid-item {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  font-size: 30px;
+  text-align: center;
+  vertical-align: top;
+  margin: 30px;
+}
+
+.grid {
+  /*Somehow this is being ignored, not sure why*/
+  display: grid;
+  background-color: red;
+  grid-template-columns: 1fr 1fr;
+}
+.package-courses {
+  /*Somehow this is being ignored, not sure why*/
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.package-course {
+  height: fit-content;
+  background-color: blueviolet;
+  border-radius: 20px;
+  margin: 30px;
+}
