@@ -442,17 +442,11 @@ class UserComment(Resource):
 
         try:
             comment = Comment.get(comment_id)
-            print(comment)
-            print(comment.upvotes)
-            print(comment.downvotes)
-            print(change)
             upvp = comment.upvotes
             downvp = comment.downvotes
             if change > 0:
-                print("yes")
                 upvp += change
             else:
-                print("no")
                 downvp += change
 
             comment.updateComment(upvp, downvp)
