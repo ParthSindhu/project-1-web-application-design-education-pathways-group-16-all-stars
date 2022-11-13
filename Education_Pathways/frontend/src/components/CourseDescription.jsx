@@ -9,6 +9,8 @@ import requisite_label from './img/requisite-label.png'
 // import empty_star from './img/star.png'
 // import starred from './img/starred.png'
 import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 // let star = empty_star;
 
@@ -166,7 +168,16 @@ class CourseDescriptionPage extends Component {
           rating_engagement: rating_engagement.value,
       })
     })
-    console.log("Rating Submitted!")
+    toast.success("Thank you!", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
   }
 
   redirectCourseComments = () => {
@@ -178,6 +189,16 @@ class CourseDescriptionPage extends Component {
 		return(
 
       <div className="page-content">
+        <ToastContainer             
+                    position="top-center"
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"/>
         <Container className="course-template">
           <Row float="center" className="course-title">
             <Col className="title-center" >
@@ -280,6 +301,7 @@ class CourseDescriptionPage extends Component {
                   
                   <button type="submit" class={"btn"} >Submit</button>
                   <button type="button" className={"btn cancel"} onClick={this.closeForm}>Close</button>
+                  
                 </form>
               </div>
               
