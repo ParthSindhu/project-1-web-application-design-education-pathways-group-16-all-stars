@@ -12,7 +12,7 @@ const SticktoTop = (props) => {
     };
 
     const fixed_style ={
-        border:'solid black 10px',
+        // border:'solid black 10px',
         position:'fixed',
         textAlign:'center',
         zindex:'200',

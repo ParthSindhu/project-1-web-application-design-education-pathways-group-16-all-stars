@@ -55,7 +55,7 @@ class CourseComments extends CourseDescriptionPage{
 
     render() {
         return (
-            <div id="respond">
+            <div className="comment-offset" id="respond">
                 
                 <div className="container">
                             <h3 className="comments-title">Comments</h3>

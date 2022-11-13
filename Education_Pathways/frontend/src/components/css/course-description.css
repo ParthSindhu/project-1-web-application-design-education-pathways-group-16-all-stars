@@ -18,8 +18,12 @@ p {
 }
 
 .course-template .course-title {
-  padding-top: 5%;;
+  padding-top: 8%;
   padding-bottom: 3%;
+}
+
+.title-center {
+  width: 100vw;
 }
 
 .col-item {
@@ -112,7 +116,7 @@ p {
   border-radius: 15px;
   background-color: #2e583b;
   color: white;
-  width: 12em;
+  width: 15em;
   height: 3em;
   border: none;
   font-size: 1.2em;

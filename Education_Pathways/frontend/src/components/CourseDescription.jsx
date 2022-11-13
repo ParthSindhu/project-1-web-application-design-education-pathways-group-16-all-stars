@@ -180,7 +180,7 @@ class CourseDescriptionPage extends Component {
       <div className="page-content">
         <Container className="course-template">
           <Row float="center" className="course-title">
-            <Col xs={8}>
+            <Col className="title-center" >
               <h1>{this.state.course_code} : {this.state.course_name}</h1>
             </Col>
             {/* <Col xs={4}>

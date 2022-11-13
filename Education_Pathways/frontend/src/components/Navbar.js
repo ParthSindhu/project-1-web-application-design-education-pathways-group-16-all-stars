@@ -9,6 +9,7 @@ import CourseDescriptionPage from "./CourseDescription";
 // import Wishlist from './Wishlist';
 // import SignUp from './SignUp'
 import SearchResultDisplay from './ResultDisplay'
+import CourseComments from "./CourseComments";
 
 // function CourseDescription (props) {
 //   let query = useQuery();
@@ -61,9 +62,6 @@ export default class NavbarComp extends Component {
                   <Nav.Link as={Link} to="/about">
                     About Us
                   </Nav.Link>
-                  <Nav.Link as={Link} to="/test">
-                    Test
-                  </Nav.Link>
 
                   {/* <Nav.Link href="/search" style={{ color: "white", display: "inline" }}>
                     Search
@@ -97,8 +95,9 @@ export default class NavbarComp extends Component {
               <Route path="/search">
                 <SearchResultDisplay />
               </Route>
-              <Route path="/test">
-                <SearchResultDisplay />
+              <Route exact
+                path="/courseComments/:code"
+                render={props =>(<CourseComments {...props} />)}>
               </Route>
               <Route exact
                 path="/courseDetails/:code"
