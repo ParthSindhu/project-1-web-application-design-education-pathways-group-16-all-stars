@@ -45,9 +45,9 @@ class CourseDescriptionPage extends Component {
     axios.get(`http://127.0.0.1:5000/course/ratings?course=${this.props.match.params.code}`, {})
       .then(res => {
         console.log(res.data)
-        this.setState({ratings_difficulty: res.data.ratings_difficulty})
-        this.setState({ratings_courseload: res.data.ratings_courseload})
-        this.setState({ratings_engagement: res.data.ratings_engagement})
+        this.setState({ratings_difficulty: this.getRatingPercentage(res.data.ratings_difficulty)})
+        this.setState({ratings_courseload: this.getRatingPercentage(res.data.ratings_courseload)})
+        this.setState({ratings_engagement: this.getRatingPercentage(res.data.ratings_engagement)})
     })
 
     axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
@@ -113,11 +113,17 @@ class CourseDescriptionPage extends Component {
   }
 
   getRatingPercentage(ratings) {
-    const total = ratings.reduce((acc, c) => acc + c, 0);
+    const total = ratings.reduce((a, b) => {
+      return parseInt(a) + parseInt(b);
+    });
+    console.log(total)
     let percentage = Math.round(((total / ratings.length) / 5)*100)
     if (percentage == null){
       percentage="?"
     }
+    console.log("ratings"+ratings)
+    console.log("percentage"+percentage)
+
     return percentage;
   }
 
@@ -207,18 +213,18 @@ class CourseDescriptionPage extends Component {
                   <div className="value-bar"/>
                 </div>
               </div>
-                Courseload
+                Difficulty
               </label>
 
               <label className="ratings-lbl">
-                <div className={`progress-circle p${this.state.ratings_course_load} ${this.getRatingOver50(this.state.ratings_course_load)}`}>
-                  <span>{this.state.ratings_course_load}%</span>
+                <div className={`progress-circle p${this.state.ratings_courseload} ${this.getRatingOver50(this.state.ratings_courseload)}`}>
+                  <span>{this.state.ratings_courseload}%</span>
                   <div className="left-half-clipper">
                     <div class="first50-bar"></div>
                     <div className="value-bar"/>
                   </div>
                 </div>
-                Difficulty
+                Courseload
               </label>
 
               <label className="ratings-lbl">
