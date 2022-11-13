@@ -33,6 +33,10 @@ class SearchResultDisplay extends Component {
   getData = (input) => {
     axios.get(`${process.env.REACT_APP_API_URL}/searchc?input=${input}`)
       .then(res => {
+        console.log("course data")
+        console.log(res.data)
+        console.log(`it is ${res.status}`)
+
         if (res.status === 200) {
           this.setState({ results: [] })
           if (res.data.length > 0) {
