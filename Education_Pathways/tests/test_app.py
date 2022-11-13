@@ -1,3 +1,4 @@
+import pytest
 from index import app
 from minor import check_course_in_minor
 from flask.testing import FlaskClient
@@ -49,39 +50,41 @@ def test_course_graph_endpoint():
     assert response.status_code == 200
 
 
-def test_user_wishlist_endpoint():
-    tester = app.test_client()
-    response = tester.get("/user/wishlist")
+# def test_user_wishlist_endpoint():
+#     tester = app.test_client()
+#     response = tester.get("/user/wishlist")
 
-    assert response.status_code == 200
-
-
-def test_user_wishlist_addCourse_endpoint():
-    tester = app.test_client()
-    response = tester.get("/user/wishlist/addCourse")
-
-    assert response.status_code == 200
+#     assert response.status_code == 200
 
 
-def test_user_wishlist_removeCourse_endpoint():
-    tester = app.test_client()
-    response = tester.get("/user/wishlist/removeCourse")
+# def test_user_wishlist_addCourse_endpoint():
+#     tester = app.test_client()
+#     response = tester.get("/user/wishlist/addCourse")
 
-    assert response.status_code == 200
+#     assert response.status_code == 200
 
 
-def test_user_wishlist_minorCheck_endpoint():
-    tester = app.test_client()
-    response = tester.get("/user/wishlist/minorCheck")
+# def test_user_wishlist_removeCourse_endpoint():
+#     tester = app.test_client()
+#     response = tester.get("/user/wishlist/removeCourse")
 
-    assert response.status_code == 200
+#     assert response.status_code == 200
+
+
+# def test_user_wishlist_minorCheck_endpoint():
+#     tester = app.test_client()
+#     response = tester.get("/user/wishlist/minorCheck")
+
+#     assert response.status_code == 200
+
+# Course Package test
 
 
 if __name__ == '__main__':
-    test_check_course_in_minor()
-    test_user_register_endpoint()
-    test_user_login_endpoint()
-    test_search_endpoint()
+    # test_check_course_in_minor()
+    # test_user_register_endpoint()
+    # test_user_login_endpoint()
+    # test_search_endpoint()
     # test_course_details_endpoint()
     # test_course_graph_endpoint()
     # test_user_wishlist_endpoint()

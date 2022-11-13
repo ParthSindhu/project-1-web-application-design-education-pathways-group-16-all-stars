@@ -543,6 +543,27 @@ class CoursePackages(Resource):
             resp.status_code = 400
             return resp
 
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('name', required=True)
+        parser.add_argument('description', required=True)
+        parser.add_argument('courses', required=True)
+        data = parser.parse_args()
+        name = data['name']
+        description = data['description']
+        courses = data['courses']
+        try:
+            package = Package.create(
+                name=name, description=description, courses=courses)
+            package.save()
+            resp = jsonify({'package': package.expand()})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
 
 class SearchPackages(Resource):
     def get(self):
