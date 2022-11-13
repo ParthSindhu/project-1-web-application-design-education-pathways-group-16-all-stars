@@ -4,8 +4,8 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import './css/Result.css'
-import unstarred from './img/star.png'
-import starred from './img/starred.png'
+// import unstarred from './img/star.png'
+// import starred from './img/starred.png'
 
 // let star;
 
