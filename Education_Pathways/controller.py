@@ -233,6 +233,27 @@ class ShowCourse(Resource):
             return resp
 
 
+class ShowAllCourse(Resource):
+    def get(self):
+
+        limit = request.args.get('limit', type=int)
+        try:
+            courses = Course.get_all(limit)
+            courses = [course.to_json() for course in courses]
+            # remove keyword, graph , comments
+            for course in courses:
+                del course['keyword']
+                del course['graph']
+                del course['comments']
+            resp = jsonify({'courses': courses})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+
 class ShowRecommendations(Resource):
     def get(self):
         tag = request.args.get('tag')
@@ -519,6 +540,70 @@ class UserComment(Resource):
             updatedComment = Comment.get(comment_id)
             resp = jsonify(
                 {'comment': updatedComment})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+
+# ------------------------------------------------------------
+# Course Packages
+
+class CoursePackages(Resource):
+    def get(self):
+        package_id = request.args.get('package_id')
+        try:
+            package = Package.get(package_id)
+            resp = jsonify({'package': package.expand()})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('name', required=True)
+        parser.add_argument('description', required=True)
+        parser.add_argument('courses', required=True,
+                            type=str, action='append')
+        data = parser.parse_args()
+        name = data['name']
+        description = data['description']
+        courses = data['courses']
+        try:
+            package = Package.create(
+                name, description, courses)
+            if package is None:
+                resp = jsonify({'error': 'package already exists'})
+                resp.status_code = 400
+                return resp
+            resp = jsonify({'package': package.expand()})
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            resp = jsonify({'error': str(e)})
+            resp.status_code = 400
+            return resp
+
+
+class SearchPackages(Resource):
+    def get(self):
+        input = request.args.get('input')
+        # input = ' '.join([nysiis(w) for w in input.split()])
+        try:
+            searchPackageName = list(Package.objects(name__icontains=input))
+            searchPackageDescription = list(
+                Package.objects(description__icontains=input))
+            search = searchPackageName + searchPackageDescription
+            packages = []
+            # Get packages
+            for package in search:
+                packages.append(package.expand())
+            resp = jsonify(packages)
             resp.status_code = 200
             return resp
         except Exception as e:

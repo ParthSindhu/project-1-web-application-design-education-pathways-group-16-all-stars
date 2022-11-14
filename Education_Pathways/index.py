@@ -21,12 +21,14 @@ config.init_db(app)
 config.init_cors(app)
 
 # API Endpoints
+# Import cotroller here. Else DB is not initialized
 import controller
 api = Api(app)
 api.add_resource(controller.UserRegistration, '/user/register')
 api.add_resource(controller.UserLogin, '/user/login')
 
 api.add_resource(controller.SearchCourse, '/searchc')
+api.add_resource(controller.ShowAllCourse, '/course_list')
 api.add_resource(controller.ShowCourse, '/course/details')
 api.add_resource(controller.ShowCourseGraph, '/course/graph')
 api.add_resource(controller.ShowRecommendations, '/course/recommendations')
@@ -38,6 +40,10 @@ api.add_resource(controller.UserWishlistMinorCheck,
                  '/user/wishlist/minorCheck')
 # Adding comments
 api.add_resource(controller.UserComment, '/course/comments')
+
+# Packages
+api.add_resource(controller.SearchPackages, '/packages/search')
+api.add_resource(controller.CoursePackages, '/packages')
 
 
 api.add_resource(controller.UserRatings, '/course/ratings')
