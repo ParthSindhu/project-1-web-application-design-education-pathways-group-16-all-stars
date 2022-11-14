@@ -104,6 +104,62 @@ class Course(db.Document):
         return self.comments
 
 
+# Course Packages Frontend
+class Package(db.Document):
+    package_id = db.StringField(required=True, primary_key=True)
+    name = db.StringField(required=True)
+    description = db.StringField(required=True)
+    courses = db.ListField(db.ReferenceField(Course))
+
+    @classmethod
+    def create(cls, name_, description_, courses_):
+        usr = cls.objects(name=name_)
+        if usr:
+            return None
+        else:
+            # Create package_id
+            package_id_ = name_.lower().replace(" ", "_")
+            # Get courses
+            courses = []
+            for course in courses_:
+                courses.append(Course.get(course))
+            package = cls(name=name_, description=description_,
+                          courses=courses, package_id=package_id_)
+            package.save()
+            return package
+
+    meta = {'indexes': [
+        'name',
+        'description'
+    ]}
+
+    @classmethod
+    def get(cls, package_id_):
+        return cls.objects(package_id=package_id_).get()
+
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
+
+    def add_course(self, course_):
+        if course_ not in self.courses:
+            self.update(add_to_set__course=course_)
+
+    def remove_course(self, course_):
+        if course_ in self.courses:
+            self.courses.remove(course_)
+            self.save()
+
+    def expand(self):
+        ret = {
+            'name': self.name,
+            'courses': self.courses,
+            'description': self.description,
+            'package_id': self.package_id
+        }
+        return ret
+
+
 class Wishlist(db.Document):
     username = db.StringField(required=True, unique=True)
     course = db.ListField(db.ReferenceField(Course))
