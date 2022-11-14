@@ -38,31 +38,31 @@ const SticktoTop = (props) => {
 
     const inputRef = useRef();
 
-    
+    const handleScroll = () => {
+        //console.log(inputRef.current.getBoundingClientRect());
+        const top_ = inputRef.current.getBoundingClientRect().y;
+        setBottomPos(inputRef.current.getBoundingClientRect().height);
+
+        const position = window.pageYOffset;
+        setScrollPosition(position);
+        
+        if(Math.floor(top_) <= 70 && (position > ret_top )){
+            setStyle(fixed_style);
+            setRetTop(position);
+            setStyleFill(filler);
+        } else {
+            setStyle(reg_style);
+            setStyleFill(filler_none);
+            setRetTop(0);
+        }
+    };
 
     useEffect(() => {
-        const handleScroll = () => {
-            console.log(inputRef.current.getBoundingClientRect());
-            const top_ = inputRef.current.getBoundingClientRect().y;
-            setBottomPos(inputRef.current.getBoundingClientRect().height);
-    
-            const position = window.pageYOffset;
-            setScrollPosition(position);
-            
-            if(Math.floor(top_) <= 70 && (position > ret_top )){
-                setStyle(fixed_style);
-                setRetTop(position);
-                setStyleFill(filler);
-            } else {
-                setStyle(reg_style);
-                setStyleFill(filler_none);
-                setRetTop(0);
-            }
-        };
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
+        // eslint-disable-next-line
     }, []);
 
     return (
