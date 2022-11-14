@@ -42,10 +42,13 @@ jobs:
 
       - name: Install pip dependencies
         run: pip install -r requirements.txt
+
+      - name: Install pip dependencies
+        run: pip install pytest
       # Run backend tests
       - name: Run backend tests
         run: |
-          python -m tests.test_app
+          pytest
         working-directory: ./Education_Pathways
 
       - name: Run frontend tests
