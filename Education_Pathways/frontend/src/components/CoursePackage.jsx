@@ -9,7 +9,9 @@ export default function CoursePackage({ name, description, courses }) {
 
         <div className='package-bg'></div>
         <div className="package-content">
-            {name}
+            <h2>
+                {name}
+                </h2>
             <p>
                 {description}
             </p>

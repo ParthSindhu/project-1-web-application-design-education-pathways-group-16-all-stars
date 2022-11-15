@@ -26,12 +26,13 @@
 .package-content {
   z-index: 1;
   text-align: center;
-  padding-top: 100px;
+  padding-top: 20px;
   height: 100%;
   width: 100%;
   opacity: 0.8;
   border-radius: inherit;
   font-size: large;
+  vertical-align: top;
 }
 .package-content:hover {
   opacity: 1;
