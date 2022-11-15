@@ -1,8 +1,7 @@
-import React, {Component, useState} from 'react'
+import React, {Component} from 'react'
 import axios from 'axios'
 import CourseFiltersResult from './CourseFiltersResult'
 import './css/CourseFiltersResult.css'
-import Label from './Label'
 import "./css/styles.css";
 import CourseFilter from './CourseFilter'
 
