@@ -64,6 +64,7 @@ class CourseFilter extends Component {
                     <option value="2">200</option>
                     <option value="3">300</option>
                     <option value="4">400</option>
+                    <option value="5">500</option>
                 </select>
                 </label>
             </form>

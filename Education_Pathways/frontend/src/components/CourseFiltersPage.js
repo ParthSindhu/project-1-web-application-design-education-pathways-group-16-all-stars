@@ -106,7 +106,7 @@ class CourseFiltersPage extends Component {
       handleFilterClick(event) {
 
         let result_temp = []
-        if(event.target.value !== "1" && event.target.value !== "2" && event.target.value !== "3" && event.target.value !== "4" && event.target.value !== "ALL2" ){
+        if(event.target.value !== "1" && event.target.value !== "2" && event.target.value !== "3" && event.target.value !== "4" && event.target.value !== "5" && event.target.value !== "ALL2" ){
           this.setState({resultsFiltered: [] }, () => {
             if (event.target.value === "ALL") {
             
@@ -157,7 +157,7 @@ class CourseFiltersPage extends Component {
       handleSecondFilter(event){
 
         let result_temp = []
-        if(event.target.value === "1" || event.target.value === "2" || event.target.value === "3" || event.target.value === "4" || event.target.value === "ALL2" ){
+        if(event.target.value === "1" || event.target.value === "2" || event.target.value === "3" || event.target.value === "4" || event.target.value === "5" || event.target.value === "ALL2" ){
           this.setState({resultsFiltered2: [] }, () => {
             if (event.target.value === "ALL2") {
             
