@@ -4,25 +4,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import logo from './img/logo.png'
 import { Navbar, Nav } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-// import LogIn from "./LogIn.jsx";
 import CourseDescriptionPage from "./CourseDescription";
-// import Wishlist from './Wishlist';
-// import SignUp from './SignUp'
 import SearchResultDisplay from './ResultDisplay'
 import CourseComments from "./CourseComments";
 import CourseFiltersPage from './CourseFiltersPage';
-
-// function CourseDescription (props) {
-//   let query = useQuery();
-//   return <CourseDescriptionPage code={query.get("code")} />;
-// }
-
-// function useQuery() {
-//   const { search } = useLocation();
-
-//   return React.useMemo(() => new URLSearchParams(search), [search]);
-// }
-
 
 export default class NavbarComp extends Component {
 
@@ -48,40 +33,36 @@ export default class NavbarComp extends Component {
   render() {
     return (
       <Router>
-          <div className='navbar-wrap'>
-            <Navbar className = "navbar" variant="dark" sticky="top" expand="lg">
-              <Navbar.Brand className='nav-item header'>
-                <img src={logo} alt="" />{" "}
-                <Nav.Link href="/" style={{ color: "white", display: "inline", fontSize:'3vh'}}>
-                  Education Pathways
+        <div className='navbar-wrap'>
+          <Navbar className = "navbar" variant="dark" sticky="top" expand="lg">
+            <Navbar.Brand className='nav-item header'>
+              <img src={logo} alt="" />{" "}
+              <Nav.Link href="/" style={{ color: "white", display: "inline", fontSize:'3vh'}}>
+                Education Pathways
+              </Nav.Link>
+            </Navbar.Brand>
+
+            <Navbar.Toggle />
+            <Navbar.Collapse>
+              <Nav className = 'nav-item a'>
+                <Nav.Link as={Link} to="/about">
+                  About Us
                 </Nav.Link>
-              </Navbar.Brand>
+              <Nav.Link as={Link} to="/coursefilterpage">
+                Course List
+              </Nav.Link>
+              {/* <Nav.Link href="/search" style={{ color: "white", display: "inline" }}>
+                Search
+              </Nav.Link> */}
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+        </div>
 
-              <Navbar.Toggle />
-              <Navbar.Collapse>
-                <Nav className = 'nav-item a'>
-                  <Nav.Link as={Link} to="/about">
-                    About Us
-                  </Nav.Link>
-                <Nav.Link as={Link} to="/coursefilterpage">
-                  Course List
-                </Nav.Link>
-                {/* <Nav.Link href="/search" style={{ color: "white", display: "inline" }}>
-                  Search
-                </Nav.Link> */}
-
-                  {/* <Nav.Link href="/search" style={{ color: "white", display: "inline" }}>
-                    Search
-                  </Nav.Link> */}
-
-                </Nav>
-              </Navbar.Collapse>
-            </Navbar>
-          </div>
-          <div>
-            <Switch>
-              <Route path="/about">
-                <div className = "body_text">
+        <div>
+          <Switch>
+            <Route path="/about">
+              <div className = "body_text">
                 <p> 
                   Welcome to CARTE's in-development tool for course selection at UofT. Education Pathways allows for more intelligent course searching, by matching not just the terms you search, but ones relevant to them. The more terms you search for, the more relevant your results will be! Even try searching across disciplines for the courses that best cover each.
 
@@ -94,34 +75,7 @@ export default class NavbarComp extends Component {
                 </p>
                 <p>Alexander Olson <a href="https://carte.utoronto.ca/"> (CARTE)</a> </p>
                 <p>Student team from <a href="https://shuiblue.github.io/UofT-ECE444/">ECE444-Fall2021</a> : Janelle Cuevas, Jean Lin, Terry Luan, Cansin Varol, Nick Woo</p>
-
-                    
-                </div>
-                {/* <SearchResultDisplay /> */}
-              </Route>
-              <Route path="/search">
-                <SearchResultDisplay />
-              </Route>
-              <Route exact
-                path="/courseComments/:code"
-                render={props =>(<CourseComments {...props} />)}>
-              </Route>
-              <Route exact
-                path="/courseDetails/:code"
-                render={props =>(<CourseDescriptionPage {...props} />)}>
-              </Route>
-              <Route path="/">
-                <SearchResultDisplay />
-              </Route>
-
-<<<<<<< HEAD
-            </Switch>
-          </div>
-          
-          
-=======
-
-      </div>
+              </div>
               {/* <SearchResultDisplay /> */}
             </Route>
             <Route path="/search">
@@ -141,12 +95,11 @@ export default class NavbarComp extends Component {
             <Route path="/">
               <SearchResultDisplay />
             </Route>
-            
-
+  
           </Switch>
+
         </div>
->>>>>>> main
-        
+
       </Router>
     );
   }
