@@ -3,6 +3,8 @@ import './css/Comments.css'
 import React from "react";
 import Comment from "./Comment";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 class CourseComments extends CourseDescriptionPage{
     constructor(props) {
@@ -41,10 +43,21 @@ class CourseComments extends CourseDescriptionPage{
         .then(res => {
             console.log(res.data)
             this.setState({comments: res.data.comments})
+            toast.success("Thank you!", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
         })
         .catch(err => {
             console.log(err)
         })
+        
     }
 
 
@@ -56,6 +69,16 @@ class CourseComments extends CourseDescriptionPage{
     render() {
         return (
             <div className="comment-offset" id="respond">
+                <ToastContainer             
+                    position="top-center"
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"/>
                 
                 <div className="container">
                             <h3 className="comments-title">Comments</h3>
