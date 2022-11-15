@@ -12,10 +12,7 @@ function App() {
     <div>
     <div className="App">
       <NavbarComp />
-    </div>
-
-    <div className="App">
-    <ReactComp />
+      <ReactComp />
     </div>
     </div>
   );
