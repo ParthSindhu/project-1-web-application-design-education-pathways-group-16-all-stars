@@ -81,6 +81,16 @@ class CourseComments extends CourseDescriptionPage{
                         createdAt : comment.timestamp.$date,
                         upvotes: comment.upvotes,
                         downvotes: comment.downvotes
+                    }}
+                    update={(inc) => {
+                        let comments = this.state.comments;
+                        if(inc > 0) {
+                            comments[index].upvotes += inc;
+                        }
+                        else {
+                            comments[index].downvotes += inc;
+                        }
+                        this.setState({comments: comments})
                     }}    
                     />
                      )
