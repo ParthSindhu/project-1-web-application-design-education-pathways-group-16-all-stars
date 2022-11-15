@@ -17,7 +17,7 @@ export default function CoursePackage({ name, description, courses }) {
                 {courses.map((course, index) => {
                     return (
                         // <div className="package-course">
-                            <Nav.Link to={`/courseDetails/${course.code}`} className="package-course" key={course.code}>
+                            <Nav.Link href={`/courseDetails/${course.code}`} className="package-course" key={course.code}>
                             {course.code}
                             <p>
                                 {course.name}
