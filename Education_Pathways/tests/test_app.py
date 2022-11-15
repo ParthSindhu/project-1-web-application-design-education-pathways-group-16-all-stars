@@ -1,4 +1,4 @@
-from app import app
+from index import app
 from minor import check_course_in_minor
 from flask.testing import FlaskClient
 
@@ -12,11 +12,14 @@ def test_check_course_in_minor():
     assert result == minor
 
 # Cansin
+
+
 def test_user_register_endpoint():
     tester = app.test_client()
     response = tester.get("/user/register")
 
     assert response.status_code == 200
+
 
 def test_user_login_endpoint():
     tester = app.test_client()
@@ -24,11 +27,13 @@ def test_user_login_endpoint():
 
     assert response.status_code == 200
 
+
 def test_search_endpoint():
     tester = app.test_client()
     response = tester.get("/search")
 
     assert response.status_code == 200
+
 
 def test_course_details_endpoint():
     tester = app.test_client()
@@ -36,33 +41,39 @@ def test_course_details_endpoint():
 
     assert response.status_code == 200
 
+
 def test_course_graph_endpoint():
     tester = app.test_client()
     response = tester.get("/course/graph?code=ECE318H1")
 
     assert response.status_code == 200
 
-def test_user_wishlist_endpoint():
-    tester = app.test_client()
-    response = tester.get("/user/wishlist")
 
-    assert response.status_code == 200
+# def test_user_wishlist_endpoint():
+#     tester = app.test_client()
+#     response = tester.get("/user/wishlist")
 
-def test_user_wishlist_addCourse_endpoint():
-    tester = app.test_client()
-    response = tester.get("/user/wishlist/addCourse")
+#     assert response.status_code == 200
 
-    assert response.status_code == 200
 
-def test_user_wishlist_removeCourse_endpoint():
-    tester = app.test_client()
-    response = tester.get("/user/wishlist/removeCourse")
+# def test_user_wishlist_addCourse_endpoint():
+#     tester = app.test_client()
+#     response = tester.get("/user/wishlist/addCourse")
 
-    assert response.status_code == 200
+#     assert response.status_code == 200
 
-def test_user_wishlist_minorCheck_endpoint():
-    tester = app.test_client()
-    response = tester.get("/user/wishlist/minorCheck")
 
-    assert response.status_code == 200
+# def test_user_wishlist_removeCourse_endpoint():
+#     tester = app.test_client()
+#     response = tester.get("/user/wishlist/removeCourse")
 
+#     assert response.status_code == 200
+
+
+# def test_user_wishlist_minorCheck_endpoint():
+#     tester = app.test_client()
+#     response = tester.get("/user/wishlist/minorCheck")
+
+#     assert response.status_code == 200
+
+# Course Package test

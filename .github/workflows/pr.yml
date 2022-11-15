@@ -1,0 +1,117 @@
+# pr workflow to Test and Deploy to heroku
+name: CICD
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  # job to check if env api url is set to https://education-pathways-allstars.herokuapp.com/
+  check-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Check if env api url is set to https://education-pathways-allstars.herokuapp.com/
+        run: |
+          if grep -q "REACT_APP_API_URL=https://education-pathways-allstars.herokuapp.com/" ./Education_Pathways/frontend/.env; then
+            echo "Env api url is set to https://education-pathways-allstars.herokuapp.com/"
+          else
+            echo "Env api url is not set to https://education-pathways-allstars.herokuapp.com/"
+            exit 1
+          fi
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      
+      - name: Install npm dependencies
+        run: npm install
+        working-directory: ./Education_Pathways/frontend
+
+      - name: Install pip dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install pip dependencies
+        run: pip install pytest
+      # Run backend tests
+      - name: Run backend tests
+        run: |
+          pytest
+        working-directory: ./Education_Pathways
+
+      - name: Run frontend tests
+        run: |
+          npm test
+        working-directory: ./Education_Pathways/frontend
+  heroku-pull-request-deploy:
+    runs-on: ubuntu-latest
+    env:
+      HEROKU_APP_NAME: ep-allstars-pr-${{ github.event.number }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: ${{ github.event.action == 'closed' && 1 || 0 }}
+          ref: ${{ github.event.action != 'closed' && github.head_ref || '' }}
+
+      - name: Setup API URL in .env
+        run: |
+          echo "REACT_APP_API_URL=https://${{ env.HEROKU_APP_NAME }}.herokuapp.com" > ./Education_Pathways/frontend/.env
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+      
+      - name: Install npm dependencies
+        run: npm install
+        working-directory: ./Education_Pathways/frontend
+      
+      - name: Build Frontend
+        run: npm run build
+        working-directory: ./Education_Pathways/frontend
+
+      - name: Commit frontend to heroku
+        run: |
+          git config --global user.email "sindhu.parth@gmail.com"
+          git config --global user.name "Parth Sindhu"
+          git add ./frontend/build
+          git commit -m "Add frontend build"
+        working-directory: ./Education_Pathways
+
+      - name: Login to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: sindhu.parth@gmail.com
+          heroku_app_name: ${{ env.HEROKU_APP_NAME }}
+          justlogin: true
+
+      - name: Create Heroku app
+        run: heroku apps:create ${{ env.HEROKU_APP_NAME }} || true
+
+      - name: Add Heroku remote
+        run: heroku git:remote --app=${{ env.HEROKU_APP_NAME }}
+
+      - name: Push to Heroku
+        run: git push heroku ${{ github.head_ref }}:master --force
+
+      - name: Add comment to PR
+        # if: github.event.action == 'opened'
+        run: |
+          gh pr comment ${{ github.event.number }} --body '[Heroku app](https://dashboard.heroku.com/apps/${{ env.HEROKU_APP_NAME }}): https://${{ env.HEROKU_APP_NAME }}.herokuapp.com'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

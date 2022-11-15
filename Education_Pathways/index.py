@@ -1,8 +1,10 @@
 # this is the flask core
 
+# Dont import model before init_app or base class will be none
 from flask import Flask, send_from_directory
 from flask_restful import Api
 import os
+import json
 
 import config
 
@@ -11,7 +13,7 @@ app.config['ENV'] = 'development'
 app.config['DEBUG'] = True
 app.config['TESTING'] = True
 # MongoDB URI
-DB_URI = "mongodb+srv://Cansin:cv190499@a-star.roe6s.mongodb.net/A-Star?retryWrites=true&w=majority"
+DB_URI = "mongodb+srv://allstars:allstars@cluster0.vh9xizq.mongodb.net/A-Star"
 app.config["MONGODB_HOST"] = DB_URI
 
 config.init_app(app)
@@ -19,19 +21,33 @@ config.init_db(app)
 config.init_cors(app)
 
 # API Endpoints
+# Import cotroller here. Else DB is not initialized
 import controller
 api = Api(app)
 api.add_resource(controller.UserRegistration, '/user/register')
 api.add_resource(controller.UserLogin, '/user/login')
 
 api.add_resource(controller.SearchCourse, '/searchc')
+api.add_resource(controller.ShowAllCourse, '/course_list')
 api.add_resource(controller.ShowCourse, '/course/details')
 api.add_resource(controller.ShowCourseGraph, '/course/graph')
+api.add_resource(controller.ShowRecommendations, '/course/recommendations')
 
 api.add_resource(controller.UserWishlist, '/user/wishlist')
 api.add_resource(controller.UserWishlistAdd, '/user/wishlist/addCourse')
 api.add_resource(controller.UserWishlistRemove, '/user/wishlist/removeCourse')
-api.add_resource(controller.UserWishlistMinorCheck, '/user/wishlist/minorCheck')
+api.add_resource(controller.UserWishlistMinorCheck,
+                 '/user/wishlist/minorCheck')
+# Adding comments
+api.add_resource(controller.UserComment, '/course/comments')
+
+# Packages
+api.add_resource(controller.SearchPackages, '/packages/search')
+api.add_resource(controller.CoursePackages, '/packages')
+
+
+api.add_resource(controller.UserRatings, '/course/ratings')
+
 
 @app.route("/", defaults={'path': ''})
 @app.route('/<path:path>')
@@ -49,7 +65,5 @@ if __name__ == '__main__':
     #     data = json.load(f)
     # for i in range(75):
     #     i = str(i)
-    #     Course(name=data["name"][i], code=data["code"][i], description=data["description"][i], prereq=data["prereq"][i], coreq=data["coreq"][i], exclusion=data["exclusion"][i]).save()
-
-    
-    
+    #     model.Course(name=data["name"][i], code=data["code"][i], description=data["description"][i],
+    #                  prereq=data["prereq"][i], coreq=data["coreq"][i], exclusion=data["exclusion"][i]).save()
