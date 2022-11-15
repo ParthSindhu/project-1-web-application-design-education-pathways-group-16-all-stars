@@ -37,5 +37,12 @@ def test_course_package_search_endpoint():
     tester = app.test_client()
     response = tester.get("/packages/search?input=test")
     assert response.status_code == 200
-    # check if length > 2 , for test_course and test_course_2
-    assert len(response.json) >= 2
+
+    course_packages = response.get_json()
+
+    # Validate payload
+    assert isinstance(course_packages, list)
+    if (len(course_packages) > 0):
+        for package in course_packages:
+            assert isinstance(package['name'], str)
+            assert isinstance(package['package_id'], str)
