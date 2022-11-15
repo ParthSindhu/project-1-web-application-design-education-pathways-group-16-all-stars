@@ -2,6 +2,8 @@ import React from 'react'
 import NavbarComp from "./components/Navbar.js";
 import ReactComp from "./components/Footer.js";
 import './App.css';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 
 function App() {
