@@ -64,7 +64,11 @@ class CourseFiltersPage extends Component {
                         console.log(`NEW: ${res.data.courses[i].code}`)
                         result_temp.push(res.data.courses[i].code)
                     }
-                    this.setState({ results: result_temp })
+                    this.setState({ results: result_temp }, () => {
+                      this.setState({resultsFiltered: this.state.results }, () => {
+                        this.setState({resultsFiltered2: this.state.resultsFiltered});
+                      });
+                    });
                     //this.setState({ message: `${res.data.length} courses found for '${input}'`})
                   } else if (res.data.length === 0) {
                     //this.setState({ message: `No courses found for '${input}'`})
@@ -74,7 +78,7 @@ class CourseFiltersPage extends Component {
                     //result_temp.push(<CourseFiltersResult course_code={res.data.courses.code} course_name={res.data.courses.description}></CourseFiltersResult>)
                     this.setState({ results: result_temp }, () => {
                       this.setState({resultsFiltered: this.state.results }, () => {
-                        this.setState({resultsFiltered2: this.state.resultsFiltered2});
+                        this.setState({resultsFiltered2: this.state.resultsFiltered});
                       });
                     });
                     
@@ -115,7 +119,7 @@ class CourseFiltersPage extends Component {
     
             } else {
               
-              let filter = this.state.results.filter((result_) => {return result_.substring(0,1).toLowerCase().includes(event.target.value.toLowerCase())});
+              let filter = this.state.results.filter((result_) => {return result_.substring(0,3).toLowerCase().includes(event.target.value.toLowerCase())});
               console.log("Handle Click2");
               console.log(this.state.results);
               console.log(filter);

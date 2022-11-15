@@ -33,32 +33,26 @@ class CourseFilter extends Component {
             Alphabetical Filter
             <Container className = 'container-course-filters-filter-page'>
                 <Button onClick={this.props.handleClick} type="button" value="ALL" className="submit-button-course">ALL</Button>
-                <Button onClick={this.props.handleClick} type="button" value="A" className="submit-button-course">A</Button>
-                <Button onClick={this.props.handleClick}type="button" value="B" className="submit-button-course">B</Button>
-                <Button onClick={this.props.handleClick}type="button" value="C" className="submit-button-course">C</Button>
-                <Button onClick={this.props.handleClick} type="button" value="D" className="submit-button-course">D</Button>
-                <Button onClick={this.props.handleClick}type="button" value="E" className="submit-button-course">E</Button>
-                <Button onClick={this.props.handleClick}type="button" value="F" className="submit-button-course">F</Button>
-                <Button onClick={this.props.handleClick} type="button" value="G" className="submit-button-course">G</Button>
-                <Button onClick={this.props.handleClick}type="button" value="H" className="submit-button-course">H</Button>
-                <Button onClick={this.props.handleClick} type="button" value="I" className="submit-button-course">I</Button>
-                <Button onClick={this.props.handleClick}type="button" value="J" className="submit-button-course">J</Button>
-                <Button onClick={this.props.handleClick} type="button" value="K" className="submit-button-course">K</Button>
-                <Button onClick={this.props.handleClick} type="button" value="L" className="submit-button-course">L</Button>
-                <Button onClick={this.props.handleClick}type="button" value="M" className="submit-button-course">M</Button>
-                <Button onClick={this.props.handleClick} type="button" value="N" className="submit-button-course">N</Button>
-                <Button onClick={this.props.handleClick} type="button" value="O" className="submit-button-course">O</Button>
-                <Button onClick={this.props.handleClick} type="button" value="P" className="submit-button-course">P</Button>
-                <Button onClick={this.props.handleClick} type="button" value="Q" className="submit-button-course">Q</Button>
-                <Button onClick={this.props.handleClick} type="button" value="R" className="submit-button-course">R</Button>
-                <Button onClick={this.props.handleClick}type="button" value="S" className="submit-button-course">S</Button>
-                <Button onClick={this.props.handleClick}type="button" value="T" className="submit-button-course">T</Button>
-                <Button onClick={this.props.handleClick}type="button" value="U" className="submit-button-course">U</Button>
-                <Button onClick={this.props.handleClick} type="button" value="V" className="submit-button-course">V</Button>
-                <Button onClick={this.props.handleClick} type="button" value="W" className="submit-button-course">W</Button>
-                <Button onClick={this.props.handleClick} type="button" value="X" className="submit-button-course">X</Button>
-                <Button onClick={this.props.handleClick}type="button" value="Y" className="submit-button-course">Y</Button>
-                <Button onClick={this.props.handleClick} type="button" value="Z" className="submit-button-course">Z</Button>
+                <Button onClick={this.props.handleClick} type="button" value="APS" className="submit-button-course">APS</Button>
+                <Button onClick={this.props.handleClick}type="button" value="AER" className="submit-button-course">AER</Button>
+                <Button onClick={this.props.handleClick}type="button" value="BME" className="submit-button-course">BME</Button>
+                <Button onClick={this.props.handleClick} type="button" value="BCB" className="submit-button-course">BCB</Button>
+                <Button onClick={this.props.handleClick}type="button" value="CHE" className="submit-button-course">CHE</Button>
+                <Button onClick={this.props.handleClick}type="button" value="CIV" className="submit-button-course">CIV</Button>
+                <Button onClick={this.props.handleClick} type="button" value="CSC" className="submit-button-course">CSC</Button>
+                <Button onClick={this.props.handleClick}type="button" value="ECE" className="submit-button-course">ECE</Button>
+                <Button onClick={this.props.handleClick} type="button" value="ECO" className="submit-button-course">ECO</Button>
+                <Button onClick={this.props.handleClick}type="button" value="ENV" className="submit-button-course">ENV</Button>
+                <Button onClick={this.props.handleClick} type="button" value="FOR" className="submit-button-course">FOR</Button>
+                <Button onClick={this.props.handleClick} type="button" value="GGR" className="submit-button-course">GGR</Button>
+                <Button onClick={this.props.handleClick}type="button" value="HMU" className="submit-button-course">HMU</Button>
+                <Button onClick={this.props.handleClick} type="button" value="HPS" className="submit-button-course">HPS</Button>
+                <Button onClick={this.props.handleClick} type="button" value="HMB" className="submit-button-course">HMB</Button>
+                <Button onClick={this.props.handleClick} type="button" value="IMM" className="submit-button-course">IMM</Button>
+                <Button onClick={this.props.handleClick} type="button" value="ROB" className="submit-button-course">ROB</Button>
+                <Button onClick={this.props.handleClick} type="button" value="STA" className="submit-button-course">STA</Button>
+                <Button onClick={this.props.handleClick}type="button" value="TEP" className="submit-button-course">TEP</Button>
+                <Button onClick={this.props.handleClick}type="button" value="TMU" className="submit-button-course">TMU</Button>
                 
             </Container>
             <form>
