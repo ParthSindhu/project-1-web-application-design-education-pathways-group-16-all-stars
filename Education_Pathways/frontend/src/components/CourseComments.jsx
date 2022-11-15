@@ -10,20 +10,30 @@ class CourseComments extends CourseDescriptionPage{
     constructor(props) {
         super(props);
         this.state = {
-            comments: []
+            comments: [],
+            fetching: false
         };
     }
     
+    fetchComments =  () => {
+        if(!this.state.fetching) {
+            this.setState({fetching: true});
+            return fetch(`${process.env.REACT_APP_API_URL}/course/comments?course=` + this.props.match.params.code).then(
+                response => response.json()
+            ).then(comments => {
+                this.setState({comments: comments.comments});
+                this.setState({fetching: false});
+            }).catch(error => {
+                console.log(error)
+                this.setState({fetching: false});
+            })
+        }
+        return Promise.reject();
+    }
     componentDidMount() {
         console.log("pass in course code: ", this.props.match.params.code)
         // fetch comments from backend
-        fetch(`${process.env.REACT_APP_API_URL}/course/comments?course=` + this.props.match.params.code).then(
-            response => response.json()
-        ).then(comments => {
-            this.setState({comments: comments.comments});
-        }).catch(
-            error => console.log(error)
-        )
+        this.fetchComments();
     }
     submitComment = (event) => {
         event.preventDefault();
@@ -42,8 +52,8 @@ class CourseComments extends CourseDescriptionPage{
         })
         .then(res => {
             console.log(res.data)
-            this.setState({comments: res.data.comments})
-            toast.success("Thank you!", {
+            this.fetchComments();
+            toast.success("Submitted Comment!", {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -53,8 +63,30 @@ class CourseComments extends CourseDescriptionPage{
                 progress: undefined,
                 theme: "light",
                 });
+            // this.setState({comments: res.data.comments})
         })
         .catch(err => {
+            toast.error("Failed to submit comment! Please use UofT Email", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+
+            // toast.error("Comment error", {
+            //     position: "top-center",
+            //     autoClose: 1000,
+            //     hideProgressBar: false,
+            //     closeOnClick: true,
+            //     pauseOnHover: true,
+            //     draggable: true,
+            //     progress: undefined,
+            //     theme: "light",
+            //     });
             console.log(err)
         })
         
@@ -68,7 +100,7 @@ class CourseComments extends CourseDescriptionPage{
 
     render() {
         return (
-            <div className="comment-offset" id="respond">
+            <div id="respond">
                 <ToastContainer             
                     position="top-center"
                     hideProgressBar={false}
@@ -79,7 +111,6 @@ class CourseComments extends CourseDescriptionPage{
                     draggable
                     pauseOnHover
                     theme="light"/>
-                
                 <div className="container">
                             <h3 className="comments-title">Comments</h3>
                 <ul className="comments-list">
@@ -94,6 +125,16 @@ class CourseComments extends CourseDescriptionPage{
                         createdAt : comment.timestamp.$date,
                         upvotes: comment.upvotes,
                         downvotes: comment.downvotes
+                    }}
+                    update={(inc) => {
+                        let comments = this.state.comments;
+                        if(inc > 0) {
+                            comments[index].upvotes += inc;
+                        }
+                        else {
+                            comments[index].downvotes += inc;
+                        }
+                        this.setState({comments: comments})
                     }}    
                     />
                      )

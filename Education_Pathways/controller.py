@@ -153,7 +153,7 @@ class SearchCourse(Resource):
         try:
             searchCourseCode = list(Course.objects(code__icontains=input))
             searchCourseName = list(Course.objects(name__icontains=input))
-           
+
             search = list(dict.fromkeys(searchCourseCode + searchCourseName))
             resp = jsonify(search)
             resp.status_code = 200
@@ -257,7 +257,7 @@ class ShowRecommendations(Resource):
         tag = request.args.get('tag')
 
         try:
-            recommended_courses = list(Course.objects(tag__iexact=tag))
+            recommended_courses = list(Course.objects(tags__iexact=tag))
             resp = jsonify(recommended_courses)
             resp.status_code = 200
             return resp
@@ -523,7 +523,7 @@ class UserComment(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('increment', required=True)
         data = parser.parse_args()
-        change = data['increment']
+        change = int(data['increment'])
 
         try:
             comment = Comment.get(comment_id)
