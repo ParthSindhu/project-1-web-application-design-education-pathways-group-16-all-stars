@@ -37,6 +37,16 @@
   height: auto;
 }
 
+.container-course-filters-filter-page{
+  display: flex;
+  flex: 1 0 23%; /* explanation below */
+  justify-content: center;
+
+  width: auto;
+  height: auto;
+  border: 3px solid black;
+}
+
 .SearchQuery-course-filters-page{
   width:auto;
   display: flex;
@@ -53,4 +63,15 @@
 
 .filter-wrapper{
   max-width: 99vw;
+}
+
+.submit-button-course {
+  background-color: #1c3e6e;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  border: none;
+  margin: 2px;
+  height: 3em;
+  width: 7em;
 }

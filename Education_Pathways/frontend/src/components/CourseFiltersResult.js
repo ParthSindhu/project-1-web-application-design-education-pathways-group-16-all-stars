@@ -50,7 +50,7 @@ class CourseFiltersResult extends Component{
 
   render(){
     return (
-      <Container className = 'container-course-filters-page'>
+      <Container className = 'container-course-filters-page' id={this.state.course_code}>
         <a href={`courseDetails/${this.state.course_code}`} onClick={this.redirectCourse} className={"search-result-item"} style={{textDecoration: "none"}}>
         <Row className={"result-display-course"}>
             <Col>

@@ -35,7 +35,7 @@ class SearchResultDisplay extends Component {
       .then(res => {
         console.log("course data")
         console.log(res.data)
-        console.log(`it is ${res.status}`)
+        console.log(`it is 123 ${res.status}`)
 
         if (res.status === 200) {
           this.setState({ results: [] })
