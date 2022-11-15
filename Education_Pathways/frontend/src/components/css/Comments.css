@@ -21,11 +21,39 @@
 .like {
   height: 30px;
   width: auto;
+  mix-blend-mode: multiply;
 }
 
 .dislike {
   height: 30px;
   width: auto;
+  mix-blend-mode: multiply;
+}
+
+.like-btn {
+  background-color: #ebe7fb;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.like-btn:hover {
+  background-color: #d3d0f0;
+}
+
+.dislike-btn {
+  background-color: #ebe7fb;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.dislike-btn:hover {
+  background-color: #d3d0f0;
 }
 
 .comments {
@@ -87,9 +115,9 @@
 .comment-image-container img {
   border-radius: 50px;
 }
-.comment-votes-container img {
+.comment-votes-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 .comment-votes-box {
   display: flex;

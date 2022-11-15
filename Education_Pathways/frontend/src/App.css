@@ -1,5 +1,11 @@
+body {
+  /* background-color: #ebe7fb; */
+}
+
 .App {
   text-align: center;
+  /* background-color: #ebe7fb; */
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -45,7 +51,8 @@
   width: 50%;
   height: 30%;
   margin-top: 150px;
+  /*change bg from white to match given*/
+  mix-blend-mode: multiply;
   /* make the footer appear in the centre of the page
   */
-  
 }

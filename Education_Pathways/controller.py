@@ -153,7 +153,7 @@ class SearchCourse(Resource):
         try:
             searchCourseCode = list(Course.objects(code__icontains=input))
             searchCourseName = list(Course.objects(name__icontains=input))
-           
+
             search = list(dict.fromkeys(searchCourseCode + searchCourseName))
             resp = jsonify(search)
             resp.status_code = 200
@@ -256,8 +256,13 @@ class ShowRecommendations(Resource):
     def get(self):
         tag = request.args.get('tag')
 
+        if not tag:
+            resp = jsonify({'error': 'missing or invalid parameter'})
+            resp.status_code = 400
+            return resp
+
         try:
-            recommended_courses = list(Course.objects(tag__iexact=tag))
+            recommended_courses = list(Course.objects(tags__iexact=tag))
             resp = jsonify(recommended_courses)
             resp.status_code = 200
             return resp
@@ -523,7 +528,7 @@ class UserComment(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('increment', required=True)
         data = parser.parse_args()
-        change = data['increment']
+        change = int(data['increment'])
 
         try:
             comment = Comment.get(comment_id)
@@ -597,6 +602,7 @@ class SearchPackages(Resource):
             searchPackageDescription = list(
                 Package.objects(description__icontains=input))
             search = searchPackageName + searchPackageDescription
+            search = list(dict.fromkeys(search))
             packages = []
             # Get packages
             for package in search:
