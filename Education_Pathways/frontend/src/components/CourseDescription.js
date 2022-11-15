@@ -27,21 +27,20 @@ class CourseDescriptionPage extends Component {
       prerequisites: "",
       corequisites: "",
       exclusions: "",
-      tags: "",
-      recommendations: {},
+      tags: [],
+      recommendations: [],
       starred: false,
       graphics: [],
       username: localStorage.getItem('username')
     }
   }
 
-
-
   componentDidMount() {
     console.log("pass in course code: ", this.props.match.params.code)
 
     // Get info about course
-    axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.props.match.params.code}`, {
+    // Delete this after
+    axios.get(`http://127.0.0.1:5000/course/details?code=${this.props.match.params.code}`, {
       code: this.props.course_code
     })
       .then(res => {
@@ -90,15 +89,6 @@ class CourseDescriptionPage extends Component {
         }
         let rec_len = res.data.course.tags.length
         if (rec_len > 1) {
-          let rec_str = ""
-          for (let i = 0; i < rec_len; i++) {
-            rec_str += res.data.course.tags[i]
-            if (i !== rec_len - 1) {
-              rec_str += ", "
-            }
-          }
-          this.setState({ tags: rec_str })
-        } else {
           this.setState({ tags: res.data.course.tags })
         }
         let syllabus_link = "http://courses.skule.ca/course/" + this.props.code
@@ -107,17 +97,22 @@ class CourseDescriptionPage extends Component {
         let temp_graph = []
         //temp_graph.push(<ShowGraph graph_src={this.state.graph}></ShowGraph>)
         this.setState({ graphics: temp_graph })
-      })
 
-    // Get course recommendations based on tags
-    // axios.get(`https://assignment-1-starter-template.herokuapp.com/course/details?code=${this.state.tags}`, {
-    //   code: this.props.course_code
-    // })
-    //   .then(res => {
-    //     // Implement this
-    //   })
+        for (let i = 0; i < this.state.tags.length; i++) {
+          axios.get(`http://127.0.0.1:5000/course/recommendations?tag=${this.state.tags[i]}`, {
+            code: this.props.course_code
+          })
+            .then(res => {
+              let course_recommendations = [];
+              for (let j = 0; j < res.data.length; j++) {
+                course_recommendations.push({ 'code': res.data[j].code, 'name': res.data[j].name })
+              }
+              this.setState({ recommendations: course_recommendations })
+            })
+        }
+      }
+      )
   }
-
 
   openLink = () => {
     const newWindow = window.open(this.state.syllabus, '_blacnk', 'noopener,noreferrer');
@@ -128,7 +123,6 @@ class CourseDescriptionPage extends Component {
 
   render() {
     return (
-
       <div className="page-content">
         <Container className="course-template">
           <Row float="center" className="course-title">
@@ -186,38 +180,40 @@ class CourseDescriptionPage extends Component {
             <Row>
               <h3>Course Recommendations</h3>
             </Row>
+            {this.state.recommendations.map((track) => (
+              <p>{track.code} {track.name}</p>
+            ))}
             <Row>
               <Col className="recommendations-display">
-                <h4>Recommended Course 1</h4>
-                <p>{this.state.exclusions}</p>
+                <h4>{this.state.recommendations[0]?.code}</h4>
+                <p>{this.state.recommendations[0]?.name}</p>
               </Col>
               <Col className="recommendations-display">
-                <h4>Recommended Course 2</h4>
-                <p>{this.state.exclusions}</p>
+                <h4>{this.state.recommendations[0]?.code}</h4>
+                <p>{this.state.recommendations[0]?.name}</p>
               </Col>
               <Col className="recommendations-display">
-                <h4>Recommended Course 3</h4>
-                <p>{this.state.exclusions}</p>
+                <h4>{this.state.recommendations[0]?.code}</h4>
+                <p>{this.state.recommendations[0]?.name}</p>
               </Col>
             </Row>
             <Row>
               <Col className="recommendations-display">
-                <h4>Recommended Course 4</h4>
-                <p>{this.state.exclusions}</p>
+                <h4>{this.state.recommendations[0]?.code}</h4>
+                <p>{this.state.recommendations[0]?.name}</p>
               </Col>
               <Col className="recommendations-display">
-                <h4>Recommended Course 5</h4>
-                <p>{this.state.exclusions}</p>
+                <h4>{this.state.recommendations[0]?.code}</h4>
+                <p>{this.state.recommendations[0]?.name}</p>
               </Col>
               <Col className="recommendations-display">
-                <h4>Recommended Course 6</h4>
-                <p>{this.state.exclusions}</p>
+                <h4>{this.state.recommendations[0]?.code}</h4>
+                <p>{this.state.recommendations[0]?.name}</p>
               </Col>
             </Row>
           </Row>
         </Container>
       </div>
-
     )
   }
 }

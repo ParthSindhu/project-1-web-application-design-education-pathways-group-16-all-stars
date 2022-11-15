@@ -61,7 +61,7 @@ p {
   margin-left: 0;
 }
 
-.requisites-display, recommendations-display {
+.requisites-display, .recommendations-display {
   height: 120px;
   margin-top: 2%;
   background-color: #EFF3FB;
