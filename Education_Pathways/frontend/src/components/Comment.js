@@ -6,11 +6,14 @@ import './css/Comments.css'
 
 function vote(increment, comment_id) {
     console.log("vote", increment, comment_id);
-    return axios.put(`${process.env.REACT_APP_API_URL}/course/comments?comment_id=${comment_id}`, {increment: increment})
+    axios.put(`${process.env.REACT_APP_API_URL}/course/comments?comment_id=${comment_id}`, {increment: increment})
+    .catch((err) => {
+        console.log(err);
+    })
 }
 
 export default function Comment({
-  comment,  update
+  comment
 }){
   const createdAt = new Date(comment.createdAt).toLocaleDateString();
   return (
@@ -29,24 +32,13 @@ export default function Comment({
         <div className="comment-votes-box">
         {/* <input type="button" style="" className="like" /> */}
         {/* <input type="image" src="/like.png" className="like" onClick={vote(1, comment.id)} />  */}
-        <button className="like-btn" onClick={() => {
-          vote(1,  comment.id).then(() => {
-            update(1);
-          })
-        }}>
-        <img alt="upvote" src="/like.png" className="like" /> 
+        
+        <img alt="upvote" src="/like.png" className="like" onClick={() => vote(1, comment.id)} /> 
         {comment.upvotes}
-        </button>
         </div>
         <div className="comment-votes-box">
-        <button className="dislike-btn" onClick={() => {
-          vote(-1, comment.id).then(() => {
-            update(-1);
-          })
-        }}>
-        <img alt="downvote" src="/dislike.png" className="dislike" /> 
-        {comment.downvotes}
-        </button>
+        
+        <img alt="downvote" src="/dislike.png" className="dislike" onClick={() => vote(-1, comment.id)}/> {comment.downvotes}
         
       </div>
       </div>
