@@ -111,7 +111,7 @@ class CourseDescriptionPage extends Component {
             .then(res => {
               let course_recommendations = [];
               for (let j = 0; j < res.data.length; j++) {
-                if (res.data[j].code != this.state.course_code)
+                if (res.data[j].code !== this.state.course_code)
                   course_recommendations.push({ 'code': res.data[j].code, 'name': res.data[j].name })
               }
 
