@@ -8,20 +8,29 @@ class CourseComments extends CourseDescriptionPage{
     constructor(props) {
         super(props);
         this.state = {
-            comments: []
+            comments: [],
+            fetching: false
         };
     }
     
+    fetchComments =  () => {
+        if(!this.state.fetching) {
+            this.setState({fetching: true});
+            fetch(`${process.env.REACT_APP_API_URL}/course/comments?course=` + this.props.match.params.code).then(
+                response => response.json()
+            ).then(comments => {
+                this.setState({comments: comments.comments});
+                this.setState({fetching: false});
+            }).catch(error => {
+                console.log(error)
+                this.setState({fetching: false});
+            })
+        }
+    }
     componentDidMount() {
         console.log("pass in course code: ", this.props.match.params.code)
         // fetch comments from backend
-        fetch(`${process.env.REACT_APP_API_URL}/course/comments?course=` + this.props.match.params.code).then(
-            response => response.json()
-        ).then(comments => {
-            this.setState({comments: comments.comments});
-        }).catch(
-            error => console.log(error)
-        )
+        this.fetchComments();
     }
     submitComment = (event) => {
         event.preventDefault();
@@ -40,7 +49,8 @@ class CourseComments extends CourseDescriptionPage{
         })
         .then(res => {
             console.log(res.data)
-            this.setState({comments: res.data.comments})
+            this.fetchComments();
+            // this.setState({comments: res.data.comments})
         })
         .catch(err => {
             console.log(err)

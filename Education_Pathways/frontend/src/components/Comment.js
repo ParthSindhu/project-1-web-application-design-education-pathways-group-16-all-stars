@@ -32,13 +32,16 @@ export default function Comment({
         <div className="comment-votes-box">
         {/* <input type="button" style="" className="like" /> */}
         {/* <input type="image" src="/like.png" className="like" onClick={vote(1, comment.id)} />  */}
-        
+        <button className="like-btn">
         <img alt="upvote" src="/like.png" className="like" onClick={() => vote(1, comment.id)} /> 
         {comment.upvotes}
+        </button>
         </div>
         <div className="comment-votes-box">
-        
-        <img alt="downvote" src="/dislike.png" className="dislike" onClick={() => vote(-1, comment.id)}/> {comment.downvotes}
+        <button className="dislike-btn">
+        <img alt="downvote" src="/dislike.png" className="dislike" onClick={() => vote(-1, comment.id)}/> 
+        {comment.downvotes}
+        </button>
         
       </div>
       </div>
