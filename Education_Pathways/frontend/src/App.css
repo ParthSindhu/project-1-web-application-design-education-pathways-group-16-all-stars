@@ -4,6 +4,7 @@
   text-align: center;
   font-family: "JetBrains Mono", monospace;
   color: white;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -50,6 +51,8 @@
   width: 50%;
   height: 30%;
   margin: auto;
+  /*change bg from white to match given*/
+  mix-blend-mode: multiply;
   /* make the footer appear in the centre of the page
   */
 }
