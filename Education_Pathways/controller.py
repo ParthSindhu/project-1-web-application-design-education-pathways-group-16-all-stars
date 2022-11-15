@@ -257,7 +257,7 @@ class ShowRecommendations(Resource):
         tag = request.args.get('tag')
 
         try:
-            recommended_courses = list(Course.objects(tag__iexact=tag))
+            recommended_courses = list(Course.objects(tags__iexact=tag))
             resp = jsonify(recommended_courses)
             resp.status_code = 200
             return resp
