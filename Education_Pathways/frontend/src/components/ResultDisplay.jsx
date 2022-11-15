@@ -4,7 +4,6 @@ import Result from './Results'
 import './css/Result.css'
 import Label from './Label'
 import "./css/styles.css";
-
 class SearchResultDisplay extends Component {
 
   constructor() {
@@ -13,7 +12,8 @@ class SearchResultDisplay extends Component {
       input: "",
       results: [],
       message: "",
-      fetching: false
+      fetching: false,
+      controller: null 
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,12 +33,22 @@ class SearchResultDisplay extends Component {
     this.getData(this.state.input)
   }
 
-  getData = async (input) => {
+  getData = async (input, controller) => {
     // check if fetching
+    if (this.state.fetching) {
+      // abort previous request
+      this.state.controller.abort();
+    }
     if (!this.state.fetching) {
-      this.setState({ fetching: true });
+      const controller = new AbortController();
+      this.setState({ 
+        fetching: true,
+        controller: controller
+      });
       try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/searchc?input=${input}`)
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/searchc?input=${input}`, {
+          signal: controller.signal
+        })
         console.log("course data")
         console.log(res.data)
         console.log(`it is ${res.status}`)
@@ -80,8 +90,7 @@ class SearchResultDisplay extends Component {
         
       }catch(err){
           this.setState({
-            fetching: false,
-            message: "System Error. Please refresh"
+            fetching: false
           })
           console.log(err)
       }
