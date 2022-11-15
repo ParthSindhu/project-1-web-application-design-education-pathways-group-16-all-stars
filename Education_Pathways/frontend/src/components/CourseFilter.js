@@ -29,7 +29,7 @@ class CourseFilter extends Component {
     
       render() {
         return (
-        <div>
+        <div className = 'wrapper-course-filter'>
             Alphabetical Filter
             <Container className = 'container-course-filters-filter-page'>
                 <Button onClick={this.props.handleClick} type="button" value="ALL" className="submit-button-course">ALL</Button>
