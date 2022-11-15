@@ -105,7 +105,7 @@ class CourseDescriptionPage extends Component {
         this.setState({ graphics: temp_graph })
 
         for (let i = 0; i < this.state.tags.length; i++) {
-          axios.get(`http://127.0.0.1:5000/course/recommendations?tag=${this.state.tags[i]}`, {
+          axios.get(`${process.env.REACT_APP_API_URL}/course/recommendations?tag=${this.state.tags[i]}`, {
             code: this.props.course_code
           })
             .then(res => {
@@ -197,6 +197,10 @@ class CourseDescriptionPage extends Component {
 
   redirectCourseComments = () => {
     this.props.history.push(`/courseComments/${this.state.course_code}`, { course_code: this.state.course_code })
+  }
+
+  redirectCourseRecommendations = (courseCode) => {
+    window.location.href = `window.location.origin/courseDetails/${courseCode}`
   }
 
   render() {
@@ -366,16 +370,14 @@ class CourseDescriptionPage extends Component {
             <Row>
               <h3>Course Recommendations</h3>
             </Row>
-            <Row>
               <Slider {...carousel_settings}>
                 {this.state.recommendations.map((recommendation) => (
-                  <div className="recommendations-display">
+                  <div className="recommendations-display" onClick={() => this.redirectCourseRecommendations(recommendation.code)}>
                     <h4>{recommendation.code}</h4>
                     <p>{recommendation.name}</p>
                   </div>
                 ))}
               </Slider>
-            </Row>
           </Row>
         </Container>
       </div>
