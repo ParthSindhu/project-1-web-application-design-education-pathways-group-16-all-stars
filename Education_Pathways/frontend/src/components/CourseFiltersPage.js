@@ -97,10 +97,10 @@ class CourseFiltersPage extends Component {
 
       componentDidMount(){
         this.getData("ALL");
-        let result_temp = ['ACE140','BAE412', 'ECE412'];
+        //let result_temp = ['ACE140','BAE412', 'ECE412'];
         //result_temp.push(<CourseFiltersResult id = {"B"} course_code={"ECE0"}></CourseFiltersResult>);
         //result_temp.push(<CourseFiltersResult id = {"A"} course_code={"A"}></CourseFiltersResult>);
-        this.setState({ results: result_temp });
+        //this.setState({ results: result_temp });
       }
 
       handleFilterClick(event) {
