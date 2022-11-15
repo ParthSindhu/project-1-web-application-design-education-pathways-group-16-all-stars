@@ -4,7 +4,7 @@ import React, {useState, useEffect, useRef} from 'react'
 
 const SticktoTop = (props) => {
 
-    const [, setBottomPos] = useState(0);
+    const [bottom, setBottomPos] = useState(0);
 
     const reg_style ={
         color:'white',
@@ -15,8 +15,27 @@ const SticktoTop = (props) => {
         // border:'solid black 10px',
         position:'fixed',
         textAlign:'center',
-        zindex:'200',
-        top:'70px',
+        zindex:'2000',
+        top:'69px',
+        width:'99vw',
+        justifyContent:'center',
+        height:'auto',
+        backgroundColor:'white',
+    };
+
+    const reg_style_invisible ={
+        visibility: 'hidden',
+        color:'white',
+        overflowY:'auto',
+    };
+
+    const fixed_style_invisible ={
+        visibility: 'hidden',
+        // border:'solid black 10px',
+        position:'fixed',
+        textAlign:'center',
+        zindex:'2000',
+        top:'69px',
         width:'99vw',
         justifyContent:'center',
         height:'auto',
@@ -24,15 +43,15 @@ const SticktoTop = (props) => {
     };
 
     const filler ={
-        height: '400px',
+        height: '4vh',
     };
 
     const filler_none ={
         height: '0px',
     };
 
-    const [, setScrollPosition] = useState(0);
-    const [style, setStyle] = useState(reg_style);
+    const [scroll, setScrollPosition] = useState(0);
+    const [style, setStyle] = useState(fixed_style_invisible);
     const [style_fill, setStyleFill] = useState(reg_style);
     const [ret_top, setRetTop] = useState(0);
 
@@ -43,16 +62,24 @@ const SticktoTop = (props) => {
         const top_ = inputRef.current.getBoundingClientRect().y;
         setBottomPos(inputRef.current.getBoundingClientRect().height);
 
+        console.log("Bottom:")
+        console.log(bottom);
+
+        console.log("TOP:")
+        console.log(top_);
+        
         const position = window.pageYOffset;
+        console.log("Position:")
+        console.log(position);
         setScrollPosition(position);
         
         if(Math.floor(top_) <= 70 && (position > ret_top )){
             setStyle(fixed_style);
             setRetTop(position);
-            setStyleFill(filler);
+            setStyleFill(reg_style_invisible);
         } else {
-            setStyle(reg_style);
-            setStyleFill(filler_none);
+            setStyle(fixed_style_invisible);
+            setStyleFill(reg_style);
             setRetTop(0);
         }
     };
@@ -67,10 +94,11 @@ const SticktoTop = (props) => {
 
     return (
     <div>
-        <div style={style} ref={inputRef}>
+        <div style={style}>
             {props.children}
         </div>
-        <div style={style_fill}>
+        <div style={style_fill}ref={inputRef}>
+            {props.children}
         </div>
     </div>
     );

@@ -46,9 +46,10 @@
   background-color: white;
   color: white;
   text-align: center;
+  padding-bottom: 100px;
   width: 50%;
   height: 30%;
-  margin-top: 150px;
+  margin: auto;
   /* make the footer appear in the centre of the page
   */
   

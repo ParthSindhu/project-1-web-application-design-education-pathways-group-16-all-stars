@@ -54,7 +54,12 @@ class CourseFiltersResult extends Component{
         <a href={`courseDetails/${this.state.course_code}`} onClick={this.redirectCourse} className={"search-result-item"} style={{textDecoration: "none"}}>
         <Row className={"result-display-course"}>
             <Col>
-                <div className="res-item-coursefilters-page">{this.state.course_code}</div>  
+                <div className="res-item-coursefilters-page">
+                {this.state.course_code}
+                </div>
+                <div className="res-item-coursefilters-page-sub">
+                {this.state.course_name}
+                </div>  
             </Col>
             {/* <Col><img src={star} alt=""/></Col> */}
         </Row>
