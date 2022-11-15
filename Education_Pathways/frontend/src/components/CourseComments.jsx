@@ -66,7 +66,7 @@ class CourseComments extends CourseDescriptionPage{
             // this.setState({comments: res.data.comments})
         })
         .catch(err => {
-            toast.error("Failed to submit comment!", {
+            toast.error("Failed to submit comment! Please use UofT Email", {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: false,
