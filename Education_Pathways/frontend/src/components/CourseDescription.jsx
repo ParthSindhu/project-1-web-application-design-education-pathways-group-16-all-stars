@@ -206,8 +206,8 @@ class CourseDescriptionPage extends Component {
   render() {
     var carousel_settings = {
       dots: true,
-      infinite: false,
-      speed: 500,
+      infinite: true,
+      speed: 600,
       slidesToShow: 4,
       slidesToScroll: 4,
       initialSlide: 0,
@@ -341,19 +341,6 @@ class CourseDescriptionPage extends Component {
             </Col>
 
           </Row>
-          <Row className="col-item course-recommendations">
-            <Row>
-              <h3>Course Recommendations</h3>
-            </Row>
-            <Slider {...carousel_settings}>
-              {this.state.recommendations.map((recommendation) => (
-                <div className="recommendations-display" onClick={() => this.redirectCourseRecommendations(recommendation.code)}>
-                  <h4>{recommendation.code}</h4>
-                  <p>{recommendation.name}</p>
-                </div>
-              ))}
-            </Slider>
-          </Row>
           <Row className="col-item course-requisite">
             <Row>
               <h3>Course Requisites</h3>
@@ -378,6 +365,19 @@ class CourseDescriptionPage extends Component {
                 <img src={`data:image/jpeg;base64,${this.state.graph}`} alt="" ></img>
               </div>
             </Row>
+          </Row>
+          <Row className="col-item course-recommendations">
+            <Row>
+              <h3>Course Recommendations</h3>
+            </Row>
+            <Slider {...carousel_settings}>
+              {this.state.recommendations.map((recommendation) => (
+                <div className="recommendations-display" onClick={() => this.redirectCourseRecommendations(recommendation.code)}>
+                  <h4>{recommendation.code}</h4>
+                  <p>{recommendation.name}</p>
+                </div>
+              ))}
+            </Slider>
           </Row>
         </Container>
       </div>

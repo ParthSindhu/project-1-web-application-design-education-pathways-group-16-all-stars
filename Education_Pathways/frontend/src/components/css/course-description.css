@@ -107,12 +107,11 @@ p {
   visibility: visible;
 }
 
-/* actual styles */
 .slick-arrow:before,
 .slick-prev:before,
 .slick-next:before {
   color: #1C3E6E !important;
-  opacity: 100% !important;
+  opacity: 1 !important;
 }
 
 .slick-prev.slick-disabled:before,
