@@ -66,11 +66,11 @@ export default class NavbarComp extends Component {
                 <Nav.Link as={Link} to="/coursepackages">
                   Course Packages
                 </Nav.Link>
-                <Nav.Link as={Link} to="/about">
-                  About Us
-                </Nav.Link>
                 <Nav.Link as={Link} to="/coursefilterpage">
                   Course List
+                </Nav.Link>
+                <Nav.Link as={Link} to="/about">
+                  About Us
                 </Nav.Link>
                 {/* <Nav.Link href="/search" style={{ color: "white", display: "inline" }}>
                   Search

@@ -3,38 +3,6 @@ import CoursePackage from './CoursePackage';
 
 import './css/coursepackages.css'
 
-// const data = [
-//     {
-//         name: "Package 1",
-//         description: "This is a package",
-//         courses: [
-//             "CSC343H1",
-//             "CSC343H1",
-//             "CSC343H1"
-//         ],
-//         _id: 1
-//     },
-//     {
-//         name: "Computer Science",
-//         description: "This package is for students who are interested in Computer Science.",
-//         courses: [ 
-//             "CSC343H1",
-//             "CSC343H1",
-//             "CSC343H1"
-//      ],
-//         _id: 2               
-//     },
-//     {
-//         name: "Computer Science",
-//         description: "This package is for students who are interested in Computer Science.",
-//         courses: [ "CSC343H1", 
-//         "ECE444H1",
-//         "ECE444H1"
-//     ],
-//         _id: 3
-//     }
-// ]
-
 export default function CoursePackages() {
   // fetch data from packages endpoint
   const [data, setData] = React.useState([]);
@@ -63,10 +31,10 @@ export default function CoursePackages() {
         setMsg(`Found ${new_data.length} matching packages.`)
         setData(r => [...new_data]);
         })
-        // .catch(e => {
-        //   setFetching(false);
-        //   console.log(e);
-        // });
+        .catch(e => {
+          setFetching(false);
+          console.log(e);
+        });
       return () => {
         setFetching(false);
         controller.abort();
