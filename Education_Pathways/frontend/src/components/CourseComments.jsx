@@ -3,6 +3,8 @@ import './css/Comments.css'
 import React from "react";
 import Comment from "./Comment";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 class CourseComments extends CourseDescriptionPage{
     constructor(props) {
@@ -16,7 +18,7 @@ class CourseComments extends CourseDescriptionPage{
     fetchComments =  () => {
         if(!this.state.fetching) {
             this.setState({fetching: true});
-            fetch(`${process.env.REACT_APP_API_URL}/course/comments?course=` + this.props.match.params.code).then(
+            return fetch(`${process.env.REACT_APP_API_URL}/course/comments?course=` + this.props.match.params.code).then(
                 response => response.json()
             ).then(comments => {
                 this.setState({comments: comments.comments});
@@ -26,6 +28,7 @@ class CourseComments extends CourseDescriptionPage{
                 this.setState({fetching: false});
             })
         }
+        return Promise.reject();
     }
     componentDidMount() {
         console.log("pass in course code: ", this.props.match.params.code)
@@ -50,9 +53,40 @@ class CourseComments extends CourseDescriptionPage{
         .then(res => {
             console.log(res.data)
             this.fetchComments();
+            toast.success("Submitted Comment!", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
             // this.setState({comments: res.data.comments})
         })
         .catch(err => {
+            toast.error("Failed to submit comment!", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+
+            // toast.error("Comment error", {
+            //     position: "top-center",
+            //     autoClose: 1000,
+            //     hideProgressBar: false,
+            //     closeOnClick: true,
+            //     pauseOnHover: true,
+            //     draggable: true,
+            //     progress: undefined,
+            //     theme: "light",
+            //     });
             console.log(err)
         })
     }
@@ -66,7 +100,16 @@ class CourseComments extends CourseDescriptionPage{
     render() {
         return (
             <div id="respond">
-                
+                <ToastContainer             
+                    position="top-center"
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"/>
                 <div className="container">
                             <h3 className="comments-title">Comments</h3>
                 <ul className="comments-list">
