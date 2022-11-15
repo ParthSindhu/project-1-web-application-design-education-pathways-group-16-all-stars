@@ -7,8 +7,8 @@
 }
 
 .course-packages {
-  background-color: #ebe7fb;
-  height: 100vh;
+  /* background-color: #ebe7fb; */
+  /* height: 100%; */
 }
 
 .package-bg {
@@ -31,6 +31,7 @@
   width: 100%;
   opacity: 80%;
   border-radius: inherit;
+  font-size: large;
 }
 .package-content:hover {
   opacity: 100%;
@@ -62,5 +63,8 @@
   height: fit-content;
   background-color: blueviolet;
   border-radius: 20px;
+  height: inherit;
+  width: inherit;
+  font-size: medium;
   margin: 30px;
 }

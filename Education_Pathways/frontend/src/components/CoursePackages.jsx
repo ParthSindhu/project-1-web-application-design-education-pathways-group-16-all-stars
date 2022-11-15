@@ -3,55 +3,100 @@ import CoursePackage from './CoursePackage';
 
 import './css/coursepackages.css'
 
-const data = [
-    {
-        name: "Package 1",
-        description: "This is a package",
-        courses: [
-            "CSC343H1",
-            "CSC343H1",
-            "CSC343H1"
-        ],
-        _id: 1
-    },
-    {
-        name: "Computer Science",
-        description: "This package is for students who are interested in Computer Science.",
-        courses: [ 
-            "CSC343H1",
-            "CSC343H1",
-            "CSC343H1"
-     ],
-        _id: 2               
-    },
-    {
-        name: "Computer Science",
-        description: "This package is for students who are interested in Computer Science.",
-        courses: [ "CSC343H1", 
-        "ECE444H1",
-        "ECE444H1"
-    ],
-        _id: 3
-    }
-]
+// const data = [
+//     {
+//         name: "Package 1",
+//         description: "This is a package",
+//         courses: [
+//             "CSC343H1",
+//             "CSC343H1",
+//             "CSC343H1"
+//         ],
+//         _id: 1
+//     },
+//     {
+//         name: "Computer Science",
+//         description: "This package is for students who are interested in Computer Science.",
+//         courses: [ 
+//             "CSC343H1",
+//             "CSC343H1",
+//             "CSC343H1"
+//      ],
+//         _id: 2               
+//     },
+//     {
+//         name: "Computer Science",
+//         description: "This package is for students who are interested in Computer Science.",
+//         courses: [ "CSC343H1", 
+//         "ECE444H1",
+//         "ECE444H1"
+//     ],
+//         _id: 3
+//     }
+// ]
 
 export default function CoursePackages() {
+  // fetch data from packages endpoint
+  const [data, setData] = React.useState([]);
+  const [query, setQuery] = React.useState("");
+  const [fetching, setFetching] = React.useState(false);
+  const [msg, setMsg] = React.useState("");
+  React.useEffect(() => {
+    const controller = new AbortController();
+    setFetching(true);
+    fetch(`${process.env.REACT_APP_API_URL}/packages/search?input=${query}`, {
+      signal: controller.signal
+    })
+      .then(res => {
+        setFetching(false);
+        return res.json();
+      })
+      .then(d => {
+        const new_data = d.map((item) => {
+          return {
+            name: item.name,
+            description: item.description,
+            courses: item.courses,
+            _id: item._id
+          }
+        })
+        setMsg(`Found ${new_data.length} matching packages.`)
+        setData(r => [...new_data]);
+        })
+        // .catch(e => {
+        //   setFetching(false);
+        //   console.log(e);
+        // });
+      return () => {
+        setFetching(false);
+        controller.abort();
+      }
+  }, [query]);
   return (
     <div className='course-packages'>
       <h1>Course Packages</h1>
+      <form onSubmit={(event)=>{
+        event.preventDefault();
+        setQuery(event.target[0].value);
+      }} className="search">
+        <input placeholder="Search for course packages ..." className="text-input" type="text"/>
+        <input type="submit" value="Search" className="submit-button" />
+      </form>
+      <div className={"search-result-message"} >{msg}</div>
+      {
+      fetching ? <div className={"search-result-message"} >Fetching data..</div>: 
       <div className="gird" style={{
         "display": "grid",
         "gridTemplateColumns": "1fr 1fr"
     }}>
+      
         {
-        data.map((item, index) => {
-            return ( <div className="grid-item">
-                <CoursePackage name={item.name} description={item.description} courses={item.courses} />
-            </div>
-            );
-        })
+          data?.map((item, index) => 
+            <CoursePackage key={item._id} name={item.name} description={item.description} courses={item.courses} />
+          )
         }
       </div>
+      }
     </div>
   );
 }
