@@ -153,7 +153,7 @@ class SearchCourse(Resource):
         try:
             searchCourseCode = list(Course.objects(code__icontains=input))
             searchCourseName = list(Course.objects(name__icontains=input))
-           
+
             search = list(dict.fromkeys(searchCourseCode + searchCourseName))
             resp = jsonify(search)
             resp.status_code = 200
@@ -597,6 +597,7 @@ class SearchPackages(Resource):
             searchPackageDescription = list(
                 Package.objects(description__icontains=input))
             search = searchPackageName + searchPackageDescription
+            search = list(dict.fromkeys(search))
             packages = []
             # Get packages
             for package in search:
