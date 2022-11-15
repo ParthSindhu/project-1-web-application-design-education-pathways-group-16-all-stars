@@ -523,7 +523,7 @@ class UserComment(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('increment', required=True)
         data = parser.parse_args()
-        change = data['increment']
+        change = int(data['increment'])
 
         try:
             comment = Comment.get(comment_id)
