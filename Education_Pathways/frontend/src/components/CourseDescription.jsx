@@ -111,6 +111,11 @@ class CourseDescriptionPage extends Component {
     console.log("new state: ", this.state)
   }
 
+  /**
+   * This method returns the percentage value of the average ratings which range from 1-5
+   * @param {*} ratings the type of rating (e.g. Courseload)
+   * @returns percentage value of average rating
+   */
   getRatingPercentage(ratings) {
     let total=0
     for (const value of ratings) {
@@ -122,7 +127,11 @@ class CourseDescriptionPage extends Component {
     }
     return percentage;
   }
-
+  /**
+   * This method returns a string indicating if a percentage is over 50 to be used to update circular progress bars accordingly
+   * @param {*} percentage percentage value of average rating
+   * @returns string indicating whether the percentage is over 50
+   */
   getRatingOver50(percentage){
     let over50=null
     if (percentage > 50){
@@ -144,6 +153,10 @@ class CourseDescriptionPage extends Component {
   closeForm() {
     document.getElementById("formElement").style.display = "none";
   }
+
+  /**
+   * This method sends a post request and saves info submitted in the ratings form to the db
+   */
   submitRating = () =>{
     var email = document.getElementById("email");
     var rating_courseload = document.getElementById("rating_courseload");
