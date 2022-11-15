@@ -18,7 +18,7 @@ def generate_course_tags():
     db = myclient["A-Star"]
     course_table = db["course"]
     cursor = course_table.find({})
-    excluded_words = ["introduction"]
+    excluded_words = ["introduction", "engineering"]
 
     # Iterate through every document in the courses table
     for document in cursor:
