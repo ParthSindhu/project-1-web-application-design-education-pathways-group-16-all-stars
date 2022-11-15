@@ -51,15 +51,11 @@ class SearchResultDisplay extends Component {
         })
         console.log("course data")
         console.log(res.data)
-<<<<<<< HEAD
-        console.log(`it is 123 ${res.status}`)
-=======
         console.log(`it is ${res.status}`)
         if (res.status === 400) {
           alert("System Error. Please refresh")
           return
         }
->>>>>>> main
 
         if (res.status === 200) {
           if (res.data.length > 0) {

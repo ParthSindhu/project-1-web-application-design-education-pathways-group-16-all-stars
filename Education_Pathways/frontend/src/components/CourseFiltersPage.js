@@ -162,7 +162,7 @@ class CourseFiltersPage extends Component {
     
               let len = this.state.resultsFiltered.length
               for (let i = 0; i < len; i++) {
-                result_temp.push(this.state.results[i])
+                result_temp.push(this.state.resultsFiltered[i])
               }
     
             } else {
