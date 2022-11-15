@@ -256,6 +256,11 @@ class ShowRecommendations(Resource):
     def get(self):
         tag = request.args.get('tag')
 
+        if not tag:
+            resp = jsonify({'error': 'missing or invalid parameter'})
+            resp.status_code = 400
+            return resp
+
         try:
             recommended_courses = list(Course.objects(tags__iexact=tag))
             resp = jsonify(recommended_courses)
