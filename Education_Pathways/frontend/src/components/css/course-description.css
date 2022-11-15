@@ -57,11 +57,11 @@ p {
   color: #5C779C;
 }
 
-.course-template .course-description, .course-requisite, course-recommendations {
+.course-template .course-description, .course-requisite {
   margin-left: 0;
 }
 
-.requisites-display, .recommendations-display {
+.requisites-display {
   height: 120px;
   margin-top: 2%;
   background-color: #EFF3FB;
@@ -70,6 +70,29 @@ p {
   padding-top: 5px;
   padding-bottom: 5px;
   margin-bottom: 4%;
+}
+
+.course-recommendations {
+  margin-left: 0;
+  padding-bottom: 30px;
+}
+
+.recommendations-display {
+  height: 200px;
+  background-color: #EFF3FB;
+  border-radius: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+
+.slick-list {
+  margin: 0 -10px;
 }
 
 .expand_button {

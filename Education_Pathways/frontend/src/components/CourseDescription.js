@@ -8,6 +8,7 @@ import requisite_label from './img/requisite-label.png'
 import empty_star from './img/star.png'
 import starred from './img/starred.png'
 import axios from "axios"
+import Slider from "react-slick";
 
 let star = empty_star;
 
@@ -105,9 +106,15 @@ class CourseDescriptionPage extends Component {
             .then(res => {
               let course_recommendations = [];
               for (let j = 0; j < res.data.length; j++) {
-                course_recommendations.push({ 'code': res.data[j].code, 'name': res.data[j].name })
+                if (res.data[j].code != this.state.course_code)
+                  course_recommendations.push({ 'code': res.data[j].code, 'name': res.data[j].name })
               }
-              this.setState({ recommendations: course_recommendations })
+              
+              let unique_course_recommendations = [...new Map(course_recommendations.map(item => [item['code'], item])).values()]
+              
+              this.setState({ recommendations: unique_course_recommendations })
+
+              console.log(this.state)
             })
         }
       }
@@ -122,6 +129,41 @@ class CourseDescriptionPage extends Component {
   }
 
   render() {
+    var carousel_settings = {
+      dots: true,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      initialSlide: 0,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    };
+
     return (
       <div className="page-content">
         <Container className="course-template">
@@ -180,36 +222,15 @@ class CourseDescriptionPage extends Component {
             <Row>
               <h3>Course Recommendations</h3>
             </Row>
-            {this.state.recommendations.map((track) => (
-              <p>{track.code} {track.name}</p>
-            ))}
             <Row>
-              <Col className="recommendations-display">
-                <h4>{this.state.recommendations[0]?.code}</h4>
-                <p>{this.state.recommendations[0]?.name}</p>
-              </Col>
-              <Col className="recommendations-display">
-                <h4>{this.state.recommendations[0]?.code}</h4>
-                <p>{this.state.recommendations[0]?.name}</p>
-              </Col>
-              <Col className="recommendations-display">
-                <h4>{this.state.recommendations[0]?.code}</h4>
-                <p>{this.state.recommendations[0]?.name}</p>
-              </Col>
-            </Row>
-            <Row>
-              <Col className="recommendations-display">
-                <h4>{this.state.recommendations[0]?.code}</h4>
-                <p>{this.state.recommendations[0]?.name}</p>
-              </Col>
-              <Col className="recommendations-display">
-                <h4>{this.state.recommendations[0]?.code}</h4>
-                <p>{this.state.recommendations[0]?.name}</p>
-              </Col>
-              <Col className="recommendations-display">
-                <h4>{this.state.recommendations[0]?.code}</h4>
-                <p>{this.state.recommendations[0]?.name}</p>
-              </Col>
+              <Slider {...carousel_settings}>
+                {this.state.recommendations.map((recommendation) => (
+                  <div className="recommendations-display">
+                    <h4>{recommendation.code}</h4>
+                    <p>{recommendation.name}</p>
+                  </div>
+                ))}
+              </Slider>
             </Row>
           </Row>
         </Container>
