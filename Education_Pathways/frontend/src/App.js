@@ -9,11 +9,11 @@ import "slick-carousel/slick/slick-theme.css";
 function App() {
 
   return (
-    <div>
-    <div className="App">
-      <NavbarComp />
-      <ReactComp />
-    </div>
+    <div id='MAIN'>
+      <div className="App">
+        <NavbarComp />
+        <ReactComp />
+      </div>
     </div>
   );
 
