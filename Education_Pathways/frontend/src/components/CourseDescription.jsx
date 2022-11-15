@@ -7,6 +7,10 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import requisite_label from './img/requisite-label.png'
 import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
+// let star = empty_star;
 import Slider from "react-slick";
 
 class CourseDescriptionPage extends Component {
@@ -192,7 +196,16 @@ class CourseDescriptionPage extends Component {
         rating_engagement: rating_engagement.value,
       })
     })
-    console.log("Rating Submitted!")
+    toast.success("Thank you!", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
   }
 
   redirectCourseComments = () => {
@@ -241,9 +254,19 @@ class CourseDescriptionPage extends Component {
 
     return (
       <div className="page-content">
+        <ToastContainer             
+                    position="top-center"
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"/>
         <Container className="course-template">
           <Row float="center" className="course-title">
-            <Col xs={8}>
+            <Col className="title-center" >
               <h1>{this.state.course_code} : {this.state.course_name}</h1>
             </Col>
             {/* <Col xs={4}>
@@ -261,11 +284,16 @@ class CourseDescriptionPage extends Component {
             </Col>
             <Col className="col-item">
               <h3>Past Tests and Syllabi</h3>
-              <button className={"syllabus-link"} onClick={this.openLink}>View</button>
+              <div className="submit-button-wrapper">
+                <button className={"submit-button"} onClick={this.openLink}>View</button>
+              </div>
+              
             </Col>
             <Col className="col-item">
               <h3>Past Student Comments</h3>
-              <button className={"syllabus-link"} onClick={this.redirectCourseComments}>View</button>
+              <div className="submit-button-wrapper">
+                <button className={"submit-button"} onClick={this.redirectCourseComments}>View</button>
+              </div>
             </Col>
           </Row>
           <Row>
@@ -310,8 +338,11 @@ class CourseDescriptionPage extends Component {
                 Engagement
               </label>
 
-              <button className={"open-button"} onClick={this.showForm}>Submit a Rating</button>
-
+              <br></br>
+              <div className="rating-button-wrapper">
+                <button className={"rating-button"} onClick={this.showForm}>Submit a Rating</button>
+              </div>
+              
               <div className={"form-popup"} id="formElement">
                 <form className={"form-container"} onSubmit={(event) => {
                   event.preventDefault();
@@ -335,6 +366,7 @@ class CourseDescriptionPage extends Component {
 
                   <button type="submit" class={"btn"} >Submit</button>
                   <button type="button" className={"btn cancel"} onClick={this.closeForm}>Close</button>
+                  
                 </form>
               </div>
 
