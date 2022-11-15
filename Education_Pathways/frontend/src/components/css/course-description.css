@@ -88,6 +88,7 @@ p {
   padding-bottom: 15px;
   margin-top: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .slick-slide>div {
@@ -111,7 +112,7 @@ p {
 .slick-prev:before,
 .slick-next:before {
   color: #1C3E6E !important;
-  opacity: 100%;
+  opacity: 100% !important;
 }
 
 .slick-prev.slick-disabled:before,

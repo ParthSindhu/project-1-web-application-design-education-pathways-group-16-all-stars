@@ -200,7 +200,7 @@ class CourseDescriptionPage extends Component {
   }
 
   redirectCourseRecommendations = (courseCode) => {
-    window.location.href = `window.location.origin/courseDetails/${courseCode}`
+    window.location.href = `${window.location.origin}/courseDetails/${courseCode}`
   }
 
   render() {
@@ -279,12 +279,12 @@ class CourseDescriptionPage extends Component {
 
               <label class="ratings-lbl">
                 <div className={`progress-circle p${this.state.ratings_difficulty} ${this.getRatingOver50(this.state.ratings_difficulty)}`}>
-                <span>{this.state.ratings_difficulty}%</span>
-                <div className="left-half-clipper">
-                  <div class="first50-bar"></div>
-                  <div className="value-bar"/>
+                  <span>{this.state.ratings_difficulty}%</span>
+                  <div className="left-half-clipper">
+                    <div class="first50-bar"></div>
+                    <div className="value-bar" />
+                  </div>
                 </div>
-              </div>
                 Difficulty
               </label>
 
@@ -293,7 +293,7 @@ class CourseDescriptionPage extends Component {
                   <span>{this.state.ratings_courseload}%</span>
                   <div className="left-half-clipper">
                     <div class="first50-bar"></div>
-                    <div className="value-bar"/>
+                    <div className="value-bar" />
                   </div>
                 </div>
                 Courseload
@@ -304,42 +304,55 @@ class CourseDescriptionPage extends Component {
                   <span>{this.state.ratings_engagement}%</span>
                   <div className="left-half-clipper">
                     <div class="first50-bar"></div>
-                    <div className="value-bar"/>
+                    <div className="value-bar" />
                   </div>
                 </div>
                 Engagement
               </label>
 
               <button className={"open-button"} onClick={this.showForm}>Submit a Rating</button>
-              
+
               <div className={"form-popup"} id="formElement">
                 <form className={"form-container"} onSubmit={(event) => {
-                    event.preventDefault();
-                    this.submitRating()
-                    this.closeForm()
-                  } }> 
+                  event.preventDefault();
+                  this.submitRating()
+                  this.closeForm()
+                }}>
                   <h3>Rate Your Experience!</h3>
-                  
+
                   <div className={"dropdown"}>
                     <label for="hour">Courseload:</label>
-                    <input type="number" id="rating_courseload" min="1" max="5" required/><br></br><br></br>
+                    <input type="number" id="rating_courseload" min="1" max="5" required /><br></br><br></br>
 
                     <label for="hour">Difficulty:</label>
-                    <input type="number" id="rating_difficulty" min="1" max="5" required/><br></br><br></br>
+                    <input type="number" id="rating_difficulty" min="1" max="5" required /><br></br><br></br>
 
                     <label for="hour">Engagement:</label>
-                    <input type="number" id="rating_engagement" min="1" max="5" required/>
+                    <input type="number" id="rating_engagement" min="1" max="5" required />
                   </div>
 
-                  <input type="email" placeholder="Enter Email" id="email" required/>
-                  
+                  <input type="email" placeholder="Enter Email" id="email" required />
+
                   <button type="submit" class={"btn"} >Submit</button>
                   <button type="button" className={"btn cancel"} onClick={this.closeForm}>Close</button>
                 </form>
               </div>
-              
+
             </Col>
-            
+
+          </Row>
+          <Row className="col-item course-recommendations">
+            <Row>
+              <h3>Course Recommendations</h3>
+            </Row>
+            <Slider {...carousel_settings}>
+              {this.state.recommendations.map((recommendation) => (
+                <div className="recommendations-display" onClick={() => this.redirectCourseRecommendations(recommendation.code)}>
+                  <h4>{recommendation.code}</h4>
+                  <p>{recommendation.name}</p>
+                </div>
+              ))}
+            </Slider>
           </Row>
           <Row className="col-item course-requisite">
             <Row>
@@ -365,19 +378,6 @@ class CourseDescriptionPage extends Component {
                 <img src={`data:image/jpeg;base64,${this.state.graph}`} alt="" ></img>
               </div>
             </Row>
-          </Row>
-          <Row className="col-item course-recommendations">
-            <Row>
-              <h3>Course Recommendations</h3>
-            </Row>
-              <Slider {...carousel_settings}>
-                {this.state.recommendations.map((recommendation) => (
-                  <div className="recommendations-display" onClick={() => this.redirectCourseRecommendations(recommendation.code)}>
-                    <h4>{recommendation.code}</h4>
-                    <p>{recommendation.name}</p>
-                  </div>
-                ))}
-              </Slider>
           </Row>
         </Container>
       </div>
