@@ -602,6 +602,7 @@ class SearchPackages(Resource):
             searchPackageDescription = list(
                 Package.objects(description__icontains=input))
             search = searchPackageName + searchPackageDescription
+            search = list(dict.fromkeys(search))
             packages = []
             # Get packages
             for package in search:
