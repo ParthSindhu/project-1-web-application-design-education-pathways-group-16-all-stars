@@ -42,15 +42,7 @@ const SticktoTop = (props) => {
         backgroundColor:'white',
     };
 
-    const filler ={
-        height: '4vh',
-    };
-
-    const filler_none ={
-        height: '0px',
-    };
-
-    const [scroll, setScrollPosition] = useState(0);
+    const [, setScrollPosition] = useState(0);
     const [style, setStyle] = useState(fixed_style_invisible);
     const [style_fill, setStyleFill] = useState(reg_style);
     const [ret_top, setRetTop] = useState(0);
