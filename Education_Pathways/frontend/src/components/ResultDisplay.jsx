@@ -12,7 +12,8 @@ class SearchResultDisplay extends Component {
     this.state = {
       input: "",
       results: [],
-      message: ""
+      message: "",
+      fetching: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,7 +22,9 @@ class SearchResultDisplay extends Component {
   handleChange(event) {
     this.setState({ input: event.target.value }, () => {
       if (this.state.input && (this.state.input).length > 1)
+      {
         this.getData(this.state.input);
+      }
     });
   }
 
@@ -30,15 +33,21 @@ class SearchResultDisplay extends Component {
     this.getData(this.state.input)
   }
 
-  getData = (input) => {
-    axios.get(`${process.env.REACT_APP_API_URL}/searchc?input=${input}`)
-      .then(res => {
+  getData = async (input) => {
+    // check if fetching
+    if (!this.state.fetching) {
+      this.setState({ fetching: true });
+      try {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/searchc?input=${input}`)
         console.log("course data")
         console.log(res.data)
         console.log(`it is ${res.status}`)
+        if (res.status === 400) {
+          alert("System Error. Please refresh")
+          return
+        }
 
         if (res.status === 200) {
-          this.setState({ results: [] })
           if (res.data.length > 0) {
             let len = res.data.length
             let result_temp = []
@@ -46,25 +55,37 @@ class SearchResultDisplay extends Component {
             for (let i = 0; i < len; i++) {
               result_temp.push(<Result course_code={res.data[i].code} course_name={res.data[i].name}></Result>)
             }
-            this.setState({ results: result_temp })
-            this.setState({ message: `${res.data.length} courses found for '${input}'`})
+            this.setState({ 
+              results: result_temp,
+              message: `${res.data.length} courses found for '${input}'`,
+              fetching: false
+            })
           } else if (res.data.length === 0) {
-            this.setState({ message: `No courses found for '${input}'`})
+            this.setState({ 
+              message: `No courses found for '${input}'`,
+              results: [],
+              fetching: false
+            })
           } else {
             let result_temp = []
             result_temp.push(<Label></Label>)
             result_temp.push(<Result course_code={res.data.course.code} course_name={res.data.course.name}></Result>)
-            this.setState({ results: result_temp })
-            this.setState({ message: "" })
+            this.setState({ 
+              results: result_temp,
+              message: "",
+               fetching: false
+            })
           }
-        } else if (res.status === 400) {
-          alert("System Error. Please refresh")
-        }
-      }).catch(
-        err => {
+        } 
+        
+      }catch(err){
+          this.setState({
+            fetching: false,
+            message: "System Error. Please refresh"
+          })
           console.log(err)
-        }
-      )
+      }
+    }
   }
 
   render() {
@@ -81,9 +102,11 @@ class SearchResultDisplay extends Component {
         <div className={"search-result-message"} >
           {this.state.message}
         </div>
+        {this.state.fetching ? <div className={"search-result-message"}>Fetching...</div> : 
         <div className={"search-result-display"} >
           {this.state.results}
         </div>
+        }
       </div>
     );
   }
