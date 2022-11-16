@@ -112,7 +112,7 @@ This web application is designed to help organize and display courses to help st
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running, follow these simple example steps.
 
 ### Prerequisites
 
@@ -127,6 +127,45 @@ This is an example of how to list things you need to use the software and how to
 1. Clone the repo
    ```sh
    git clone https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars.git
+
+   ```
+2. Install Requirements
+   ```sh
+   project-1-web-application-design-education-pathways-group-16-all-stars/
+   pip install requirements
+
+   ```
+3. Install NPM packages
+   ```sh
+   cd Education_Pathways/frontend
+   npm install
+   ```
+4. Open two terminals:
+
+  Terminal one:
+  ```sh
+  cd Education_Pathways/frontend
+  ```
+
+  Run
+  ```bash
+  npm start
+  ```
+
+  Terminal two (If using local):
+  ```sh
+  cd Education_Pathways/
+  ```
+
+  Run
+  ```bash
+  python index.py
+  ```
+
+3. 
+   In a seperate terminal (at the same time as 
+   ```bash
+   npm start
    ```
 2. Install NPM packages
    ```sh
