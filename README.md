@@ -42,7 +42,7 @@
     <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="images/Group 16 Allstars Product Guide.mp4">View Demo</a>
+    <a href="images/Demo">View Demo</a>
     ·
     <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars/issues">Report Bug</a>
     ·
