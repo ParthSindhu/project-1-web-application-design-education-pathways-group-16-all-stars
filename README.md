@@ -18,12 +18,12 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors]][contributors-url]
-[![Forks]][forks-url]
-[![Stargazers]][stars-url]
-[![Issues]][issues-url]
-[![MIT License]][license-url]
-[![LinkedIn]][linkedin-url]
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
@@ -42,7 +42,7 @@
     <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">View Demo</a>
+    <a href="images/Group 16 Allstars Product Guide.mp4">View Demo</a>
     ·
     <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars/issues">Report Bug</a>
     ·
