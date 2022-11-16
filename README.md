@@ -88,9 +88,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<div align="center" width="100vw" height="100vw">
+<div align="center">
   <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
-      <img src="images/Frontend.png" alt="Logo" width="100vw" height="100vw">
+      <img src="images/Frontend.png" alt="Logo" width="1000vw" height="auto>
     </a>
 </div>
 
