@@ -94,9 +94,7 @@
     </a>
 </div>
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `ECE444-2022Fall`, `project-1-web-application-design-education-pathways-group-16-all-stars`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `Education Pathways`, `Group 16 - All Stars`
+This web application is designed to help organize and display courses to help students view a catalog of courses the University of Toronto offers.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
