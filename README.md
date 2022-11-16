@@ -168,9 +168,58 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+The project has multiple features:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Homepage Search:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/Search.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course Packages:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CoursePackages.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course List:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CourseList1.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CourseList2.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course Description Page:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes1.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes2.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes3.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
