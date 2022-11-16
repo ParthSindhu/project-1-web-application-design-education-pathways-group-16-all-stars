@@ -88,6 +88,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/frontend.png" alt="Logo" width="100vw" height="auto">
+    </a>
+</div>
+
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `ECE444-2022Fall`, `project-1-web-application-design-education-pathways-group-16-all-stars`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `Education Pathways`, `Group 16 - All Stars`
