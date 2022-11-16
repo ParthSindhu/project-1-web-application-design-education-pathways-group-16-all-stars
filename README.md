@@ -125,60 +125,43 @@ This is an example of how to list things you need to use the software and how to
 ### Installation
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars.git
+    ```sh
+    git clone https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars.git
 
-   ```
+    ```
 2. Install Requirements
-   ```sh
-   project-1-web-application-design-education-pathways-group-16-all-stars/
-   pip install requirements
+    ```sh
+    project-1-web-application-design-education-pathways-group-16-all-stars/
+    pip install requirements
 
-   ```
+    ```
 3. Install NPM packages
-   ```sh
-   cd Education_Pathways/frontend
-   npm install
-   ```
+    ```sh
+    cd Education_Pathways/frontend
+    npm install
+    ```
 4. Open two terminals:
+    Terminal one:
+    ```sh
+    cd Education_Pathways/frontend
+    ```
 
-  Terminal one:
-  ```sh
-  cd Education_Pathways/frontend
-  ```
+    Run
+    ```bash
+    npm start
+    ```
 
-  Run
-  ```bash
-  npm start
-  ```
+    Terminal two (If using local):
+    ```sh
+    cd Education_Pathways/
+    ```
 
-  Terminal two (If using local):
-  ```sh
-  cd Education_Pathways/
-  ```
-
-  Run
-  ```bash
-  python index.py
-  ```
-
-3. 
-   In a seperate terminal (at the same time as 
-   ```bash
-   npm start
-   ```
-2. Install NPM packages
-   ```sh
-   cd Education_Pathways/frontend
-   npm install
-   ```
-3. Run
-   ```bash
-   npm start
-   ```
+    Run
+    ```bash
+    python index.py
+    ```
    
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- USAGE EXAMPLES -->
