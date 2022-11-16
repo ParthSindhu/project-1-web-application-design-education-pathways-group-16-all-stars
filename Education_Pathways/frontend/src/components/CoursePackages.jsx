@@ -52,7 +52,9 @@ export default function CoursePackages() {
             setQuery(event.target[0].value);
             }} className="search">
             <input placeholder="Search for course packages ..." className="text-input" type="text"/>
-            <input type="submit" value="Search" className="submit-button-pack" />
+            <div className="submit-button-wrapper">
+              <input type="submit" value="Search" className="submit-button-pack" />
+            </div>
           </form>
           </SticktoTop>
         </div>
