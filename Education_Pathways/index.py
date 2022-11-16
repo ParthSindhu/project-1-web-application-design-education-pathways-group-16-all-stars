@@ -13,7 +13,9 @@ app.config['ENV'] = 'development'
 app.config['DEBUG'] = True
 app.config['TESTING'] = True
 # MongoDB URI
-DB_URI = "mongodb+srv://allstars:allstars@cluster0.vh9xizq.mongodb.net/A-Star"
+# DB_URI = "mongodb+srv://allstars:allstars@cluster0.vh9xizq.mongodb.net/A-Star"
+DB_URI = "mongodb+srv://allstars:allstars@cluster0.x783yu8.mongodb.net/A-Star"
+
 app.config["MONGODB_HOST"] = DB_URI
 
 config.init_app(app)
