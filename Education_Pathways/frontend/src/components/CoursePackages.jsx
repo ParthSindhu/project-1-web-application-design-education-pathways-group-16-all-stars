@@ -1,6 +1,6 @@
 import React from 'react';
 import CoursePackage from './CoursePackage';
-
+import SticktoTop from "./SticktoTop";
 import './css/coursepackages.css'
 
 export default function CoursePackages() {
@@ -41,22 +41,35 @@ export default function CoursePackages() {
       }
   }, [query]);
   return (
+
     <div className='course-packages comment-offset'>
+
+      <div style={{ marginTop: "10%", zIndex:'200', position:'relative'}}>
       <h1>Course Packages</h1>
-      <form onSubmit={(event)=>{
-        event.preventDefault();
-        setQuery(event.target[0].value);
-      }} className="search">
-        <input placeholder="Search for course packages ..." className="text-input" type="text"/>
-        <input type="submit" value="Search" className="submit-button" />
-      </form>
+          <SticktoTop>
+            <form onSubmit= {(event)=>{
+            event.preventDefault();
+            setQuery(event.target[0].value);
+            }} className="search">
+            <input placeholder="Search for course packages ..." className="text-input" type="text"/>
+            <div className="submit-button-wrapper">
+              <input type="submit" value="Search" className="submit-button-pack" />
+            </div>
+          </form>
+          </SticktoTop>
+        </div>
+      
+      
       <div className={"search-result-message"} >{msg}</div>
+      
       {
       fetching ? <div className={"search-result-message"} >Fetching data..</div>: 
+      
       <div className="gird" style={{
         "display": "grid",
-        "gridTemplateColumns": "1fr 1fr"
-    }}>
+        "gridTemplateColumns": "1fr 1fr",
+        "color":"red"
+      }}>
       
         {
           data?.map((item, index) => 
