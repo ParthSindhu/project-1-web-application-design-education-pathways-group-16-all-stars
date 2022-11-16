@@ -90,7 +90,7 @@
 
 <div align="center">
   <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
-      <img src="images/Frontend.png" alt="Logo" width="1000vw" height="auto>
+      <img src="images/Frontend.png" alt="Logo" width="1000vw" height="auto">
     </a>
 </div>
 
