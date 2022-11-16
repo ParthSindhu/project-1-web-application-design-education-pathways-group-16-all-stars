@@ -4,28 +4,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import logo from './img/logo.png'
 import { Navbar, Nav } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-// import LogIn from "./LogIn.jsx";
 import CourseDescriptionPage from "./CourseDescription";
-// import Wishlist from './Wishlist';
-// import SignUp from './SignUp'
 import SearchResultDisplay from './ResultDisplay'
 import CourseComments from "./CourseComments";
 import AboutPage from './AboutPage';
 import CoursePackages from './CoursePackages';
 import CourseFiltersPage from './CourseFiltersPage';
-
-
-// function CourseDescription (props) {
-//   let query = useQuery();
-//   return <CourseDescriptionPage code={query.get("code")} />;
-// }
-
-// function useQuery() {
-//   const { search } = useLocation();
-
-//   return React.useMemo(() => new URLSearchParams(search), [search]);
-// }
-
 
 export default class NavbarComp extends Component {
 
@@ -51,18 +35,18 @@ export default class NavbarComp extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Navbar bg="myBlue" variant="dark" sticky="top" expand="lg">
-            <Navbar.Brand>
+        <div className='navbar-wrap'>
+          <Navbar className = "navbar" variant="dark" sticky="top" expand="lg">
+            <Navbar.Brand className='nav-item header'>
               <img src={logo} alt="" />{" "}
-              <Nav.Link href="/" style={{ color: "white", display: "inline" }}>
+              <Nav.Link href="/" style={{ color: "white", display: "inline", fontSize:'3vh'}}>
                 Education Pathways
               </Nav.Link>
             </Navbar.Brand>
 
             <Navbar.Toggle />
             <Navbar.Collapse>
-              <Nav>
+              <Nav className='nav-item a'>
                 <Nav.Link as={Link} to="/coursepackages">
                   Course Packages
                 </Nav.Link>
@@ -82,6 +66,7 @@ export default class NavbarComp extends Component {
             </Navbar.Collapse>
           </Navbar>
         </div>
+
         <div>
           <Switch>
           <Route path="/coursepackages">
@@ -107,13 +92,11 @@ export default class NavbarComp extends Component {
             <Route path="/">
               <SearchResultDisplay />
             </Route>
-            
-
+  
           </Switch>
+
         </div>
-        
-        
-    
+
       </Router>
     );
   }

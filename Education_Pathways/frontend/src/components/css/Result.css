@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&display=swap');
+
+.SearchQuery{
+  
+  font-family: 'JetBrains Mono', monospace;
+}
+
 .result-display {
   display: flex;
   flex-direction: row;
@@ -11,6 +18,11 @@
   padding-bottom: 2%;
   margin-top: 3%;
   margin-bottom: 3%;
+  
+}
+.result-display:hover {
+  transition: transform 50ms ease-in-out;
+  transform: scale(1.04); 
 }
 
 .search-result-message {
@@ -21,20 +33,44 @@
 .search-result-display {
   margin-top: 3%;
   margin-bottom: 3%;
+  
 }
 
 .search {
-  margin-top: 3%;
+  color: #00295c;
+}
+
+.submit-button-wrapper{
+  margin-top: 5%;
+  display: inline-block;
+  color: white;
+  border-radius: 1vh;
+  background-image: linear-gradient(to bottom,#00295c 0%,#001b3b 100%);
 }
 
 .submit-button {
-  background-color: #1c3e6e;
-  color: white;
-  border: none;
-  border-radius: 15px;
-  border: none;
   height: 3em;
   width: 7em;
+
+  font-size: 1.7vh;
+  --_g1: conic-gradient(from 90deg at 50% 75%,#00295c  90deg, black 0) no-repeat;
+  --_g2: conic-gradient(from 90deg at 50% 75%,#00295c 90deg, rgb(129, 145, 224) 0) no-repeat;
+  background: 
+    var(--_g1) 0    calc(134% - var(--_p,0%)),
+    var(--_g2) 0    calc(134% - var(--_p,0%)),
+    var(--_g1) 100% calc(200% - var(--_p,0%)),
+    var(--_g2) 100% calc(200% - var(--_p,0%)),
+    #000;
+  color:white;
+  background-size: 50.2% 400%;
+  border-radius: 1vh;
+  -webkit-background-clip: text, padding-box;
+          background-clip: text, padding-box;
+  transition: 0.2s
+}
+.submit-button:hover {
+  --_p: 134%;
+  color: white;
 }
 
 .text-input {

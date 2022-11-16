@@ -72,7 +72,8 @@ export default function CoursePackages() {
   }, [query]);
   return (
     <>
-    <div className='course-packages'>
+    <div className='course-packages comment-offset'>
+
       <h1>Course Packages</h1>
       <form onSubmit={(event)=>{
         event.preventDefault();

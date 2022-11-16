@@ -1,17 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
 * {
-  font-family: 'Fredoka One', cursive;
   letter-spacing: 3px !important;
-  color: #1C3E6E;
+  color: #1c3e6e;
 }
 
 p {
-  color: #8198B8;
+  color: #8198b8;
 }
 
 .page-content {
-  background-color: #F2F4F8;
+  background-color: #f2f4f8;
 }
 
 .course-template {
@@ -19,9 +18,12 @@ p {
 }
 
 .course-template .course-title {
-  padding-top: 5%;
-  ;
+  padding-top: 8%;
   padding-bottom: 3%;
+}
+
+.title-center {
+  width: 100vw;
 }
 
 .col-item {
@@ -53,10 +55,9 @@ p {
 .course-template .col-item p {
   margin-top: 20px;
   width: 90%;
-  ;
   margin-left: 4%;
   margin-bottom: 3%;
-  color: #5C779C;
+  color: #5c779c;
 }
 
 .course-template .course-description,
@@ -67,7 +68,7 @@ p {
 .requisites-display {
   height: 120px;
   margin-top: 2%;
-  background-color: #EFF3FB;
+  background-color: #eff3fb;
   margin-left: 3%;
   border-radius: 15px;
   padding-top: 5px;
@@ -82,7 +83,7 @@ p {
 
 .recommendations-display {
   height: 200px;
-  background-color: #EFF3FB;
+  background-color: #eff3fb;
   border-radius: 15px;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -91,7 +92,7 @@ p {
   cursor: pointer;
 }
 
-.slick-slide>div {
+.slick-slide > div {
   margin: 0 10px;
 }
 
@@ -110,7 +111,7 @@ p {
 .slick-arrow:before,
 .slick-prev:before,
 .slick-next:before {
-  color: #1C3E6E !important;
+  color: #1c3e6e !important;
   opacity: 1 !important;
 }
 
@@ -126,7 +127,7 @@ p {
 .syllabus-link {
   margin-top: 2%;
   border-radius: 15px;
-  background-color: #1C3E6E;
+  background-color: #1c3e6e;
   color: white;
   width: 8em;
   height: 3em;
@@ -146,7 +147,7 @@ p {
 .ratings-lbl {
   display: inline-block;
   width: 25%;
-  margin-right: .5em;
+  margin-right: 0.5em;
   padding-top: 1.5em;
 }
 
@@ -154,18 +155,40 @@ p {
   display: none;
 }
 
-/* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {
-  margin-top: 7%;
-  border-radius: 15px;
-  background-color: #2e583b;
+.rating-button-wrapper {
+  margin-top: 5%;
+  display: inline-block;
   color: white;
-  width: 12em;
+  border-radius: 1vh;
+  background-image: linear-gradient(to bottom, #2e583b 0%, #2e583b 100%);
+}
+/* Button used to open the contact form - fixed at the bottom of the page */
+.rating-button {
   height: 3em;
-  border: none;
-  font-size: 1.2em;
-  text-align: center;
-  opacity: 1;
+  width: 15em;
+
+  font-size: 1.7vh;
+  --_g1: conic-gradient(from 90deg at 50% 75%, #2e583b 90deg, black 0) no-repeat;
+  --_g2: conic-gradient(
+      from 90deg at 50% 75%,
+      #2e583b 90deg,
+      rgb(99, 151, 116) 0
+    )
+    no-repeat;
+  background: var(--_g1) 0 calc(134% - var(--_p, 0%)),
+    var(--_g2) 0 calc(134% - var(--_p, 0%)),
+    var(--_g1) 100% calc(200% - var(--_p, 0%)),
+    var(--_g2) 100% calc(200% - var(--_p, 0%)), #000;
+  color: white;
+  background-size: 50.2% 400%;
+  border-radius: 1vh;
+  -webkit-background-clip: text, padding-box;
+  background-clip: text, padding-box;
+  transition: 0.2s;
+}
+.rating-button:hover {
+  --_p: 134%;
+  color: white;
 }
 
 /* The popup form - hidden by default */
@@ -187,8 +210,8 @@ p {
 }
 
 /* Full-width input fields */
-.form-container input[type=email],
-.form-container input[type=password] {
+.form-container input[type="email"],
+.form-container input[type="password"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -197,8 +220,8 @@ p {
 }
 
 /* When the inputs get focus, do something */
-.form-container input[type=text]:focus,
-.form-container input[type=password]:focus {
+.form-container input[type="text"]:focus,
+.form-container input[type="password"]:focus {
   background-color: #ddd;
   outline: none;
 }

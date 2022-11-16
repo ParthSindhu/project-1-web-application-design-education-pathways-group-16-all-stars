@@ -4,6 +4,10 @@ import Result from './Results'
 import './css/Result.css'
 import Label from './Label'
 import "./css/styles.css";
+import SticktoTop from "./SticktoTop";
+
+let isVisible = false;
+
 class SearchResultDisplay extends Component {
 
   constructor() {
@@ -24,6 +28,7 @@ class SearchResultDisplay extends Component {
       if (this.state.input && (this.state.input).length > 1)
       {
         this.getData(this.state.input);
+        this.setState({ isVisible: false})
       }
     });
   }
@@ -59,9 +64,9 @@ class SearchResultDisplay extends Component {
 
         if (res.status === 200) {
           if (res.data.length > 0) {
+            isVisible = true;
             let len = res.data.length
             let result_temp = []
-            result_temp.push(<Label></Label>)
             for (let i = 0; i < len; i++) {
               result_temp.push(<Result course_code={res.data[i].code} course_name={res.data[i].name}></Result>)
             }
@@ -71,6 +76,7 @@ class SearchResultDisplay extends Component {
               fetching: false
             })
           } else if (res.data.length === 0) {
+            isVisible = false;
             this.setState({ 
               message: `No courses found for '${input}'`,
               results: [],
@@ -88,7 +94,8 @@ class SearchResultDisplay extends Component {
           }
         } 
         
-      }catch(err){
+      }
+      catch(err){
           this.setState({
             fetching: false
           })
@@ -100,18 +107,28 @@ class SearchResultDisplay extends Component {
   render() {
     return (
       <div className="SearchQuery">
-        <div style={{ marginTop: "10%" }}>
-          <h1> Education Pathways</h1>
-          <br></br>
-          <form onSubmit={this.handleSubmit} className={"search"}>
-            <input placeholder={"Search for course code, course name, keyword ..."} className={"text-input"} type="text" value={this.state.input} onChange={this.handleChange} />
-            <input type="submit" value="Search" className={"submit-button"} />
-          </form>
+        <div style={{ marginTop: "10%", zIndex:'200', position:'relative'}}>
+          
+          
+            <h1> Education Pathways</h1>
+            <SticktoTop>
+            <form onSubmit={this.handleSubmit} className={"search"}>
+              <input placeholder={"Search for course code, course name, keyword ..."} className={"text-input"} type="text" value={this.state.input} onChange={this.handleChange} />
+              <div className="submit-button-wrapper">
+                <input type="submit" value="Search" className={"submit-button"} />
+              </div>
+            </form>
+            <div className={"search-result-message"} >
+              {this.state.message}
+            </div>
+            {isVisible && (
+              <Label ></Label>
+            )}
+          </SticktoTop>
         </div>
-        <div className={"search-result-message"} >
-          {this.state.message}
-        </div>
+
         {this.state.fetching ? <div className={"search-result-message"}>Fetching...</div> : 
+
         <div className={"search-result-display"} >
           {this.state.results}
         </div>

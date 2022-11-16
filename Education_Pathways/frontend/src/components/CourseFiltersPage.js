@@ -4,6 +4,7 @@ import CourseFiltersResult from './CourseFiltersResult'
 import './css/CourseFiltersResult.css'
 import "./css/styles.css";
 import CourseFilter from './CourseFilter'
+import SticktoTop from "./SticktoTop";
 
 class CourseFiltersPage extends Component {
 
@@ -47,7 +48,7 @@ class CourseFiltersPage extends Component {
 
             if (res.status === 200) {
                 console.log(`Initial: ${res.data.courses[0].code}`)
-                console.log(`Initial: ${res.data.courses[0].description}`)
+                console.log(`Initial: ${res.data.courses[0].name}`)
 
               this.setState({ results: [] })
               this.setState({results: [] }, () => {
@@ -241,7 +242,11 @@ class CourseFiltersPage extends Component {
             <div style={{ marginTop: "10%" }}>
               <h1> Course List</h1>
             </div>
-            <CourseFilter handleClick={this.handleFilterClick} ></CourseFilter>
+            <div style={{ marginTop: "10%", zIndex:'200', position:'relative'}}>
+              <SticktoTop>
+                <CourseFilter handleClick={this.handleFilterClick} ></CourseFilter>
+              </SticktoTop>
+            </div>
             <div className="SearchQuery-course-filters-page">
               <div className={"search-result-message-course"} >
                 {this.state.message}

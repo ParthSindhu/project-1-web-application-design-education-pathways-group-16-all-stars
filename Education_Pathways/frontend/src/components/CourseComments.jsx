@@ -66,7 +66,7 @@ class CourseComments extends CourseDescriptionPage{
             // this.setState({comments: res.data.comments})
         })
         .catch(err => {
-            toast.error("Failed to submit comment! Please use UofT Email", {
+            toast.error("Please use UofT Email!", {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -89,6 +89,7 @@ class CourseComments extends CourseDescriptionPage{
             //     });
             console.log(err)
         })
+        
     }
 
 
@@ -99,7 +100,7 @@ class CourseComments extends CourseDescriptionPage{
 
     render() {
         return (
-            <div id="respond">
+            <div id="respond" className="comment-offset">
                 <ToastContainer             
                     position="top-center"
                     hideProgressBar={false}
