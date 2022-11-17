@@ -42,7 +42,7 @@
     <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">View Demo</a>
+    <a href="images/Demo">View Demo</a>
     ·
     <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars/issues">Report Bug</a>
     ·
@@ -56,6 +56,9 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li>
+      <a href="#project-management-tools">Project Management Tools</a>
+    </li>
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
@@ -85,9 +88,13 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/Frontend.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `ECE444-2022Fall`, `project-1-web-application-design-education-pathways-group-16-all-stars`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `Education Pathways`, `Group 16 - All Stars`
+This web application is designed to help organize and display courses to help students view a catalog of courses the University of Toronto offers.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -105,7 +112,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running, follow these simple example steps.
 
 ### Prerequisites
 
@@ -118,29 +125,118 @@ This is an example of how to list things you need to use the software and how to
 ### Installation
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars.git
-   ```
-2. Install NPM packages
-   ```sh
-   cd Education_Pathways/frontend
-   npm install
-   ```
-3. Run
-   ```bash
-   npm start
-   ```
+    ```sh
+    git clone https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars.git
+
+    ```
+2. Install Requirements
+    ```sh
+    project-1-web-application-design-education-pathways-group-16-all-stars/
+    pip install requirements
+
+    ```
+3. Install NPM packages
+    ```sh
+    cd Education_Pathways/frontend
+    npm install
+    ```
+4. Open two terminals:
+
+    Terminal one:
+    ```sh
+    cd Education_Pathways/frontend
+    ```
+
+    Run
+    ```bash
+    npm start
+    ```
+
+    Terminal two (If using local):
+    ```sh
+    cd Education_Pathways/
+    ```
+
+    Run
+    ```bash
+    python index.py
+    ```
    
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+The project has multiple features:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Homepage Search:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/search2.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course Packages:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CoursePackages.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course List:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CourseList1.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CourseList2.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course Description Page:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes1.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes2.5.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes3.5.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes4.5.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes2.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes3.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
