@@ -8,8 +8,6 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -80,36 +78,32 @@
 
 <!-- Project Management Tools -->
 ## Project Management Tools
+
 - Github Projects
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[Education Pathways](https://education-pathways-allstars.herokuapp.com/)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `ECE444-2022Fall`, `project-1-web-application-design-education-pathways-group-16-all-stars`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `Education Pathways`, `Group 16 - All Stars`
+Education Pathways by Group 16 ECE444-2022Fall. A tool to help UofT students find their prefered courses.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Built With
 
 * [![React][React.js]][React-url]
+* [Flask](https://flask.palletsprojects.com/en/2.2.x/)
+* [MongoDB](https://www.mongodb.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+
 * npm
   ```sh
   npm install npm@latest -g
@@ -171,24 +165,12 @@ DB_URI = "mongodb://localhost:27017/A-Star"
 mongorestore mongodb://localhost:27017 ~/dump
 ```
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- ROADMAP -->
 ## Roadmap
 
 See the [open issues](https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTRIBUTING -->
@@ -204,7 +186,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- CONTACT -->
 ## Contact
 
@@ -213,7 +194,6 @@ ECE444 Group 16 - All Stars - ece444group16@gmail.com
 Project Link: [https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars](https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
