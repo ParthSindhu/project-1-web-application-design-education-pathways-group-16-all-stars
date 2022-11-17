@@ -40,7 +40,7 @@
     <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">View Demo</a>
+    <a href="images/Demo">View Demo</a>
     ·
     <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars/issues">Report Bug</a>
     ·
@@ -54,6 +54,9 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li>
+      <a href="#project-management-tools">Project Management Tools</a>
+    </li>
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
@@ -87,6 +90,13 @@
 [Education Pathways](https://education-pathways-allstars.herokuapp.com/)
 
 Education Pathways by Group 16 ECE444-2022Fall. A tool to help UofT students find their prefered courses.
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/Frontend.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+This web application is designed to help organize and display courses to help students view a catalog of courses the University of Toronto offers.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -100,6 +110,9 @@ Education Pathways by Group 16 ECE444-2022Fall. A tool to help UofT students fin
 
 <!-- GETTING STARTED -->
 ## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running, follow these simple example steps.
 
 ### Prerequisites
 
@@ -147,10 +160,84 @@ Education Pathways by Group 16 ECE444-2022Fall. A tool to help UofT students fin
     ```bash
     export FLASK_APP=index.py
     flask run  ```
+<!-- USAGE EXAMPLES -->
+## Usage
+
+The project has multiple features:
+
+Homepage Search:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/search2.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course Packages:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CoursePackages.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course List:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CourseList1.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CourseList2.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course Description Page:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes1.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes2.5.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes3.5.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes4.5.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes2.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes3.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Local DB
+
+In the case that the website has slow performance due to the DB, the DB can be run locally to fix performance.
 
 To Run mongoDB instance locally, first generate a binary dump of the database using the `monogodump` utility
 
