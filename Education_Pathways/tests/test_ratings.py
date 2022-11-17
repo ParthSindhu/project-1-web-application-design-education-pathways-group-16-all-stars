@@ -1,3 +1,8 @@
+"""
+This file adds testing functionality for the ratings feature of Education Pathways
+Author: Sepehr Hosseini
+"""
+
 from index import app
 
 def test_course_ratings_get_endpoint():
