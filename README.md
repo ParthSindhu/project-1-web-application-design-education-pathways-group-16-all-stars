@@ -8,8 +8,6 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -83,11 +81,15 @@
 
 <!-- Project Management Tools -->
 ## Project Management Tools
+
 - Github Projects
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+[Education Pathways](https://education-pathways-allstars.herokuapp.com/)
+
+Education Pathways by Group 16 ECE444-2022Fall. A tool to help UofT students find their prefered courses.
 <div align="center">
   <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
       <img src="images/Frontend.png" alt="Logo" width="1000vw" height="auto">
@@ -98,15 +100,13 @@ This web application is designed to help organize and display courses to help st
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 ### Built With
 
 * [![React][React.js]][React-url]
+* [Flask](https://flask.palletsprojects.com/en/2.2.x/)
+* [MongoDB](https://www.mongodb.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -116,55 +116,50 @@ To get a local copy up and running, follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+
 * npm
   ```sh
   npm install npm@latest -g
   ```
 
-### Installation
+### Local Run
 
 1. Clone the repo
-    ```sh
-    git clone https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars.git
 
-    ```
-2. Install Requirements
-    ```sh
-    project-1-web-application-design-education-pathways-group-16-all-stars/
-    pip install requirements
+   ```sh
+   git clone https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars.git
+   ```
 
-    ```
-3. Install NPM packages
-    ```sh
-    cd Education_Pathways/frontend
-    npm install
-    ```
-4. Open two terminals:
+2. Install NPM packages
 
-    Terminal one:
-    ```sh
-    cd Education_Pathways/frontend
-    ```
+   ```sh
+   cd Education_Pathways/frontend
+   npm install
+   ```
 
-    Run
+3. Change Frontend `.env`
+
+    Update frontend  `.env` to change url to `http://localhost:5000`
+
+4. Run Frontend
+
+   ```bash
+   npm start
+   ```
+
+5. Install Python Dependecies
+
     ```bash
-    npm start
+    pip install -r requirements.txt
     ```
 
-    Terminal two (If using local):
-    ```sh
-    cd Education_Pathways/
-    ```
+6. Run Backend
 
-    Run
+    In `/Education_Pathways`
+
     ```bash
-    python index.py
-    ```
-   
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
+    export FLASK_APP=index.py
+    flask run  ```
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -240,7 +235,22 @@ Course Description Page:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Local DB
 
+In the case that the website has slow performance due to the DB, the DB can be run locally to fix performance.
+
+To Run mongoDB instance locally, first generate a binary dump of the database using the `monogodump` utility
+
+Then
+
+```bash
+# Start Local Databse
+docker run --name mongo-local -d mongo:latest
+# Point Backend to local darabse, in index.py
+DB_URI = "mongodb://localhost:27017/A-Star"
+# Restore Data in local database
+mongorestore mongodb://localhost:27017 ~/dump
+```
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -248,7 +258,6 @@ Course Description Page:
 See the [open issues](https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTRIBUTING -->
@@ -264,7 +273,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- CONTACT -->
 ## Contact
 
@@ -273,7 +281,6 @@ ECE444 Group 16 - All Stars - ece444group16@gmail.com
 Project Link: [https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars](https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
