@@ -174,7 +174,7 @@ Homepage Search:
 
 <div align="center">
   <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
-      <img src="images/Search.png" alt="Logo" width="1000vw" height="auto">
+      <img src="images/search2.png" alt="Logo" width="1000vw" height="auto">
     </a>
 </div>
 
