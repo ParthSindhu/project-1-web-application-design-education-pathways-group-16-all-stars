@@ -115,25 +115,61 @@ This is an example of how to list things you need to use the software and how to
   npm install npm@latest -g
   ```
 
-### Installation
+### Local Run
 
 1. Clone the repo
+
    ```sh
    git clone https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars.git
    ```
+
 2. Install NPM packages
+
    ```sh
    cd Education_Pathways/frontend
    npm install
    ```
-3. Run
+
+3. Change Frontend `.env`
+
+    Update frontend  `.env` to change url to `http://localhost:5000`
+
+4. Run Frontend
+
    ```bash
    npm start
    ```
-   
+
+5. Install Python Dependecies
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+6. Run Backend
+
+    In `/Education_Pathways`
+
+    ```bash
+    export FLASK_APP=index.py
+    flask run  ```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Local DB
 
+To Run mongoDB instance locally, first generate a binary dump of the database using the `monogodump` utility
+
+Then
+
+```bash
+# Start Local Databse
+docker run --name mongo-local -d mongo:latest
+# Point Backend to local darabse, in index.py
+DB_URI = "mongodb://localhost:27017/A-Star"
+# Restore Data in local database
+mongorestore mongodb://localhost:27017 ~/dump
+```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
