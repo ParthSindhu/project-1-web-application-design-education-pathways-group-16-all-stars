@@ -8,8 +8,6 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -42,7 +40,7 @@
     <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">View Demo</a>
+    <a href="images/Demo">View Demo</a>
     ·
     <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars/issues">Report Bug</a>
     ·
@@ -56,6 +54,9 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li>
+      <a href="#project-management-tools">Project Management Tools</a>
+    </li>
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
@@ -80,71 +81,176 @@
 
 <!-- Project Management Tools -->
 ## Project Management Tools
+
 - Github Projects
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[Education Pathways](https://education-pathways-allstars.herokuapp.com/)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `ECE444-2022Fall`, `project-1-web-application-design-education-pathways-group-16-all-stars`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `Education Pathways`, `Group 16 - All Stars`
+Education Pathways by Group 16 ECE444-2022Fall. A tool to help UofT students find their prefered courses.
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/Frontend.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+This web application is designed to help organize and display courses to help students view a catalog of courses the University of Toronto offers.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Built With
 
 * [![React][React.js]][React-url]
+* [Flask](https://flask.palletsprojects.com/en/2.2.x/)
+* [MongoDB](https://www.mongodb.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running, follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+
 * npm
   ```sh
   npm install npm@latest -g
   ```
 
-### Installation
+### Local Run
 
 1. Clone the repo
+
    ```sh
    git clone https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars.git
    ```
+
 2. Install NPM packages
+
    ```sh
    cd Education_Pathways/frontend
    npm install
    ```
-3. Run
+
+3. Change Frontend `.env`
+
+    Update frontend  `.env` to change url to `http://localhost:5000`
+
+4. Run Frontend
+
    ```bash
    npm start
    ```
-   
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+5. Install Python Dependecies
 
+    ```bash
+    pip install -r requirements.txt
+    ```
 
+6. Run Backend
+
+    In `/Education_Pathways`
+
+    ```bash
+    export FLASK_APP=index.py
+    flask run  ```
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+The project has multiple features:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Homepage Search:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/search2.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course Packages:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CoursePackages.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course List:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CourseList1.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/CourseList2.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+Course Description Page:
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes1.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes2.5.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes3.5.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes4.5.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes2.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars">
+      <img src="images/coursedes3.png" alt="Logo" width="1000vw" height="auto">
+    </a>
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Local DB
 
+In the case that the website has slow performance due to the DB, the DB can be run locally to fix performance.
+
+To Run mongoDB instance locally, first generate a binary dump of the database using the `monogodump` utility
+
+Then
+
+```bash
+# Start Local Databse
+docker run --name mongo-local -d mongo:latest
+# Point Backend to local darabse, in index.py
+DB_URI = "mongodb://localhost:27017/A-Star"
+# Restore Data in local database
+mongorestore mongodb://localhost:27017 ~/dump
+```
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -152,7 +258,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 See the [open issues](https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTRIBUTING -->
@@ -168,7 +273,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- CONTACT -->
 ## Contact
 
@@ -177,7 +281,6 @@ ECE444 Group 16 - All Stars - ece444group16@gmail.com
 Project Link: [https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars](https://github.com/ECE444-2022Fall/project-1-web-application-design-education-pathways-group-16-all-stars)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
