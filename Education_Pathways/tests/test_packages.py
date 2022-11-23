@@ -1,3 +1,6 @@
+# This file contains the tests for the course packages endpoint
+# Author : Parth Sindhu
+
 import pytest
 import pytest
 from index import app
