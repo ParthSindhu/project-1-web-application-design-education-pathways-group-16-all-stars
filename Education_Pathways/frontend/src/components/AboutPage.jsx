@@ -11,7 +11,7 @@ We are looking for feedback to improve Education Pathways and make it more usefu
     </p>
         <p>Alexander Olson <a href="https://carte.utoronto.ca/"> (CARTE)</a> </p>
         <p>Student team from <a href="https://shuiblue.github.io/UofT-ECE444/">ECE444-Fall2021</a> : Janelle Cuevas, Jean Lin, Terry Luan, Cansin Varol, Nick Woo</p>
-        <p>Student team from <a href="https://shuiblue.github.io/UofT-ECE444/">ECE444-Fall2022</a> : Parth Sindhu, Sepehr Hosseini,  Alexandre Gouveiarodrigues, Nathan Jones</p>
+        <p>Student team from <a href="https://shuiblue.github.io/UofT-ECE444/">ECE444-Fall2022</a> : Parth Sindhu, Sepehr Hosseini,  Alexandre Gouveia Rodrigues, Nathan Jones</p>
       </div>
 );
 }

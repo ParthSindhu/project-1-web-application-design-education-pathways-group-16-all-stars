@@ -1,3 +1,6 @@
+# This file contains the tests for course recommendations
+# Author : Alexandre Gouveia Rodrigues
+
 from index import app
 
 def test_course_recommendations_valid_input():
